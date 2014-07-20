@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PONG test</title>
+
+
+	<script src="js/Game.js"></script>
+	<script src="js/BrowserRenderer.js"></script>
+
+	<script>
+
+	var game, renderer;
+	var lastUpdate;
+
+	document.addEventListener("DOMContentLoaded", function() {
+
+		game = Game.init();
+		renderer = BrowserRenderer.init();
+
+		document.getElementById("container").appendChild(renderer.canvas);
+
+		document.addEventListener("mousemove", onMouseMove);
+
+		lastUpdate = Date.now();
+
+		animate();
+	});
+
+
+	function animate() {
+
+		window.requestAnimationFrame(animate);
+
+		var dt = Date.now() - lastUpdate;
+
+		game.update(dt);
+		BrowserRenderer.render(game);
+
+		lastUpdate = Date.now();
+
+	}
+
+	function onMouseMove(e) {
+
+		var x = e.clientX / window.innerWidth;
+
+		game.setPlayerPosition("a", x);
+		game.setPlayerPosition("b", x);
+
+	}
+
+	</script>
+
+</head>
+<body>
+
+<div id="container">
+
+</div>
+
+</body>
+</html>
