@@ -22,7 +22,7 @@
 
 	p.positionUpdated = function(data) {
 
-		console.log(" * position from player " + this.playerId + " " + data.position);
+		// console.log(" * position from player " + this.playerId + " " + data.position);
 
 		this.position = parseFloat(data.position);
 		
