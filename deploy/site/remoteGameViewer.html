@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HarpaPONG remote viewer</title>
+
+	<script src="js/libs/socket.io-1.0.6.js"></script>
+
+	<script src="../common/CanvasRenderer.js"></script>
+	<script src="../common/Game.js"></script>
+	
+
+	<script>
+
+		var game, renderer;
+		var socket;
+
+		document.addEventListener("DOMContentLoaded", function() {
+
+			game = Game.init();
+			renderer = CanvasRenderer.init();
+
+			document.getElementById("container").appendChild(renderer.canvas);
+
+			socket = io.connect(document.location.hostname + ":8081");
+
+			socket.on("connect", onServerConnect);
+
+		});
+
+		function onServerConnect() {
+
+			socket.on('identify', function(){
+				socket.emit('remoterenderer', {});
+			});
+
+			socket.on('render', onRender);
+
+		};
+
+
+		function onRender(data){
+
+			game.setFromSerialised(data.data);
+
+			renderer.render(game);
+
+		};
+
+	</script>
+
+</head>
+<body>
+
+<div id="container">
+
+
+</div>
+
+</body>
+</html>

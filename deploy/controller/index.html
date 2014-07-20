@@ -3,8 +3,29 @@
 <head>
 	<title>HarpaPONG Controller</title>
 
-	<script src="js/libs/socket.io.js"></script>
-	<script src="js/RemoteController.js"></script>
+	<script src="../common/Utils.js"></script>
+	<script src="js/libs/socket.io-1.0.6.js"></script>
+	<script src="js/MouseInput.js"></script>
+	<script src="js/AccelInput.js"></script>
+
+	<script src="js/Controller.js"></script>
+
+	<script>
+
+		var controller;
+
+		document.addEventListener("DOMContentLoaded", function() {
+
+			queryParams = Utils.parseQueryString(document.location.href);
+
+			var playerId = queryParams["player"] || "";
+
+			controller = Controller.init(document.location.hostname + ":8081", playerId);
+
+
+		});
+
+	</script>
 
 </head>
 <body>

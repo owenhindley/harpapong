@@ -4,8 +4,8 @@
 	<title>PONG test</title>
 
 
-	<script src="js/Game.js"></script>
-	<script src="js/BrowserRenderer.js"></script>
+	<script src="../common/Game.js"></script>
+	<script src="../common/CanvasRenderer.js"></script>
 
 	<script>
 
@@ -15,7 +15,8 @@
 	document.addEventListener("DOMContentLoaded", function() {
 
 		game = Game.init();
-		renderer = BrowserRenderer.init();
+		game.startGame();
+		renderer = CanvasRenderer.init();
 
 		document.getElementById("container").appendChild(renderer.canvas);
 
@@ -34,7 +35,7 @@
 		var dt = Date.now() - lastUpdate;
 
 		game.update(dt);
-		BrowserRenderer.render(game);
+		renderer.render(game);
 
 		lastUpdate = Date.now();
 
