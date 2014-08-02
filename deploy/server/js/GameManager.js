@@ -38,6 +38,7 @@
 			this.players.push(player);
 			var playerId = player.id;
 			player.on("position", function(data) {
+				//console.log("* Game Manager : position from player " + data.id + " : " + data.position);
 				this.game.setPlayerPosition(data.id, data.position);
 			}.bind(this));
 		},
