@@ -53,7 +53,7 @@
 			this.pos.ball.velocity.x = Math.random() * 0.0002 - 0.0001;
 			this.pos.ball.velocity.y = (Math.random() > 0.5) ? 0.0002 : -0.0002;
 
-
+			
 		},
 
 		update : function(dt) {

@@ -2,6 +2,12 @@
 	
 	var Controller = {
 
+		GAME_STATE_CONNECTING : "gameStateConnecting",
+		GAME_STATE_WAIT : "gameStateWait",
+		GAME_STATE_DURING : "gameStateDuring",
+		GAME_STATE_AFTER : "gameStateAfter",
+
+		state : null,
 		socket : null,
 		input : null,
 		playerId : "",
@@ -9,6 +15,8 @@
 		updateFlag : true,
 
 		init : function(wsUrl, playerId) {
+
+			state = GAME_STATE_CONNECTING;
 
 			this.playerId = playerId;
 
@@ -27,7 +35,7 @@
 
 			
 			this.socket.on("identify", this.onIdentify.bind(this));
-			this.socket.on("gamestart", this.onGameStart.bind(this));
+			this.socket.on("start", this.onGameStart.bind(this));
 
 
 		},
@@ -39,9 +47,25 @@
 
 		},
 
+		onGameWait : function() {
+
+			state = GAME_STATE_WAIT;
+
+			// we're waiting for the other player to connect
+
+		},
+
 		onGameStart : function() {
 
+			state = GAME_STATE_DURING;
+
 			// TODO : handle game start
+
+		},
+
+		onGameEnd : function() {
+
+			state = GAME_STATE_AFTER;
 
 		},
 
@@ -69,8 +93,27 @@
 
 		render : function() {
 
+			switch(state){
+
+				case GAME_STATE_CONNECTING:
+
+				break;
+
+				case GAME_STATE_WAIT:
+					
+
+				break;
+
+				case GAME_STATE_DURING:
 
 
+				break;
+
+				case GAME_STATE_AFTER:
+
+
+				break;
+			}
 		},
 
 
