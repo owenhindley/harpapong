@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HarpaPONG queue debug</title>
+
+	<style>
+
+		body, html {
+			margin:1em;
+			padding:0.1em;
+
+			font-family: "Helvetica Neue";
+			color:#222;
+		}
+
+		.lastcheck {
+			color:red;
+		}
+
+	</style>
+	
+
+	<script>
+
+		var serverUrl = "http://" + document.location.hostname + ":8080";
+		serverUrl += "?method=debug";
+
+		document.addEventListener("DOMContentLoaded", function() {
+
+			setInterval(updateDebug, 1000);
+		});
+
+		function updateDebug() {
+
+			var rq = new XMLHttpRequest();
+			rq.open("GET", serverUrl, true);
+			rq.onreadystatechange = function(){
+				switch(rq.readyState) {
+					case 0: //Uninitialized
+					case 1: //Set up
+					case 2: //Sent
+					case 3: //Partly done
+						//: do nothing
+						break;
+					case 4: //Done
+						if(rq.status < 400) {
+							try	{
+								var data = JSON.parse(rq.responseText);
+								displayDebugData(data);
+							} catch(err) {
+								console.error("ERROR parsing json");
+								break;
+							}
+							
+						}
+						break;
+				}
+
+			}
+			rq.send(null);
+
+		}
+
+		function displayDebugData(data){
+
+			var dateNow = Date.now();
+
+			var queueData = data.data.queue;
+			var playingData = data.data.playing;
+			var message = data.message;
+
+			var outputString = "";
+			outputString += "<h1>" + message + "</h1><br/>";
+
+			outputString += "<h3>playing data</h3>";
+			outputString += "<ul>";
+			for (var i=0; i< playingData.length; i++){
+				outputString += "<li>";
+				outputString += playingData[i].id;
+				outputString += " <span class='lastcheck'>";
+				outputString += parseInt(dateNow - playingData[i].lastCheck) / 1000 + "s";
+				outputString += "</span>";
+
+				outputString += "</li>";
+			}
+			outputString += "</ul>"
+
+			outputString += "<h3>queue</h3>";
+			outputString += "<ul>";
+			for (var i=0; i < queueData.length; i++){
+				outputString += "<li>";
+				outputString += queueData[i].id;
+				outputString += " <span class='lastcheck'>";
+				outputString += parseInt(dateNow - queueData[i].lastCheck) / 1000 + "s";
+				outputString += "</span>";
+
+				outputString += "</li>";
+			}
+			outputString += "</ul>";
+
+			document.getElementById("debugWindow").innerHTML = outputString;
+		};
+
+
+	</script>
+
+
+</head>
+<body>
+
+<div id="container">
+	<p id="debugWindow">
+
+	</p>
+
+</div>
+
+</body>
+</html>

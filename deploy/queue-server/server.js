@@ -121,7 +121,7 @@ var server = http.createServer(function(request, response){
                 responseMessage.status = "OK";
                 responseMessage.message = "debug data";
                 responseMessage.data["queue"] = queueManager.queue;
-                responseMessage.data["playing"] = queryComponents.playing;
+                responseMessage.data["playing"] = queueManager.playing;
 
 
             break;
@@ -133,7 +133,12 @@ var server = http.createServer(function(request, response){
         responseMessage.message = "invalid request url";       
     }
 
-    response.writeHead(501, { 'Content-Type': 'application/json' });
+
+    response.writeHead(200, { 
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin' : '*'
+    });
+
     response.end(JSON.stringify(responseMessage));
 
 
