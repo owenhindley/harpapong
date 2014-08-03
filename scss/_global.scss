@@ -1,0 +1,155 @@
+
+@import "compass/css3";
+@import "compass/css3/user-interface";
+@import "compass/css3/text-shadow";
+@import "compass/css3/box-shadow";
+@import "compass/css3/transition";
+@import "compass/css3/font-face";
+@import "utils/mixins";
+@import "utils/fonts";
+
+
+
+html, body{
+		
+	text-shadow: 0 1px 3px rgba(0,0,0,.2);
+	font-family:$font_family_sans !important;
+	text-align: center;
+	background: $site_background;
+	color: $site_yellow;
+
+
+}
+
+html{
+	-webkit-text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	text-size-adjust: none;
+}
+
+*{
+	outline: none;
+	outline-style: none;
+	-webkit-touch-callout: none;              /* disable callout, image save panel */
+	-webkit-tap-highlight-color: transparent; /* "turn off" link highlight */
+	
+	-webkit-font-smoothing: antialiased !important;
+	-moz-font-smoothing: antialiased !important;
+	-o-font-smoothing: antialiased !important;
+	-ms-font-smoothing: antialiased !important;
+	@include box-sizing(border-box);
+
+	text-rendering: optimizelegibility;
+}
+
+img{
+	@include user-select(none);
+	-webkit-user-drag: none;
+	user-drag: none;
+}
+
+
+.container {
+
+	text-align: center;
+}
+
+
+.row {
+
+}
+
+h1, h2 {
+	letter-spacing:0.03em;
+	font-family:$font_family_sans_bold !important;
+	font-weight: bold !important;
+}
+
+h3, h4, h5 {
+	
+	color:#232323;
+	text-shadow: 0 1px 1px rgba(0,0,0,.1);
+	font-family:$font_family_sans_light !important;
+	font-weight: bold !important;
+	
+}
+
+
+p {
+	font-family:$font_family_sans !important;
+	font-weight: bold;
+	font-size:20px;
+	text-transform: uppercase;
+
+	&.dark {
+		color:#343333;
+	}
+
+}
+
+#footer {
+
+	position: absolute;
+	bottom:-100px;
+
+
+}
+
+
+button {
+
+	background:$site_yellow;
+	border:none;
+	border-radius:4px;
+
+	box-shadow: 0px 3px 0px rgba(23, 23, 23, 1);
+
+	color:$gray_text_color;
+	padding-left:2em;
+	padding-right:2em;
+	padding-top:0.5em;
+	padding-bottom:0.5em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+
+	font-family:$font_family_sans_bold !important;
+	font-weight: bolder !important;
+
+	
+
+	font-size:20px;
+	text-transform: uppercase;
+
+}
+
+button h3 {
+	margin-top:0.5em;
+	margin-bottom:0.5em;
+}
+
+
+.container.main {
+
+	padding-top:40px;
+
+}
+
+section {
+
+
+	display:none;
+
+	position: relative;
+	width:80%;
+	margin-left:10%;
+	margin-right:10%;
+	
+
+	padding-top:1.5em;
+	padding-bottom:2em;
+
+
+}
+
+@import "animations/animations";
+@import "sections/sections";

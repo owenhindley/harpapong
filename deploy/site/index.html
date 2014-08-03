@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HarpaPONG</title>
+
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="HarpaPONG">
+
+	<meta name="description" content="HarpaPONG">
+	<meta property="og:title" content="HarpaPONG" />
+	<meta property="og:type" content="games" />
+	<meta property="og:url" content="http://www.harpapong.com" />
+	<meta property="og:site_name" content="Harpa PONG" />
+	<meta property="og:description" content="Harpa PONG" />
+	<meta property="og:image" content="http://www.harpapong.com/files/images/sharing.jpg" />
+
+
+    <link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    
+    <!-- <link href="libs/bootstrap/css/modern-business.css" rel="stylesheet">
+    <link href="libs/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet"> -->
+    
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <link href="css/main.css" rel='stylesheet'/>
+
+	<script src="js/libs/jquery-2.0.3.min.js"></script>
+	<script src="libs/bootstrap/js/bootstrap.js"></script>
+
+	<script src="../common/Utils.js"></script>
+	<script src="js/QueueKeeper.js"></script>
+	
+
+	<script>
+
+		var queueKeeper;
+
+		document.addEventListener("DOMContentLoaded", function() {
+
+			showSection("headline");
+			showSection("intro");
+
+			queryParams = Utils.parseQueryString(document.location.href);
+
+			var serverUrl = "http://" + document.location.hostname + ":8080";
+
+			queueKeeper = QueueKeeper.init(serverUrl, onPosition, onJoinGame, onError);
+
+			$('#queueButton').click(onJoinQueueClick.bind(this));
+
+		});
+
+		function onJoinQueueClick() {
+
+			showSection("joiningQueue");
+
+			queueKeeper.joinQueue();
+
+		};
+
+		function onPosition(aPosition){
+
+			showSection("queueing");
+			$("#positionMarker").html(parseInt(aPosition) + 1);
+
+			var timeUntilGame = Math.ceil(aPosition / 2.0) * 3 * 60;
+			var mins = Math.floor(timeUntilGame / 60);
+			var seconds = timeUntilGame % 60;
+			seconds = (seconds < 9) ? "0" + seconds : seconds; 
+			$("#timeMarker").html(mins + ":" + seconds);
+
+		};
+
+		function onJoinGame(aPlayerId) {
+
+
+		};
+
+		function onError() {
+
+
+		};
+
+		function showSection(aId){
+
+			$("section").each(function() {
+
+				if ($(this).attr('id') != "headline" && $(this).attr('id') != aId)
+					$(this).fadeOut();
+			});
+
+			$("#" +aId).delay(500).fadeIn();
+
+		};
+
+	</script>
+
+</head>
+<body>
+
+<div id="background">
+	&nbsp;
+</div>
+
+<section id="headline">
+
+	
+		<img src="images/logo.svg"/>
+		<h1 style="display:none;">Harpa PONG</h1>
+	
+</section>
+
+<section id="intro">
+
+		<p>Play PONG on Harpa!</p>
+		<br/>
+		<p >Click 'Join Queue' below</p>
+		<p>Wait your turn!</p>
+
+		<button id="queueButton">Join Queue</button>
+
+		<div class="instructions">
+			<p class="dark">INSTRUCTIONS</p>
+			<p class="">Swing the phone left and right<br/> to move your paddle</p>
+			<p class="dark">Don't let go of the phone</p>
+			<p>First to 3 points wins!</p>
+		</div>
+
+		<div class="credits">
+			<h3>About / Credits</h3>
+		</div>
+
+</section>
+
+<section id="joiningQueue">
+	<p>Joining queue...</p>
+</section>
+
+<section id="queueing">
+
+	<p>You're now in the queue!</p>
+	<h2>Position</h2>
+	<h1 id="positionMarker"></h1>
+	<h2>Approx. time</h2>
+	<h1 id="timeMarker"></h1>
+
+</section>
+
+
+</body>
+</html>

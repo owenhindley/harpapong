@@ -1,0 +1,41 @@
+#headline {
+
+	height:33%;
+	max-height: 200px;
+	
+	img {
+		width:70%;
+		margin-left:15%;
+		margin-right:15%;
+		max-height: 200px;
+
+	}
+
+
+}
+
+
+#intro, #queueing {
+
+	.instructions p {
+		margin-top:1em;
+		font-size:16px;
+	}
+
+	.credits {
+		margin-top:2em;
+
+		h3 {
+			text-transform: uppercase;
+			color:$gray_text_color;
+
+		}
+	}
+
+	p {
+		
+
+
+	}
+
+}
