@@ -31,10 +31,11 @@ winston.info("Started game server");
 
 // APP
 
+var queueServerUrl = "127.0.0.1";
 var game = Game.init();
-var gameManager = GameManager.init(game);
+var gameManager = GameManager.init(game, queueServerUrl);
 
-gameManager.startGame();
+gameManager.requestPlayers();
 
 // START SERVER
 

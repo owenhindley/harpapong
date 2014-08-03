@@ -3,6 +3,31 @@
 <head>
 	<title>HarpaPONG Controller</title>
 
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="HarpaPONG">
+
+	<meta name="description" content="HarpaPONG">
+	<meta property="og:title" content="HarpaPONG" />
+	<meta property="og:type" content="games" />
+	<meta property="og:url" content="http://www.harpapong.com" />
+	<meta property="og:site_name" content="Harpa PONG" />
+	<meta property="og:description" content="Harpa PONG" />
+	<meta property="og:image" content="http://www.harpapong.com/files/images/sharing.jpg" />
+
+
+    <link href="../libs/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    
+    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <link href="../css/main.css" rel='stylesheet'/>
+
+	<script src="../js/libs/jquery-2.0.3.min.js"></script>
+	<script src="../libs/bootstrap/js/bootstrap.js"></script>
+
 	<script src="../common/Utils.js"></script>
 	<script src="js/libs/socket.io-1.0.6.js"></script>
 	<script src="js/MouseInput.js"></script>
@@ -13,22 +38,89 @@
 	<script>
 
 		var controller;
+		var indicator;
+		var playing = true;
 
 		document.addEventListener("DOMContentLoaded", function() {
+
+			indicator = document.getElementById("indicator");
 
 			queryParams = Utils.parseQueryString(document.location.href);
 
 			var playerId = queryParams["player"] || "";
+			var portNumber = queryParams["port"] || "8081";
 
-			controller = Controller.init(document.location.hostname + ":8081", playerId);
+			controller = Controller.init(document.location.hostname + ":" + portNumber, playerId, queryParams["method"]);
 
+			document.getElementById("whichPlayer").innerText = "You are player " + playerId;
+
+			update();
+			//setInterval(update, 500);
 
 		});
+
+		function update() {
+
+			if (playing)
+				window.requestAnimationFrame(update);
+
+			if (controller.state == controller.GAME_STATE_DURING){
+				indicator.style.left = (20 + (controller.input.value * 60)) + "%";
+			} 
+
+			if (controller.state == controller.GAME_STATE_AFTER){
+				playing = false;
+				showEnd();
+			}
+
+			
+
+		};
+
+		function showEnd() {
+
+			$("#instructions").fadeOut();
+			$("#feedback").fadeOut();
+
+			$("#end").delay(500).fadeIn();
+
+			$("#queueButton").click(function() {
+				document.location.href = document.location.href.split("/controller")[0];
+
+			});
+
+		};
 
 	</script>
 
 </head>
-<body>
+<body id="controller">
+	<div id="background">&nbsp;</div>
+	<section id="headline">
+	
+		<img src="../images/logo.svg"/>
+		<h1 style="display:none;">Harpa PONG</h1>
+	
+	</section>
+
+	<section id="instructions">
+	
+		
+		<h3>Move your phone from left to right to control your paddle</h3>
+		<p class="dark" id="whichPlayer"></p>
+	
+	</section>
+
+	<section id="feedback">
+		<div id="indicatorContainer">
+			<div id="indicator">&nbsp;</div>
+		</div>
+	</section>
+
+	<section id="end">
+		<h3>GAME OVER!</h3>
+		<button id="queueButton">Return to Home</button>
+	</section>
 
 </body>
 </html>

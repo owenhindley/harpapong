@@ -118,6 +118,7 @@
 
 		reflectBall : function() {
 			this.pos.ball.velocity.x *= Math.random() * 4 - 2;
+			this.pos.ball.velocity.x += Math.random() * 0.00001; // just in case something gets stuck
 			this.pos.ball.velocity.y *= -1.1;
 
 			if (this.pos.ball.y < 0) this.pos.ball.y = 0;
@@ -128,6 +129,11 @@
 
 			console.log("GOAL TO " + direction);
 
+			if (direction > 0){
+				this.scores.a++;
+			} else {
+				this.scores.b++;
+			}
 
 			this.reset();
 

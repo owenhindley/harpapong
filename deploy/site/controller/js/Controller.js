@@ -14,14 +14,14 @@
 
 		updateFlag : true,
 
-		init : function(wsUrl, playerId) {
+		init : function(wsUrl, playerId, controlMethod) {
 
-			state = GAME_STATE_CONNECTING;
+			this.state = this.GAME_STATE_CONNECTING;
 
 			this.playerId = playerId;
 
-			// this.input = AccelInput.init();
-			this.input = MouseInput.init();
+			this.input = AccelInput.init(controlMethod);
+			//this.input = MouseInput.init();
 
 			this.socket = io.connect(wsUrl);
 			this.socket.on("connect", this.socketConnectHandler.bind(this));
@@ -36,7 +36,7 @@
 			
 			this.socket.on("identify", this.onIdentify.bind(this));
 			this.socket.on("start", this.onGameStart.bind(this));
-
+			this.socket.on("finish", this.onGameEnd.bind(this));
 
 		},
 
@@ -49,7 +49,7 @@
 
 		onGameWait : function() {
 
-			state = GAME_STATE_WAIT;
+			this.state = this.GAME_STATE_WAIT;
 
 			// we're waiting for the other player to connect
 
@@ -57,15 +57,22 @@
 
 		onGameStart : function() {
 
-			state = GAME_STATE_DURING;
+			this.state = this.GAME_STATE_DURING;
+
+			console.log("Game start!");
 
 			// TODO : handle game start
 
 		},
 
-		onGameEnd : function() {
+		onGameEnd : function(data) {
 
-			state = GAME_STATE_AFTER;
+			this.state = this.GAME_STATE_AFTER;
+
+			this.socket.disconnect();
+			
+			console.log("Game ended");
+			console.log(data);
 
 		},
 
@@ -79,41 +86,15 @@
 
 			window.requestAnimationFrame(this.update.bind(this));
 
-			if (this.socket){
+			if (this.socket && this.state == this.GAME_STATE_DURING){
+
 				if (this.updateFlag){
+
 					this.socket.emit("position", { position : this.input.value });
 				}
 				this.updateFlag = !this.updateFlag;
 			}
 
-			this.render();
-
-		},
-
-
-		render : function() {
-
-			switch(state){
-
-				case GAME_STATE_CONNECTING:
-
-				break;
-
-				case GAME_STATE_WAIT:
-					
-
-				break;
-
-				case GAME_STATE_DURING:
-
-
-				break;
-
-				case GAME_STATE_AFTER:
-
-
-				break;
-			}
 		},
 
 

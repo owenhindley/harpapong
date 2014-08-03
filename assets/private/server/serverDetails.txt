@@ -6,4 +6,5 @@ Server details
 
 *** QUEUE SERVER ***
 
+IP address: 134.213.27.204
 root pwd: YxB5FXB7rrPw

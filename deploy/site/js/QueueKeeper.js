@@ -21,7 +21,7 @@
 			return this;
 		},
 
-		joinQueue : function() {
+		joinQueue : function(aCallback) {
 
 
 			// check cookies to see if we've already got an ID
@@ -31,6 +31,9 @@
 				this.queueId = guid_cookie_value;
 
 				this.checkPosition();
+
+				if (aCallback)
+					aCallback();
 				
 			} else {
 				var url = this.serverURL + "/?method=join";
@@ -41,6 +44,10 @@
 						var guid = data.data.id;
 						console.log("joined queue with id " + guid);
 						this.queueId = guid;
+
+						if (aCallback){
+							aCallback();
+						}
 
 						try {
 							Utils.setCookie("queueId", this.queueId);
@@ -71,10 +78,11 @@
 			this._makeRequest(url, function(data){
 
 				if (data.status == "OK"){
-					if (data.playing){
-
-						onJoinGame(data.data.playerId);
+					if (data.data.playing){
+						
 						Utils.delete_cookie("queueId");
+						onJoinGame(data.data.playerId);
+						
 
 					} else {
 

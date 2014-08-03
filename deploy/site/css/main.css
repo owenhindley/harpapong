@@ -122,6 +122,49 @@ section {
   padding-bottom: 2em;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/controller\/_controller\.scss}line{font-family:\000033}}
+#controller section {
+  opacity: 1;
+  display: block;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/controller\/_controller\.scss}line{font-family:\0000310}}
+#controller #instructions {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/controller\/_controller\.scss}line{font-family:\0000314}}
+#controller #instructions h3 {
+  margin-top: 0px;
+  text-transform: uppercase;
+  color: #fee500;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/controller\/_controller\.scss}line{font-family:\0000322}}
+#controller #feedback {
+  position: relative;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/controller\/_controller\.scss}line{font-family:\0000326}}
+#controller #feedback #indicatorContainer {
+  background: rgba(255, 255, 255, 0.5);
+  height: 100px;
+  position: relative;
+  width: 100%;
+  border-radius: 50px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/controller\/_controller\.scss}line{font-family:\0000334}}
+#controller #feedback #indicatorContainer #indicator {
+  background: #fee500;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  margin-left: -50px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/controller\/_controller\.scss}line{font-family:\0000354}}
+#controller #end {
+  display: none;
+}
+
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/animations\/_animations\.scss}line{font-family:\000031}}
 #background {
   position: absolute;

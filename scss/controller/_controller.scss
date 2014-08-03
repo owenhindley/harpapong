@@ -1,0 +1,58 @@
+#controller {
+	
+	section {
+		opacity : 1;
+		display:block;
+
+		
+	}
+
+	#instructions {
+		padding-top:0px;
+		padding-bottom:0px;
+
+		h3 {
+			margin-top:0px;
+
+			text-transform: uppercase;
+			color:$site_yellow;
+		}
+	}
+
+	#feedback {
+
+		position: relative;
+
+		#indicatorContainer {
+
+			background:rgba(255,255,255,0.5);
+			height:100px;
+			position: relative;
+			width:100%;
+			border-radius: 50px;
+
+			#indicator {
+				background:$site_yellow;
+				
+				width:100px;
+				height:100px;
+
+				border-radius:50%;
+
+				position: absolute;
+				left:50%;
+				margin-left:-50px;
+
+			}
+
+		}
+
+		
+
+	}
+
+	#end {
+		display:none;
+	}
+
+}

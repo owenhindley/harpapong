@@ -39,6 +39,8 @@
 
 		var queueKeeper;
 
+		var debugField;
+
 		document.addEventListener("DOMContentLoaded", function() {
 
 			showSection("headline");
@@ -46,11 +48,20 @@
 
 			queryParams = Utils.parseQueryString(document.location.href);
 
-			var serverUrl = "http://" + document.location.hostname + ":8080";
+			var serverPort = queryParams["port"] || "8080";
+
+			var serverUrl = "http://" + document.location.hostname + ":" + serverPort;
 
 			queueKeeper = QueueKeeper.init(serverUrl, onPosition, onJoinGame, onError);
 
 			$('#queueButton').click(onJoinQueueClick.bind(this));
+
+			if (queryParams["debug"]){
+				var debugSection = document.getElementById("debug");
+				debugSection.style.display = "block";
+				debugSection.style.opacity = "1";
+				debugField = document.getElementById("debugField");
+			}
 
 		});
 
@@ -58,7 +69,12 @@
 
 			showSection("joiningQueue");
 
-			queueKeeper.joinQueue();
+			queueKeeper.joinQueue(function() {
+				// joined queue
+				_debug("queueId : " + queueKeeper.queueId);
+
+
+			}.bind(this));
 
 		};
 
@@ -73,10 +89,18 @@
 			seconds = (seconds < 9) ? "0" + seconds : seconds; 
 			$("#timeMarker").html(mins + ":" + seconds);
 
+			// _debug("Joining game as player " + aPlayerId);
+
 		};
 
 		function onJoinGame(aPlayerId) {
 
+			// redirect to controller page
+
+			var rootUrl = document.location.href.split("?")[0];
+			document.location.href =  rootUrl + "/controller/?player=" + aPlayerId;
+
+			_debug("Joining game as player " + aPlayerId);
 
 		};
 
@@ -94,6 +118,14 @@
 			});
 
 			$("#" +aId).delay(500).fadeIn();
+
+		};
+
+		function _debug(msg){
+			if (debugField){
+				debugField.innerHTML = debugField.innerHTML += "\n" + msg;	
+			}
+			
 
 		};
 
@@ -127,7 +159,7 @@
 			<p class="dark">INSTRUCTIONS</p>
 			<p class="">Swing the phone left and right<br/> to move your paddle</p>
 			<p class="dark">Don't let go of the phone</p>
-			<p>First to 3 points wins!</p>
+			<p>First to 5 points wins!</p>
 		</div>
 
 		<div class="credits">
@@ -149,6 +181,10 @@
 	<h1 id="timeMarker"></h1>
 
 </section>
+
+<div id="debug">
+	<p id="debugField"></p>
+</div>
 
 
 </body>
