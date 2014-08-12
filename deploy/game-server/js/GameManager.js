@@ -7,6 +7,12 @@
 
 	var MAX_SCORE = 5;
 	var JOIN_TIMEOUT = 10000;
+
+	var MODE_WAIT = "wait";
+	var MODE_GAME = "game";
+	var MODE_GOAL = "goal";
+
+	
 	
 	var GameManager = {
 
@@ -16,10 +22,12 @@
 		master : null,
 		renderers : [],
 		events : new EventEmitter(),
+		mode : MODE_WAIT,
 
 		queueServer : null,
 		lastUpdate : 0,
 		gamePlaying : false,
+		gamePaused : false,
 
 		joinTimeoutId : -1,
 
@@ -37,6 +45,8 @@
 		},
 
 		requestPlayers : function() {
+
+			this.mode = MODE_WAIT;
 
 			this._callQueueServer("nextgame", function(response){
 
@@ -57,9 +67,12 @@
 
 			clearTimeout(this.joinTimeoutId);
 
-			this.game.startGame();
+			this.game.startGame(this.onGoal.bind(this));
+
+			this.mode = MODE_GAME;
 
 			this.gamePlaying = true;
+			this.gamePaused = false;
 
 		},
 
@@ -73,6 +86,7 @@
 			}
 
 			this.gamePlaying = false;
+			this.gamePaused = false;
 
 			this.players = {};
 
@@ -114,7 +128,7 @@
 
 			var dt = Date.now() - this.lastUpdate;
 
-			if (this.gamePlaying){
+			if (this.gamePlaying && !this.gamePaused){
 				this.game.update(dt);
 
 				if (this.game.scores.a >= MAX_SCORE || this.game.scores.b >= MAX_SCORE){
@@ -122,11 +136,29 @@
 				}
 			}
 
-			
-
 			this.render();
 
 			this.lastUpdate = Date.now();
+
+		},
+
+		onGoal : function() {
+
+			winston.info("GOOOOOOAL!");
+
+			// pause the game for a short while
+			
+			this.mode = MODE_GOAL;
+			this.gamePaused = true;
+
+			setTimeout(function() {
+				
+				if (this.gamePlaying)
+					this.mode = MODE_GAME;
+
+				this.gamePaused = false;
+
+			}.bind(this), 2000);
 
 		},
 
@@ -135,7 +167,7 @@
 			this.game.serialiseState();
 
 			for (var i=0; i < this.renderers.length; i++){
-				this.renderers[i].render(this.game);
+				this.renderers[i].render(this.game, this.mode);
 			}
 		},
 

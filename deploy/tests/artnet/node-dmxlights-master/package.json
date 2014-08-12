@@ -1,0 +1,24 @@
+{
+    "name": "node-dmxlights",
+    "version": "0.0.1",
+    "author": "xandy <xandy@hackerspace-bamberg.de>",
+    "description": "advanced dmx light control via artnet",
+    "contributors": [
+        {
+            "name": "xandy",
+            "email": "xandy@hackerspace-bamberg.de"
+        }
+    ],
+    "main": "./lightctrl.js",
+    "repository": {
+    },
+    "keywords": [
+        "dmx"
+    ],
+    "dependencies" : {
+        "artnet":       "https://github.com/ydnax/artnet-node/tarball/master"
+    },
+    "engine": {
+        "node": ">=0.6"
+    }
+}

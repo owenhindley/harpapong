@@ -42,6 +42,12 @@
 
 			game.setFromSerialised(data.data);
 
+			document.getElementById("scoreA").innerHTML = game.scores.a;
+
+			document.getElementById("scoreB").innerHTML = game.scores.b;
+
+			document.getElementById("mode").innerHTML = data.mode;
+
 			renderer.render(game);
 
 		};
@@ -55,6 +61,15 @@
 
 
 </div>
+
+<div id="scores">
+<h1>Player A : <span id="scoreA">0</span></h1>
+<h1>Player B : <span id="scoreB">0</span></h1>
+</div>
+
+
+<h2>Mode : <span id="mode"></span></h2>
+
 
 </body>
 </html>

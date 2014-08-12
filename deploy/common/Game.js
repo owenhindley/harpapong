@@ -26,13 +26,17 @@
 
 		stateSnapshot : null,
 
+		goalCallback : null,
+
 
 		init : function() {
 			
 			return this;
 		},
 
-		startGame : function() {
+		startGame : function(goal_callback) {
+
+			this.goalCallback = goal_callback;
 
 			this.scores.a = 0;
 			this.scores.b = 0;
@@ -134,6 +138,10 @@
 			} else {
 				this.scores.b++;
 			}
+
+			if (this.goalCallback)
+				this.goalCallback();
+
 
 			this.reset();
 

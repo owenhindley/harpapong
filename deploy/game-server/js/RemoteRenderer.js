@@ -17,11 +17,11 @@
 
 	};
 
-	p.render = function(game){
+	p.render = function(game, mode){
 
 		var gameState = game.stateSnapshot;
 		if (gameState){
-			this.socket.emit('render', {data : gameState});
+			this.socket.emit('render', {data : gameState, mode : mode});
 		}
 
 	};
