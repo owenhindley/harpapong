@@ -3,3 +3,6 @@
 /vagrant
 OWE_003_HarpaPong.sublime-workspace
 deploy/queue.log
+/deploy/game-server/game.log
+/deploy/game.log
+/deploy/queue-server/queue.log
