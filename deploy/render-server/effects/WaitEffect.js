@@ -14,7 +14,7 @@ var WaitEffect = function(ctx, width, height) {
 
 	this.lastCanvas = new Canvas(this.width, this.height);
 	this.lastCtx = this.lastCanvas.getContext("2d");
-
+	this.ctx.globalCompositeOperation = "overlay";
 	this.ctx.font = "2pt Arial";
 	this.renderText = false;
 
@@ -35,8 +35,10 @@ p.render = function() {
 	this.frameCounter++;
 
 	
-	this.ctx.globalAlpha = 0.3;
-	//this.ctx.drawImage(this.lastCanvas, 0,0);
+	this.ctx.globalAlpha = 0.9;
+	this.ctx.fillStyle = "black";
+	this.ctx.fillRect(0,0,this.width, this.height);
+	this.ctx.drawImage(this.lastCanvas, 0,0);
 	this.ctx.globalAlpha = 1.0;
 	
 
