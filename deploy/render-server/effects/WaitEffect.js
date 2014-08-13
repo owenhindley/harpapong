@@ -9,6 +9,9 @@ var WaitEffect = function(ctx, width, height) {
 	this.flag = false;
 	this.frameCounter = 0;
 
+	this.logoImage = new Canvas.Image();
+	this.logoImage.src = "images/PONG-logo.png";
+
 	this.lastCanvas = new Canvas(this.width, this.height);
 	this.lastCtx = this.lastCanvas.getContext("2d");
 
@@ -50,8 +53,10 @@ p.render = function() {
 	this.lastCtx.drawImage(this.ctx.canvas,0,0);
 
 	if (this.renderText){
-		this.ctx.fillStyle = "green";
-		this.ctx.fillText("PONG", 3, Math.floor(this.height/2) + 4);
+		// this.ctx.fillStyle = "green";
+		// this.ctx.fillText("PONG", 4, Math.floor(this.height/2) + 4);
+
+		this.ctx.drawImage(this.logoImage, 0,0);
 
 	}
 
