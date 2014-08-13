@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Canvas sense check</title>
+
+
+	<script>
+	var canvas;
+	var ctx;
+
+	var y = 0;
+
+	document.addEventListener("DOMContentLoaded", function() {
+
+		canvas = document.getElementById("canvas");
+		ctx = canvas.getContext("2d");
+
+		animate();
+	});
+
+
+	function animate() {
+
+		window.requestAnimationFrame(animate);
+
+		render();
+
+	}
+
+	function render() {
+
+		canvas.width = 0;
+		canvas.height = 0;
+
+		canvas.width = 35;
+		canvas.height = 12;
+		// 
+		//ctx.fillStyle = "rgba(0,0,0,1)";
+		//ctx.fillRect(0,0,canvas.width, canvas.height);
+
+		//ctx.clearRect(0,0,canvas.width, canvas.height);
+
+		ctx.strokeStyle = "red";
+		ctx.lineWidth = 1;
+		//this.ctx.moveTo(5, 6);
+		//this.ctx.lineTo(31,6);
+		ctx.moveTo(5,y);
+		ctx.lineTo(31,y);
+		y++;
+		if (y > canvas.height) y = 0;
+
+		ctx.stroke();
+
+	}
+
+	</script>
+
+</head>
+<body>
+
+<div id="container">
+	<canvas id="canvas" width="35" height="12"></canvas>
+</div>
+
+</body>
+</html>

@@ -9,9 +9,8 @@ var NanoTimer = require('nanotimer');
 var front_patch = require('./patchdata/front-main-patch-1.js');
 
 var INTERFACE_IP = "2.224.168.149";
-// var GAME_SERVER_IP = "http://127.0.0.1";
-var GAME_SERVER_IP = "http://127.0.0.1";
-//var GAME_SERVER_IP = "134.213.27.204";
+//var GAME_SERVER_IP = "http://127.0.0.1";
+var GAME_SERVER_IP = "http://134.213.27.204";
 // 
 var active = true;
 
@@ -36,22 +35,27 @@ console.log("**************************************************");
 console.log("");
 console.log('Starting...');
 
+winston.add(winston.transports.File, { filename: 'render.log', handleExceptions : false });
+winston.info("started renderer");
+
 var view = new HarpaGameView(INTERFACE_IP, front_patch, 36, 12);
 var game = Game.init();
 
 var renderTimer = new NanoTimer();
 renderTimer.setInterval(render.bind(this), '', '33m');
 
+winston.info("connecting to game server at " + GAME_SERVER_IP + ":8081");
+
 var gameSocket = io.connect(GAME_SERVER_IP + ':8081', {reconnect: true});
 var gameMode = "wait";
 
 gameSocket.on('connect', function(){
 
-
-
-	console.log("conected to game server!");
+	winston.info("conected to game server!");
 
 	gameSocket.on('identify', function() {
+		winston.info("asked to identify by server");
+
 		gameSocket.emit('remoterenderer', {});
 	});
 
@@ -81,9 +85,11 @@ var server = http.createServer(function(request, response){
 
 	var queryComponents = Utils.parseQueryString(request.url);
 
+	var method = null;
+
 	if (queryComponents["method"]){
 
-		var method = queryComponents["method"];
+		method = queryComponents["method"];
 
 		switch(method){
 
@@ -101,17 +107,25 @@ var server = http.createServer(function(request, response){
 			break;
 
 			case "blackout":
-				this.view.blackout();
+				view.blackout();
 			break;
 
 			case "blind":
-				this.view.blind();
+				view.blind();
 			break;
 
 		}
 
 
 	}
+
+
+    response.writeHead(200, { 
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin' : '*'
+    });
+
+    response.end("Called method " + method);
 
 
 });

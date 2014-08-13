@@ -4,10 +4,16 @@
 	var DmxClient = require('./DmxClient.js').DmxClient;
 	var Fixture = require('./HarpaFixture.js').Fixture;
 
-	var ArtnetPixelMapper = function(ip) {
-		this.ip = ip; 
+	var ArtnetPixelMapper = function(ip, universes) {
 
-		this.client = new DmxClient(this.ip, 1);
+		this.ip = ip; 
+		universes = universes || 6;
+		this.clients = [];
+
+		for (var i =1; i<= universes; i++){
+			var newClient = new DmxClient(this.ip, i);
+			this.clients.push(newClient);
+		}
 
 		this.fixtures = [];
 
@@ -33,12 +39,12 @@
 				console.log("looking up fixture x:", i, " y:", j);
 
 				var fixturePatch = patchData[j][i].split(":");
-				fixtureUniverse = fixturePatch[0];
-				fixtureChannel = fixturePatch[1];
+				fixtureUniverse = parseInt(fixturePatch[0]);
+				fixtureChannel = parseInt(fixturePatch[1]);
 
 				console.log("fixture universe:", fixtureUniverse, " channel:", fixtureChannel);
 
-				var newFixture = new Fixture(this.client, fixtureChannel, fixtureUniverse);
+				var newFixture = new Fixture(this.clients[fixtureUniverse], fixtureChannel, fixtureUniverse);
 				this.fixtures[i].push(newFixture);
 
 			}
@@ -58,7 +64,10 @@
 		}
 
 		if (flush)
-			this.client.flush();
+		{
+			for (var i=0; i < this.clients.length; i++)
+				this.clients[i].flush();
+		}
 
 	};
 
@@ -67,7 +76,8 @@
 	};
 
 	ArtnetPixelMapper.prototype.render = function() {
-		this.client.flush();
+		for (var i=0; i < this.clients.length; i++)
+				this.clients[i].flush();
 	};
 
 	global.ArtnetPixelMapper = (global.module || {}).exports = ArtnetPixelMapper;

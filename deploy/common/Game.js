@@ -2,7 +2,7 @@
 	
 	var Game = {
 
-		pw : 0.04,
+		pw : 0.08,
 		ph : 0.02,
 		ballSize : 0.01,
 
