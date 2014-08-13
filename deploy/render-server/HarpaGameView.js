@@ -2,6 +2,8 @@ var ArtnetPixelMapper = require("./ArtnetPixelMapper.js").ArtnetPixelMapper;
 var Canvas = require("canvas");
 var winston = require("winston");
 
+var GoalEffect = require("./effects/GoalEffect.js");
+
 var tX = 0;
 var tY = 0;
 
@@ -14,6 +16,10 @@ var HarpaGameView = function(ip, patchdata, width, height){
 
 	this.canvas = new Canvas(this.width, this.height);
 	this.ctx = this.canvas.getContext("2d");
+	this.ctx.antialias = "none";
+
+	this.goalEffect = new GoalEffect(this.ctx, this.width, this.height);
+	this.goalEffect.renderText = true;
 };
 
 var p = HarpaGameView.prototype;
@@ -23,6 +29,21 @@ p.render = function(game, mode){
 
 	if (mode != this.currentMode){
 		winston.info("Game View changed mode to " + mode);
+
+		switch(mode){
+
+			case "goal":
+				this.goalEffect.start();
+			break;
+			case "wait":
+
+			break;
+			case "game":
+
+			break;
+		}
+
+
 	}
 	this.currentMode = mode;
 
@@ -37,15 +58,13 @@ p.render = function(game, mode){
 	//this.ctx.fillStyle = "black";
 	//this.ctx.fillRect(0,0,35, 12);
 
-	mode = "test";
+ 	//mode = "test";
 
 	switch(mode){
 
 		case "test":
 
-			//this.ctx.fillStyle = "blue";
-			//this.ctx.fillRect(0,0,this.width, this.height);
-
+			
 			this.ctx.strokeStyle = "red";
 			this.ctx.lineWidth = 1;
 			//this.ctx.moveTo(5, 6);
@@ -56,7 +75,15 @@ p.render = function(game, mode){
 			if (tY > this.height) tY = 0;
 			this.ctx.stroke();
 
+//			this.goalEffect.render();
+
 		break;
+
+
+		case "goal":
+
+			this.goalEffect.render();
+
 
 		case "game":
 
@@ -69,32 +96,33 @@ p.render = function(game, mode){
 			// player a
 			aX = (game.pos.a.x - game.pw / 2);
 			aY = (game.pos.a.y - game.ph / 2);
-			this.ctx.fillRect(aX * this.width, aY * this.height, game.pw * this.width, game.ph * this.height);
+			// this.ctx.fillRect(aX * this.width, aY * this.height, game.pw * this.width, game.ph * this.height);
+			this.ctx.fillRect(aX * this.width, aY * this.height, game.pw * this.width, 1);
 
 			// player b
 			bX = (game.pos.b.x - game.pw / 2);
 			bY = (game.pos.b.y - game.ph / 2);
-			this.ctx.fillRect(bX * this.width, bY * this.height, game.pw * this.width, game.ph * this.height);
+			// this.ctx.fillRect(bX * this.width, bY * this.height, game.pw * this.width, game.ph * this.height);
+			// 
+			this.ctx.fillRect(bX * this.width, (bY * this.height)-1, game.pw * this.width, 1);
 
-			// ball
-			// this.ctx.beginPath();
-			// this.ctx.arc(game.pos.ball.x, game.pos.ball.y, game.ballSize, 0, 2 * Math.PI, false);
-			// this.ctx.fill();
-			var bw = game.ballSize * 1;
-			this.ctx.fillRect((game.pos.ball.x -bw/2) * this.width, (game.pos.ball.y - bw/2) * this.height, bw * this.width, bw * this.height);
+			if (mode == "game"){
+
+				// ball
+				// this.ctx.beginPath();
+				// this.ctx.arc(game.pos.ball.x, game.pos.ball.y, game.ballSize, 0, 2 * Math.PI, false);
+				// this.ctx.fill();
+				var bw = game.ballSize * 1;
+				// this.ctx.fillRect((game.pos.ball.x -bw/2) * this.width, (game.pos.ball.y - bw/2) * this.height, bw * this.width, bw * this.height);
+				this.ctx.fillRect((game.pos.ball.x -bw/2) * this.width, (game.pos.ball.y - bw/2) * this.height, 1, 1);
+				
+			}
 			
 			//this.ctx.restore();
-
-
+			
 		break;
 
-		case "goal":
-
-
-
-		break;
-
-		case "waiting":
+		case "wait":
 
 
 		break;

@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'karmatic_arcaderegular';
+    src: url('../fonts/ka1-webfont.eot');
+    src: url('../fonts/ka1-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ka1-webfont.woff') format('woff'),
+         url('../fonts/ka1-webfont.ttf') format('truetype'),
+         url('../fonts/ka1-webfont.svg#karmatic_arcaderegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

@@ -2,9 +2,9 @@
 	
 	var Game = {
 
-		pw : 0.08,
+		pw : 0.12,
 		ph : 0.02,
-		ballSize : 0.01,
+		ballSize : 0.02,
 
 		scores : {
 			a : 0,
@@ -69,13 +69,19 @@
 
 			// paddle collision check
 			if (this.pos.ball.y < this.pos.a.y)
-				if ((this.pos.ball.x > this.pos.a.x - this.pw / 2) && (this.pos.ball.x < this.pos.a.x + this.pw / 2))
-					this.reflectBall();
+				if ((this.pos.ball.x > this.pos.a.x - this.pw / 2) && (this.pos.ball.x < this.pos.a.x + this.pw / 2)){
+					// check where the ball hit the paddle
+					var bouncePoint = (((this.pos.a.x + this.pw) - this.pos.ball.x) / this.pw) - 0.5;
+					this.reflectBall(bouncePoint);
+				}
 					
 
 			if (this.pos.ball.y > this.pos.b.y)
-				if ((this.pos.ball.x > this.pos.b.x - this.pw / 2) && (this.pos.ball.x < this.pos.b.x + this.pw / 2))
-					this.reflectBall();
+				if ((this.pos.ball.x > this.pos.b.x - this.pw / 2) && (this.pos.ball.x < this.pos.b.x + this.pw / 2)){
+					// check where the ball hit the paddle
+					var bouncePoint = (((this.pos.b.x + this.pw) - this.pos.ball.x) / this.pw) - 0.5;
+					this.reflectBall(bouncePoint);
+				}
 					
 
 			// bounds check
@@ -120,7 +126,10 @@
 
 		},
 
-		reflectBall : function() {
+		reflectBall : function(bouncePoint) {
+
+			console.log(bouncePoint);
+
 			this.pos.ball.velocity.x *= Math.random() * 4 - 2;
 			this.pos.ball.velocity.x += Math.random() * 0.00001; // just in case something gets stuck
 			this.pos.ball.velocity.y *= -1.1;
