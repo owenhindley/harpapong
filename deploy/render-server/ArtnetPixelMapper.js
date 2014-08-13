@@ -4,6 +4,11 @@
 	var DmxClient = require('./DmxClient.js').DmxClient;
 	var Fixture = require('./HarpaFixture.js').Fixture;
 
+	var repatch = {
+
+
+	};
+
 	var ArtnetPixelMapper = function(ip, universes) {
 
 		this.ip = ip; 
@@ -23,12 +28,15 @@
 		
 		console.log("Setting up renderer with width : ", width, ", height : ", height);
 
-		console.log(patchData);
+		//console.log(patchData);
+
+		console.log("patch data at 4, 3 : ", patchData[3][4]);
+
 
 		// TODO : read in patch data
 		// 
 		var fixtureChannel = 0;	// look this up from patchdata
-		var fixtureUniverse = 1; 
+		var fixtureUniverse = 3; 
 
 		for (var i=0; i < width; i++){
 
@@ -36,15 +44,15 @@
 
 			for (var j=0; j < height; j++){
 
-				console.log("looking up fixture x:", i, " y:", j);
+				//console.log("looking up fixture x:", i, " y:", j);
 
 				var fixturePatch = patchData[j][i].split(":");
 				fixtureUniverse = parseInt(fixturePatch[0]);
 				fixtureChannel = parseInt(fixturePatch[1]);
 
-				console.log("fixture universe:", fixtureUniverse, " channel:", fixtureChannel);
+				//console.log("fixture universe:", fixtureUniverse, " channel:", fixtureChannel);
 
-				var newFixture = new Fixture(this.clients[fixtureUniverse], fixtureChannel, fixtureUniverse);
+				var newFixture = new Fixture(this.clients[fixtureUniverse-1], fixtureChannel, fixtureUniverse);
 				this.fixtures[i].push(newFixture);
 
 			}

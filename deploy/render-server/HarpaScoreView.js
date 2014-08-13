@@ -14,6 +14,8 @@ var HarpaGameView = function(ip, patchdata, width, height){
 
 	this.canvas = new Canvas(this.width, this.height);
 	this.ctx = this.canvas.getContext("2d");
+
+	this.currentMode = "wait";
 };
 
 var p = HarpaGameView.prototype;
@@ -22,7 +24,7 @@ var p = HarpaGameView.prototype;
 p.render = function(game, mode){
 
 	if (mode != this.currentMode){
-		winston.info("Game View changed mode to " + mode);
+		winston.info("Score View changed mode to " + mode);
 	}
 	this.currentMode = mode;
 
@@ -50,8 +52,8 @@ p.render = function(game, mode){
 			this.ctx.lineWidth = 1;
 			//this.ctx.moveTo(5, 6);
 			//this.ctx.lineTo(31,6);
-			this.ctx.moveTo(5,tY);
-			this.ctx.lineTo(31,tY);
+			this.ctx.moveTo(0,tY);
+			this.ctx.lineTo(this.width,tY);
 			tY++;
 			if (tY > this.height) tY = 0;
 			this.ctx.stroke();
@@ -60,30 +62,6 @@ p.render = function(game, mode){
 
 		case "game":
 
-			//this.ctx.save();
-
-			//this.ctx.scale(this.width, this.height);
-
-			this.ctx.fillStyle = "green";
-
-			// player a
-			aX = (game.pos.a.x - game.pw / 2);
-			aY = (game.pos.a.y - game.ph / 2);
-			this.ctx.fillRect(aX * this.width, aY * this.height, game.pw * this.width, game.ph * this.height);
-
-			// player b
-			bX = (game.pos.b.x - game.pw / 2);
-			bY = (game.pos.b.y - game.ph / 2);
-			this.ctx.fillRect(bX * this.width, bY * this.height, game.pw * this.width, game.ph * this.height);
-
-			// ball
-			// this.ctx.beginPath();
-			// this.ctx.arc(game.pos.ball.x, game.pos.ball.y, game.ballSize, 0, 2 * Math.PI, false);
-			// this.ctx.fill();
-			var bw = game.ballSize * 1;
-			this.ctx.fillRect((game.pos.ball.x -bw/2) * this.width, (game.pos.ball.y - bw/2) * this.height, bw * this.width, bw * this.height);
-			
-			//this.ctx.restore();
 
 
 		break;

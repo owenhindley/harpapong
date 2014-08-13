@@ -6,7 +6,7 @@ var Fixture = function(client, channel, universe){
 
 Fixture.prototype.setColor = function(r, g, b, flush){
 
-   // console.log("fixture on channel ", this.channel, " setting to ", r ,g, b);
+    //console.log("fixture on channel ", this.channel, " universe : " + this.universe + " setting to ", r ,g, b);
 
     this.client.setChannel(this.channel, r);
     this.client.setChannel(this.channel + 1, g);
