@@ -3,6 +3,7 @@ var Canvas = require("canvas");
 var winston = require("winston");
 
 var GoalEffect = require("./effects/GoalEffect.js");
+var WaitEffect = require("./effects/WaitEffect.js");
 
 var tX = 0;
 var tY = 0;
@@ -21,6 +22,7 @@ var HarpaGameView = function(ip, patchdata, width, height){
 
 	this.goalEffect = new GoalEffect(this.ctx, this.width, this.height);
 
+	this.waitEffect = new WaitEffect(this.ctx, this.width, this.height);
 	this.currentMode = "wait";
 };
 
@@ -118,6 +120,7 @@ p.render = function(game, mode){
 
 		case "wait":
 
+			this.waitEffect.render();
 
 		break;
 
