@@ -12,7 +12,7 @@
 
 html, body{
 		
-	text-shadow: 0 1px 3px rgba(0,0,0,.2);
+	text-shadow: 0 1px 3px rgba(255,255,255,.5);
 	font-family:$font_family_sans !important;
 	text-align: center;
 	background: $site_background;
@@ -68,7 +68,7 @@ h1, h2 {
 h3, h4, h5 {
 	
 	color:#232323;
-	text-shadow: 0 1px 1px rgba(0,0,0,.1);
+	text-shadow: 0 1px 1px rgba(0,0,255,.5);
 	font-family:$font_family_sans_light !important;
 	font-weight: bold !important;
 	
@@ -85,6 +85,26 @@ p {
 		color:#343333;
 	}
 
+	&.small {
+		font-size: 16px;
+	}
+
+	&.lower {
+		text-transform: none;
+	}
+
+}
+
+/* Language select */
+body.lang-en {
+	.lang-is {
+		display:none;
+	}
+}
+body.lang-is {
+	.lang-en {
+		display:none;
+	}
 }
 
 #footer {
@@ -104,7 +124,7 @@ button {
 
 	box-shadow: 0px 3px 0px rgba(23, 23, 23, 1);
 
-	color:$gray_text_color;
+	color:black;
 	padding-left:2em;
 	padding-right:2em;
 	padding-top:0.5em;
@@ -153,4 +173,5 @@ section {
 
 @import "controller/controller";
 @import "animations/animations";
+@import "sections/language";
 @import "sections/sections";

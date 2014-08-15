@@ -3,7 +3,7 @@
 	var Game = {
 
 		pw : 0.12,
-		ph : 0.02,
+		ph : 0.04,
 		ballSize : 0.02,
 
 		scores : {
@@ -12,8 +12,8 @@
 		},
 
 		pos : {
-			a : { x : 0.5, y : 0 },
-			b : { x : 0.5, y : 1 },
+			a : { x : 0.5, y : 0.1 },
+			b : { x : 0.5, y : 0.9 },
 			ball : {
 				x : 0.5,
 				y : 0.5,
@@ -128,9 +128,12 @@
 
 		reflectBall : function(bouncePoint) {
 
+			bouncePoint = bouncePoint - 0.5;
+
 			console.log(bouncePoint);
 
-			this.pos.ball.velocity.x *= Math.random() * 4 - 2;
+			this.pos.ball.velocity.x = bouncePoint * -0.0008;
+
 			this.pos.ball.velocity.x += Math.random() * 0.00001; // just in case something gets stuck
 			this.pos.ball.velocity.y *= -1.1;
 

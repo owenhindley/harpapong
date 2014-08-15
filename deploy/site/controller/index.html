@@ -30,6 +30,7 @@
 	<script src="../libs/bootstrap/js/bootstrap.js"></script>
 
 	<script src="../common/Utils.js"></script>
+	<script src="../js/PongLanguageSelect.js"></script>
 	<script src="js/libs/socket.io-1.0.6.js"></script>
 	<script src="js/MouseInput.js"></script>
 	<script src="js/AccelInput.js"></script>
@@ -53,7 +54,11 @@
 
 			controller = Controller.init(document.location.hostname + ":" + portNumber, playerId, queryParams["method"]);
 
-			document.getElementById("whichPlayer").innerText = "You are player " + playerId;
+			// document.getElementById("whichPlayer").innerText = "You are player " + playerId;
+
+			
+			$("#whichPlayer").addClass("player-" + playerId);
+		
 
 			update();
 			//setInterval(update, 500);
@@ -95,20 +100,33 @@
 	</script>
 
 </head>
-<body id="controller">
+<body id="controller" class="lang-is">
 	<div id="background">&nbsp;</div>
-	<section id="headline">
-	
-		<img src="../images/logo.svg"/>
-		<h1 style="display:none;">Harpa PONG</h1>
-	
-	</section>
+
+	<div id="langContainer">
+
+	</div>
 
 	<section id="instructions">
-	
+		<br/>
+		<h3>
+			<span class="lang-en">Game on!</span>
+			<span class="lang-is">Byrja!</span>
+		</h3>
+
+		<p class="dark" id="whichPlayer">
+				
+			<span class="lang-en player-a">You control the <u>TOP</u> paddle</span>
+			<span class="lang-is player-a">Þú stýrir <u>EFRI</u> spaðanum</span>
+
+			<span class="lang-en player-b">You control the <u>BOTTOM</u> paddle</span>
+			<span class="lang-is player-b">Þú stýrir <u>NEÐRI</u> spaðanum</span>
+
+		</p>
+		<br/>
+
 		
-		<h3>Move your phone from left to right to control your paddle</h3>
-		<p class="dark" id="whichPlayer"></p>
+		
 	
 	</section>
 
@@ -116,11 +134,33 @@
 		<div id="indicatorContainer">
 			<div id="indicator">&nbsp;</div>
 		</div>
+
+		<button id="enableAudio">
+			<span class="lang-en">Enable Audio</span>
+			<span class="lang-is">Kveikja á hljóði</span>
+		</button>
+
+
 	</section>
 
 	<section id="end">
-		<h3>GAME OVER!</h3>
-		<button id="queueButton">Return to Home</button>
+		<h3>
+			<span class="lang-en">GAME OVER!</span>
+			<span class="lang-is">LEIK LOKIÐ!</span>
+		</h3>
+
+		<p id="playerResult">
+			<span class="lang-en player-win">Congratulations! You win!</span>
+			<span class="lang-is player-win">Til hamingju! Þú vannst!</span>
+
+			<span class="lang-en player-lose">Sorry, you lose :(</span>
+			<span class="lang-is player-lose">Því miður, gengur betur næst :(</span>
+		</p>
+
+		<button id="queueButton">
+			<span class="lang-en">Play Again</span>
+			<span class="lang-is">Spila aftur</span>
+		</button>
 	</section>
 
 </body>

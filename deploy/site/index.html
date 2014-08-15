@@ -34,6 +34,7 @@
 
 	<script src="../common/Utils.js"></script>
 	<script src="js/QueueKeeper.js"></script>
+	<script src="js/PongLanguageSelect.js"></script>
 	
 
 	<script>
@@ -82,6 +83,9 @@
 		function onPosition(aPosition){
 
 			showSection("queueing");
+
+			$("#headline").fadeOut();
+
 			$("#positionMarker").html(parseInt(aPosition) + 1);
 
 			var timeUntilGame = Math.ceil(aPosition / 2.0) * 3 * 60;
@@ -133,10 +137,15 @@
 	</script>
 
 </head>
-<body>
+<body class="lang-is">
 
 <div id="background">
 	&nbsp;
+</div>
+
+
+<div id="langContainer">
+
 </div>
 
 <section id="headline">
@@ -149,37 +158,84 @@
 
 <section id="intro">
 
-		<p>Play PONG on Harpa!</p>
-		<br/>
-		<p >Click 'Join Queue' below</p>
-		<p>Wait your turn!</p>
+		<!-- <p>Play PONG on Harpa!</p> -->
+		<!-- <br/>
+		<p class="small" >Click 'Join Queue' below</p>
+		<p class="small">Wait your turn!</p> -->
 
-		<button id="queueButton">Join Queue</button>
+		<p class="small">
+			<span class="lang-is">Athugaðu að þú getur ekki tengst vefnum né skoðað póstinn þinn hér.</span>
+			<span class="lang-en">Please note that you can not access the web or check your messages through this network.
+			</span>
+		</p>
+		
 
-		<div class="instructions">
-			<p class="dark">INSTRUCTIONS</p>
-			<p class="">Swing the phone left and right<br/> to move your paddle</p>
-			<p class="dark">Don't let go of the phone</p>
-			<p>First to 5 points wins!</p>
-		</div>
+		<button id="queueButton">
+			<span class="lang-is">Spila PONG</span>
+			<span class="lang-en">Play PONG</span>
+		</button>
 
 		<div class="credits">
-			<h3>About / Credits</h3>
+			<a href="about.html"> 
+			<h3>
+				<span class="lang-en">About / Credits</span>
+				<span class="lang-is">Um verkið</span>
+			</h3>
+			</a>
 		</div>
 
 </section>
 
 <section id="joiningQueue">
-	<p>Joining queue...</p>
+	<p>
+		<span class="lang-en">Joining queue...</span>
+		<span class="lang-is">Fer í röð...</span>
+
+	</p>
 </section>
 
 <section id="queueing">
 
-	<p>You're now in the queue!</p>
-	<h2>Position</h2>
-	<h1 id="positionMarker"></h1>
-	<h2>Approx. time</h2>
+	<p>
+		<span class="lang-en">You're number </span>
+		<span class="lang-is">Þú ert númer </span>
+		<span id="positionMarker"></span>
+		<span class="lang-en">in line.</span>
+		<span class="lang-is">í röðinni.</span>
+	</p>
+
+	<p>
+		<span class="lang-en">Approx. time</span>
+		<span class="lang-is">Biðtími ca.</span>
+	</p>
 	<h1 id="timeMarker"></h1>
+
+
+	<div class="instructions">
+		<p class="dark">
+			<span class="lang-en">INSTRUCTIONS:</span>
+			<span class="lang-is">LEIÐBEININGAR:</span>
+		</p>
+		<p class="lower">
+			<span class="lang-en">
+			• Wait your turn.<br/>
+			• Look at Harpa.<br/>
+			• Rest your thumb on the phone screen.<br/>
+			• Tilt your phone right and left to move the paddle.<br/>
+			• First to 5 points wins!
+			</span>
+			<span class="lang-is">
+			• Bíddu þar til kemur að þér.<br/>
+			• Horfðu á Hörpu.<br/>
+			• Hvíldu þumalinn á símaskjánum.<br/>
+			• Hallaðu símanum til hægri og vinstri til að stýra spöðunum.<br/>
+			• Leikurinn er upp í 5.
+			</span>
+		</p>
+
+		
+	</div>
+
 
 </section>
 

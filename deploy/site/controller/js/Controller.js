@@ -20,8 +20,13 @@
 
 			this.playerId = playerId;
 
-			this.input = AccelInput.init(controlMethod);
-			//this.input = MouseInput.init();
+			if (controlMethod == "mouse"){
+				this.input = MouseInput.init();
+			} else {
+				this.input = AccelInput.init(controlMethod);	
+			}
+			
+			
 
 			this.socket = io.connect(wsUrl);
 			this.socket.on("connect", this.socketConnectHandler.bind(this));
