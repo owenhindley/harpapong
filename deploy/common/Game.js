@@ -73,6 +73,7 @@
 					// check where the ball hit the paddle
 					var bouncePoint = (((this.pos.a.x + this.pw) - this.pos.ball.x) / this.pw) - 0.5;
 					this.reflectBall(bouncePoint);
+					this.pos.ball.y = this.pos.a.y;
 				}
 					
 
@@ -81,6 +82,7 @@
 					// check where the ball hit the paddle
 					var bouncePoint = (((this.pos.b.x + this.pw) - this.pos.ball.x) / this.pw) - 0.5;
 					this.reflectBall(bouncePoint);
+					this.pos.ball.y = this.pos.b.y;
 				}
 					
 

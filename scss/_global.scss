@@ -12,12 +12,12 @@
 
 html, body{
 		
-	text-shadow: 0 1px 3px rgba(255,255,255,.5);
+	text-shadow: 0 1px 3px rgba(0,255,0,.5);
 	font-family:$font_family_sans !important;
 	text-align: center;
 	background: $site_background;
 	color: $site_yellow;
-
+	letter-spacing: 0.1em;
 
 }
 
@@ -67,7 +67,7 @@ h1, h2 {
 
 h3, h4, h5 {
 	
-	color:#232323;
+	color:$gray_text_color;
 	text-shadow: 0 1px 1px rgba(0,0,255,.5);
 	font-family:$font_family_sans_light !important;
 	font-weight: bold !important;
@@ -82,7 +82,8 @@ p {
 	text-transform: uppercase;
 
 	&.dark {
-		color:#343333;
+		// color:#343333;
+		color:#ababab;
 	}
 
 	&.small {

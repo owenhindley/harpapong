@@ -18,6 +18,17 @@ var PongLanguageSelect = function(container) {
 	this.element.appendChild(this.elementEN);
 
 	this.container.appendChild(this.element);
+
+
+	// check cookie
+	var lang_cookie = Utils.getCookie("lang");
+	if (lang_cookie){
+		if (lang_cookie == "en"){
+			this.selectEN();
+		} else if (lang_cookie == "is") {
+			this.selectIS();
+		}
+	}
 };
 
 var p = PongLanguageSelect.prototype;
@@ -27,12 +38,16 @@ p.selectEN = function() {
 	$(document.body).removeClass("lang-is");
 	$(document.body).addClass("lang-en");
 
+	Utils.setCookie("lang", "en");
+
 }
 
 p.selectIS = function() {
 
 	$(document.body).removeClass("lang-en");
 	$(document.body).addClass("lang-is");
+
+	Utils.setCookie("lang", "is");
 
 }
 
