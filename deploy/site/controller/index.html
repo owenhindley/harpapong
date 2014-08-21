@@ -21,7 +21,7 @@
     <link href="../libs/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     
-    <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
 
     <link href="../css/fonts.css" rel='stylesheet'/>
     <link href="../css/main.css" rel='stylesheet'/>
@@ -41,11 +41,13 @@
 
 		var controller;
 		var indicator;
+		var scoreIndicator;
 		var playing = true;
 
 		document.addEventListener("DOMContentLoaded", function() {
 
 			indicator = document.getElementById("indicator");
+			scoreIndicator = document.getElementById("scoreNumber");
 
 			queryParams = Utils.parseQueryString(document.location.href);
 
@@ -72,26 +74,40 @@
 
 			if (controller.state == controller.GAME_STATE_DURING){
 				indicator.style.left = (20 + (controller.input.value * 60)) + "%";
+
+				scoreIndicator.innerText = controller.score;
 			} 
 
 			if (controller.state == controller.GAME_STATE_AFTER){
 				playing = false;
-				showEnd();
+				showEnd(controller.win);
 			}
 
 			
 
 		};
 
-		function showEnd() {
+		function showEnd(win) {
 
 			$("#instructions").fadeOut();
 			$("#feedback").fadeOut();
 
 			$("#end").delay(500).fadeIn();
 
+
+
+			if (win){
+				$("#playerResult").addClass("win");
+
+			} else {
+				$("#playerResult").addClass("lose");
+			}
+
 			$("#queueButton").click(function() {
-				document.location.href = document.location.href.split("/controller")[0];
+				// document.location.href = document.location.href.split("/controller")[0];
+				// 
+				// FOR MENNINGGARNOTT
+				document.location.reload();
 
 			});
 
@@ -132,7 +148,9 @@
 
 	<section id="feedback">
 		<div id="indicatorContainer">
-			<div id="indicator">&nbsp;</div>
+			<div id="indicator">
+				<div id="scoreNumber">0</div>
+			&nbsp;</div>
 		</div>
 
 		<button id="enableAudio">
@@ -150,11 +168,15 @@
 		</h3>
 
 		<p id="playerResult">
-			<span class="lang-en player-win">Congratulations! You win!</span>
-			<span class="lang-is player-win">Til hamingju! Þú vannst!</span>
+			<span class="winner">
+				<span class="lang-en player-win">Congratulations! You win!</span>
+				<span class="lang-is player-win">Til hamingju! Þú vannst!</span>
+			</span>
 
-			<span class="lang-en player-lose">Sorry, you lose :(</span>
-			<span class="lang-is player-lose">Því miður, gengur betur næst :(</span>
+			<span class="loser">
+				<span class="lang-en player-lose">Sorry, you lose :(</span>
+				<span class="lang-is player-lose">Því miður, gengur betur næst :(</span>
+			</span>
 		</p>
 
 		<button id="queueButton">

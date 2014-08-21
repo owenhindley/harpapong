@@ -188,14 +188,36 @@ section {
   left: 50%;
   margin-left: -50px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/controller\/_controller\.scss}line{font-family:\0000362}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/controller\/_controller\.scss}line{font-family:\0000358}}
+#controller #feedback #indicatorContainer #indicator #scoreNumber {
+  color: black;
+  font-size: 56px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 9px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/controller\/_controller\.scss}line{font-family:\0000375}}
 #controller #feedback #enableAudio {
   font-size: 12px;
   margin-top: 2em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/controller\/_controller\.scss}line{font-family:\0000371}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/controller\/_controller\.scss}line{font-family:\0000384}}
 #controller #end {
   display: none;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/controller\/_controller\.scss}line{font-family:\0000388}}
+#controller #end #playerResult .winner, #controller #end #playerResult .loser {
+  display: none;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/controller\/_controller\.scss}line{font-family:\0000392}}
+#controller #end #playerResult.win .winner {
+  display: block;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/controller\/_controller\.scss}line{font-family:\0000396}}
+#controller #end #playerResult.lose .loser {
+  display: block;
 }
 
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/animations\/_animations\.scss}line{font-family:\000031}}

@@ -41,6 +41,14 @@
 		this.socket.emit("start", {});
 	};
 
+	p.goal = function(data) {
+		this.socket.emit("goal", data);
+	};
+
+	p.bounce = function() {
+		this.socket.emit("bounce", {});
+	};
+
 	p.finish = function(score){
 		this.socket.emit("finish", { score : score });
 	};

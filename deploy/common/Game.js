@@ -27,6 +27,7 @@
 		stateSnapshot : null,
 
 		goalCallback : null,
+		bounceCallback : null,
 
 
 		init : function() {
@@ -34,9 +35,10 @@
 			return this;
 		},
 
-		startGame : function(goal_callback) {
+		startGame : function(goal_callback, bounce_callback) {
 
 			this.goalCallback = goal_callback;
+			this.bounceCallback = bounce_callback;
 
 			this.scores.a = 0;
 			this.scores.b = 0;
@@ -141,6 +143,9 @@
 
 			if (this.pos.ball.y < 0) this.pos.ball.y = 0;
 			if (this.pos.ball.y > 1) this.pos.ball.y = 1;
+
+			if (this.bounceCallback)
+				this.bounceCallback();
 		},
 
 		goalScored : function(direction) {

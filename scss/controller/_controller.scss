@@ -55,6 +55,19 @@
 				left:50%;
 				margin-left:-50px;
 
+				#scoreNumber {
+
+					color:black;
+					font-size: 56px;
+					font-weight: bold;
+					text-align: center;
+					margin-top:9px;
+					margin-left:auto;
+					margin-right:auto;
+					
+
+				}
+
 			}
 
 		}
@@ -70,6 +83,23 @@
 
 	#end {
 		display:none;
+
+		#playerResult {
+			.winner, .loser {
+				display:none;
+			}
+
+			&.win .winner {
+				display:block;
+			}
+
+			&.lose .loser {
+				display:block;
+			}
+
+
+		}
+
 	}
 
 }

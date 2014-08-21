@@ -67,7 +67,7 @@
 
 			clearTimeout(this.joinTimeoutId);
 
-			this.game.startGame(this.onGoal.bind(this));
+			this.game.startGame(this.onGoal.bind(this), this.onReflect.bind(this));
 
 			this.mode = MODE_GAME;
 
@@ -82,7 +82,7 @@
 
 			for (var idx in this.players){
 				this.players[idx].removeAllListeners("position");
-				this.players[idx].finish(this.game.score);
+				this.players[idx].finish(this.game.scores);
 			}
 
 			this.gamePlaying = false;
@@ -160,6 +160,20 @@
 
 			}.bind(this), 2000);
 
+			for (var idx in this.players){
+				this.players[idx].goal(this.game.scores);
+			}
+
+		},
+
+		onReflect : function() {
+
+			winston.info("bounce");
+
+			for (var idx in this.players){
+				this.players[idx].bounce();
+			}
+
 		},
 
 		render : function() {
@@ -181,7 +195,7 @@
 				path : "/?method=" + aMethod
 			};
 
-			http.request(options, function(response) {
+			var req = http.request(options, function(response) {
 
 				var str = '';
 
@@ -194,7 +208,15 @@
 					if (aCallback) aCallback(str);
 				});
 
-			}.bind(this)).end();
+			}.bind(this));
+
+			req.on("error", function() {
+
+				winston.info("Error communicating with queue server");
+
+			}.bind(this));
+
+			req.end();
 
 		}
 

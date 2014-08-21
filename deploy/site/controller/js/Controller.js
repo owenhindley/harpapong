@@ -5,12 +5,15 @@
 		GAME_STATE_CONNECTING : "gameStateConnecting",
 		GAME_STATE_WAIT : "gameStateWait",
 		GAME_STATE_DURING : "gameStateDuring",
+		GAME_STATE_GOAL : "gameStateGoal",
 		GAME_STATE_AFTER : "gameStateAfter",
 
 		state : null,
 		socket : null,
 		input : null,
 		playerId : "",
+		score : 0,
+		win : false,
 
 		updateFlag : true,
 
@@ -41,6 +44,8 @@
 			
 			this.socket.on("identify", this.onIdentify.bind(this));
 			this.socket.on("start", this.onGameStart.bind(this));
+			this.socket.on("goal", this.onGameGoal.bind(this));
+			this.socket.on("bounce", this.onPaddleBounce.bind(this));
 			this.socket.on("finish", this.onGameEnd.bind(this));
 
 		},
@@ -66,6 +71,9 @@
 
 			console.log("Game start!");
 
+			this.score = 0;
+			this.win = false;
+
 			// TODO : handle game start
 
 		},
@@ -77,13 +85,30 @@
 			this.socket.disconnect();
 			
 			console.log("Game ended");
+			console.log(data.score);
+
+			var myScore = data.score[this.playerId];
+			var opponentId = ( this.playerId == "a" ) ? "b" : "a";
+			var opponentScore = data.score[opponentId];
+
+			this.win = myScore > opponentScore;
+
+		},
+
+		onGameGoal : function(data){
+
+			console.log("GOAL!");
 			console.log(data);
+
+			this.score = data[this.playerId];
 
 		},
 
 		onPaddleBounce : function() {
 
-			// TODO : beep
+			// TODO : Beep
+
+			console.log("Bounce");
 
 		},
 
