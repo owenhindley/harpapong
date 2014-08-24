@@ -1,6 +1,7 @@
 .DS_Store
 /server/node_modules
 /vagrant
+/scss/.sass-cache
 OWE_003_HarpaPong.sublime-workspace
 deploy/queue.log
 /deploy/game-server/game.log
