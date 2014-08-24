@@ -9,6 +9,9 @@
     <meta name="description" content="">
     <meta name="author" content="HarpaPONG">
 
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
 	<meta name="description" content="HarpaPONG">
 	<meta property="og:title" content="HarpaPONG" />
 	<meta property="og:type" content="games" />
@@ -23,23 +26,27 @@
     
     <!-- <link href="libs/bootstrap/css/modern-business.css" rel="stylesheet">
     <link href="libs/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet"> -->
-    
-    <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
+    <!-- 
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'> -->
 
     <link href="css/fonts.css" rel='stylesheet'/>
     <link href="css/main.css" rel='stylesheet'/>
 
 	<script src="js/libs/jquery-2.0.3.min.js"></script>
+	<script src="js/libs/howler.js"></script>
 	<script src="libs/bootstrap/js/bootstrap.js"></script>
 
 	<script src="../common/Utils.js"></script>
 	<script src="js/QueueKeeper.js"></script>
 	<script src="js/PongLanguageSelect.js"></script>
+
+	<script src="js/AudioManagerHowler.js"></script>
 	
 
 	<script>
 
 		var queueKeeper;
+		var audioManager;
 
 		var debugField;
 
@@ -65,6 +72,9 @@
 				debugField = document.getElementById("debugField");
 			}
 
+			
+			audioManager = AudioManager.init(false);
+
 		});
 
 		function onJoinQueueClick() {
@@ -88,11 +98,15 @@
 
 			$("#positionMarker").html(parseInt(aPosition) + 1);
 
-			var timeUntilGame = Math.ceil(aPosition / 2.0) * 3 * 60;
+			var timeUntilGame = Math.ceil((aPosition + 1) / 2.0) * 3 * 60;
 			var mins = Math.floor(timeUntilGame / 60);
 			var seconds = timeUntilGame % 60;
 			seconds = (seconds < 9) ? "0" + seconds : seconds; 
 			$("#timeMarker").html(mins + ":" + seconds);
+
+			if (aPosition == 0){
+				$("#queueInfo").addClass("doFlash");
+			}
 
 			// _debug("Joining game as player " + aPlayerId);
 
@@ -195,7 +209,7 @@
 </section>
 
 <section id="queueing">
-
+	<div id="queueInfo">
 	<p>
 		<span class="lang-en">You're number </span>
 		<span class="lang-is">Þú ert númer </span>
@@ -209,6 +223,7 @@
 		<span class="lang-is">Biðtími ca.</span>
 	</p>
 	<h1 id="timeMarker"></h1>
+	</div>
 
 
 	<div class="instructions">

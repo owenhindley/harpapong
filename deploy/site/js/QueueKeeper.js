@@ -86,12 +86,17 @@
 
 					} else {
 
-						onPosition(data.data.position);
+						this.onPosition(data.data.position);
 
 						setTimeout(this.checkPosition.bind(this), 2000);
 
 					}
 				} else {
+
+					if (data.message == "Not in queue"){
+						this._resetQueuePosition();
+					}
+
 					this.onError(data.message);
 				}
 
@@ -111,6 +116,11 @@
 
 			if (this.positionCallback){
 				this.positionCallback(aPosition);
+			}
+
+			if (aPosition == 0 && audioManager){
+				audioManager.playAlarm();
+
 			}
 
 		},

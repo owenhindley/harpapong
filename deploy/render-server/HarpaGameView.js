@@ -4,6 +4,7 @@ var winston = require("winston");
 
 var GoalEffect = require("./effects/GoalEffect.js");
 var WaitEffect = require("./effects/WaitEffect.js");
+var NebulaEffect = require("./effects/NebulaEffect.js");
 
 var tX = 0;
 var tY = 0;
@@ -12,6 +13,11 @@ var HarpaGameView = function(ip, patchdata, width, height){
 
 	this.width = width;
 	this.height = height;
+
+
+	this.playwidth = Math.floor(this.width/1.5);
+	this.playoffset = Math.floor((this.width -this.playwidth ) * 0.5);
+
 	this.pixelmapper = new ArtnetPixelMapper(ip);
 	this.pixelmapper.setup(this.width, this.height, patchdata);
 
@@ -24,6 +30,8 @@ var HarpaGameView = function(ip, patchdata, width, height){
 
 	this.waitEffect = new WaitEffect(this.ctx, this.width, this.height);
 	this.waitEffect.renderText = true;
+
+	this.nebulaEffect = new NebulaEffect(this.ctx, this.width, this.height);
 };
 
 var p = HarpaGameView.prototype;
@@ -62,7 +70,7 @@ p.render = function(game, mode){
 	//this.ctx.fillStyle = "black";
 	//this.ctx.fillRect(0,0,35, 12);
 
- 	//mode = "test";
+ 	mode = "game";
 
 	switch(mode){
 
@@ -94,6 +102,10 @@ p.render = function(game, mode){
 			//this.ctx.save();
 
 			//this.ctx.scale(this.width, this.height);
+			
+			this.nebulaEffect.render();
+			this.ctx.fillStyle = "black";
+			this.ctx.fillRect(this.playoffset-1, 0, this.playwidth, this.canvas.height);
 
 			this.ctx.fillStyle = "green";
 
@@ -101,14 +113,14 @@ p.render = function(game, mode){
 			aX = (game.pos.a.x - game.pw / 2);
 			aY = (game.pos.a.y - game.ph / 2);
 			// this.ctx.fillRect(aX * this.width, aY * this.height, game.pw * this.width, game.ph * this.height);
-			this.ctx.fillRect(aX * this.width, aY * this.height, game.pw * this.width, 1);
+			this.ctx.fillRect(aX * this.playwidth + this.playoffset, 0 * this.height, game.pw * this.playwidth, 1);
 
 			// player b
 			bX = (game.pos.b.x - game.pw / 2);
 			bY = (game.pos.b.y - game.ph / 2);
 			// this.ctx.fillRect(bX * this.width, bY * this.height, game.pw * this.width, game.ph * this.height);
 			// 
-			this.ctx.fillRect(bX * this.width, (bY * this.height)-1, game.pw * this.width, 1);
+			this.ctx.fillRect(bX * this.playwidth + this.playoffset, (1 * this.height)-1, game.pw * this.playwidth, 1);
 
 			if (mode == "game"){
 
@@ -116,10 +128,21 @@ p.render = function(game, mode){
 				// this.ctx.beginPath();
 				// this.ctx.arc(game.pos.ball.x, game.pos.ball.y, game.ballSize, 0, 2 * Math.PI, false);
 				// this.ctx.fill();
-				var bw = game.ballSize * 1;
+				this.ctx.fillStyle="white";
+				var bw = game.ballSize;
 				// this.ctx.fillRect((game.pos.ball.x -bw/2) * this.width, (game.pos.ball.y - bw/2) * this.height, bw * this.width, bw * this.height);
-				this.ctx.fillRect((game.pos.ball.x -bw/2) * this.width, (game.pos.ball.y - bw/2) * this.height, 1, 1);
+				this.ctx.fillRect((game.pos.ball.x -bw/2) * this.playwidth + this.playoffset, (game.pos.ball.y - bw/2) * this.height, bw * this.playwidth, bw * this.height);
 				
+
+				// walls
+				this.ctx.moveTo(this.playoffset-1,0);
+				this.ctx.lineWidth = 1;
+				this.ctx.strokeStyle = "rgba(255,255,255,0.1)";
+				this.ctx.lineTo(this.playoffset-1,this.canvas.height);
+				this.ctx.stroke();
+				this.ctx.moveTo(this.playwidth + this.playoffset + 1, 0);
+				this.ctx.lineTo(this.playwidth + this.playoffset + 1, this.canvas.height);
+				this.ctx.stroke();
 			}
 			
 			//this.ctx.restore();

@@ -9,6 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="HarpaPONG">
 
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
 	<meta name="description" content="HarpaPONG">
 	<meta property="og:title" content="HarpaPONG" />
 	<meta property="og:type" content="games" />
@@ -20,28 +22,33 @@
 
     <link href="../libs/bootstrap/css/bootstrap.css" rel="stylesheet">
 
-    
+  <!--   
     <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
-
+ -->
     <link href="../css/fonts.css" rel='stylesheet'/>
     <link href="../css/main.css" rel='stylesheet'/>
 
 	<script src="../js/libs/jquery-2.0.3.min.js"></script>
+	<script src="../js/libs/howler.js"></script>
 	<script src="../libs/bootstrap/js/bootstrap.js"></script>
 
 	<script src="../common/Utils.js"></script>
 	<script src="../js/PongLanguageSelect.js"></script>
+	<script src="../js/AudioManagerHowler.js"></script>
 	<script src="js/libs/socket.io-1.0.6.js"></script>
 	<script src="js/MouseInput.js"></script>
 	<script src="js/AccelInput.js"></script>
 
 	<script src="js/Controller.js"></script>
 
+
+
 	<script>
 
 		var controller;
 		var indicator;
 		var scoreIndicator;
+		var audioManager;
 		var playing = true;
 
 		document.addEventListener("DOMContentLoaded", function() {
@@ -61,6 +68,9 @@
 			
 			$("#whichPlayer").addClass("player-" + playerId);
 		
+			audioManager = AudioManager.init(true);
+			
+			$("#enableAudio").click(enableAudio);
 
 			update();
 			//setInterval(update, 500);
@@ -113,6 +123,11 @@
 
 		};
 
+		function enableAudio() {
+
+			$("#enableAudio").fadeOut();
+		};
+
 	</script>
 
 </head>
@@ -153,6 +168,11 @@
 			&nbsp;</div>
 		</div>
 
+		<p id="tiltInstruction">
+			<span class="lang-en">Tilt your phone</span>
+			<span class="lang-is">Hallaðu símanum</span>
+		</p>
+
 		<button id="enableAudio">
 			<span class="lang-en">Enable Audio</span>
 			<span class="lang-is">Kveikja á hljóði</span>
@@ -174,7 +194,7 @@
 			</span>
 
 			<span class="loser">
-				<span class="lang-en player-lose">Sorry, you lose :(</span>
+				<span class="lang-en player-lose">You lose, better luck next time :(</span>
 				<span class="lang-is player-lose">Því miður, gengur betur næst :(</span>
 			</span>
 		</p>

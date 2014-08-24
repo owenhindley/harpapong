@@ -42,7 +42,7 @@ console.log('Starting...');
 winston.add(winston.transports.File, { filename: 'render.log', handleExceptions : false });
 winston.info("started renderer");
 
-var gameView = new HarpaGameView(INTERFACE_1_IP, front_patch, 36, 12);
+var gameView = new HarpaGameView(INTERFACE_1_IP, front_patch, 36, 11);
 var scoreView = new HarpaScoreView(INTERFACE_2_IP, side_patch, 39, 9);
 
 var game = Game.init();

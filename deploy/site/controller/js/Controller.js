@@ -102,6 +102,10 @@
 
 			this.score = data[this.playerId];
 
+			if (audioManager){
+				audioManager.playGoal();
+			}
+
 		},
 
 		onPaddleBounce : function() {
@@ -109,6 +113,10 @@
 			// TODO : Beep
 
 			console.log("Bounce");
+
+			if (audioManager){
+				audioManager.playBounce();
+			}
 
 		},
 

@@ -60,7 +60,7 @@ p.render = function(game, mode){
 	//this.ctx.fillStyle = "black";
 	//this.ctx.fillRect(0,0,35, 12);
 
-	//mode = "scoreTest";
+	//mode = "game";
 
 	switch(mode){
 
@@ -91,8 +91,10 @@ p.render = function(game, mode){
 			// draw scores for A
 			// 
 			// 
-			var startX = 26;
-			var startY = 2;
+			var startX = 2;
+			//var startX = 5;
+			var startY = 0;
+			//var startY = 0;
 		
 
 			for (var i =0; i < 5; i++){
@@ -101,7 +103,7 @@ p.render = function(game, mode){
 				else 
 					this.ctx.fillStyle = "green";
 
-				this.ctx.fillRect(startX + (i * 2), startY, 1, 1);
+				this.ctx.fillRect(startX + (i * 3), startY, 2, 1);
 
 			}
 
@@ -111,7 +113,7 @@ p.render = function(game, mode){
 				else 
 					this.ctx.fillStyle = "green";
 
-				this.ctx.fillRect(startX + (i * 2), startY + 2, 1, 1);
+				this.ctx.fillRect(startX + (i * 3) + 2, startY + 2, 2, 1);
 
 			}
 

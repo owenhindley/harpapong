@@ -32,3 +32,25 @@
 
 
 }
+
+@-webkit-keyframes do-flash {
+	0% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.2;
+	}
+
+	100% {
+		opacity: 1;
+	}
+
+}
+
+.doFlash {
+
+	-webkit-animation-name: do-flash;
+	-webkit-animation-duration: 0.4s;
+	-webkit-animation-iteration-count: infinite;
+}
