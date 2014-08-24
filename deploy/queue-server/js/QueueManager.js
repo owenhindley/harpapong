@@ -4,7 +4,8 @@
 	var NanoTimer = require("nanotimer");
 	var winston = require('winston');
 
-	var TIMEOUT_TIME = 60000;
+	var TIMEOUT_TIME = 60 * 1000;
+	var TIMEOUT_TIME_SHORT = 10 * 1000;
 
 	/*
 	
@@ -25,6 +26,8 @@
 		queue : [],
 		playing : [],
 
+		currentGameKey : null,
+
 		init : function(){
 
 			this.timer = new NanoTimer();
@@ -35,9 +38,9 @@
 
 		},
 
-		addWaiting : function() {
+		addWaiting : function(ip) {
 
-			var newPlayer = new WaitingPlayer();
+			var newPlayer = new WaitingPlayer(ip);
 			this.queue.push(newPlayer);
 			return newPlayer;
 
@@ -58,8 +61,12 @@
 			}
 			// check in the 'playing' section
 			for (var i=0; i < this.playing.length; i++){
-				if (this.playing[i] && this.playing[i].id == aGuid)
-					return (i == 0) ? "a" : "b";
+				if (this.playing[i] && this.playing[i].id == aGuid){
+
+					var newId = (i == 0) ? "a" : "b";
+					return newId;
+				}
+				
 			}
 
 			return -1;
@@ -93,8 +100,13 @@
 			var deadList = [];
 			
 			for (var i=0; i< queueLength; i++){
+
+				// people closer to the start of the queue have a shorter timeout
+				// because if they drop off 60s before a game starts, the game will fail
+				var inactivity_limit = (i > 3) ? TIMEOUT_TIME : TIMEOUT_TIME_SHORT;
+
 				if (this.queue[i]){
-					if (dateNow - this.queue[i].lastCheck > TIMEOUT_TIME){
+					if (dateNow - this.queue[i].lastCheck > inactivity_limit){
 						deadList.push(this.queue[i]);
 					}
 				}

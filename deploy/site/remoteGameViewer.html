@@ -30,7 +30,7 @@
 		function onServerConnect() {
 
 			socket.on('identify', function(){
-				socket.emit('remoterenderer', {});
+				socket.emit('remoterenderer', { name : "Remote Game Viewer"});
 			});
 
 			socket.on('render', onRender);

@@ -6,6 +6,7 @@
 		this.playerId = "";
 		this.position = 0.5;
 		this.socket = null;
+
 	};
 
 
@@ -52,7 +53,6 @@
 	p.finish = function(score){
 		this.socket.emit("finish", { score : score });
 	};
-
 
 	global.RemotePlayer = (global.module || {}).exports = RemotePlayer;
 

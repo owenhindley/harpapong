@@ -58,7 +58,7 @@ p.render = function() {
 		// this.ctx.fillStyle = "green";
 		// this.ctx.fillText("PONG", 4, Math.floor(this.height/2) + 4);
 
-		this.ctx.drawImage(this.logoImage, 0,0);
+		//this.ctx.drawImage(this.logoImage, 0,0);
 
 	}
 

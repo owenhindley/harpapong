@@ -62,7 +62,7 @@ gameSocket.on('connect', function(){
 	gameSocket.on('identify', function() {
 		winston.info("asked to identify by server");
 
-		gameSocket.emit('remoterenderer', {});
+		gameSocket.emit('remoterenderer', { name : "Harpa Renderer"});
 	});
 
 	gameSocket.on('render', onGameUpdate);

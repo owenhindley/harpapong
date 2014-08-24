@@ -9,6 +9,9 @@
 		serverURL : "",
 		queueId : null,
 
+		checkPositionTimeoutId : -1,
+		joinQueueTimeoutId : -1,
+
 		init : function(server, onPosition, onJoin, on_Error) {
 
 			this.serverURL = server;
@@ -73,6 +76,11 @@
 
 		checkPosition : function() {
 
+			// check we actually have a queueId
+			if (!this.queueId){
+				this.joinQueue();
+			}
+
 			var url = this.serverURL + "/?method=position&id=" + this.queueId;
 
 			this._makeRequest(url, function(data){
@@ -80,15 +88,18 @@
 				if (data.status == "OK"){
 					if (data.data.playing){
 						
+						console.log("Getting ready to play..");
+
 						Utils.delete_cookie("queueId");
-						onJoinGame(data.data.playerId);
+						onJoinGame(data.data.playerId, data.data.key);
 						
+						clearTimeout(this.checkPositionTimeoutId);
 
 					} else {
 
 						this.onPosition(data.data.position);
 
-						setTimeout(this.checkPosition.bind(this), 2000);
+						this.checkPositionTimeoutId = setTimeout(this.checkPosition.bind(this), 2000);
 
 					}
 				} else {
@@ -125,10 +136,12 @@
 
 		},
 
-		onJoinGame : function(aPlayerId){
+		onJoinGame : function(aPlayerId, aGameKey){
+
+			clearTimeout(this.checkPositionTimeoutId);
 
 			if (this.joinCallback){
-				this.joinCallback.call(aPlayerId);
+				this.joinCallback.call(aPlayerId, aGameKey);
 			}
 
 		},
@@ -144,9 +157,12 @@
 
 		_resetQueuePosition : function() {
 
+			console.log("Resetting queue position");
+
 			Utils.delete_cookie("queueId");
 			this.queueId = null;
-			setTimeout(this.joinQueue.bind(this), 1000);
+			clearTimeout(this.joinQueueTimeoutId);
+			this.joinQueueTimeoutId = setTimeout(this.joinQueue.bind(this), 1000);
 		},
 
 		_makeRequest : function(aUrl, aHandleResponse, aHandleError){

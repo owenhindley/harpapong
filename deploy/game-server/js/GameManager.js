@@ -6,7 +6,9 @@
 	var EventEmitter = require('events').EventEmitter;
 
 	var MAX_SCORE = 5;
-	var JOIN_TIMEOUT = 10000;
+	var JOIN_TIMEOUT = 10* 1000;
+
+	var INACTIVITY_TIMEOUT = 10 * 1000;
 
 	var MODE_WAIT = "wait";
 	var MODE_GAME = "game";
@@ -29,7 +31,12 @@
 		gamePlaying : false,
 		gamePaused : false,
 
+		lastPositionTime : Date.now(),
+
+		currentGameKey : null,
+
 		joinTimeoutId : -1,
+		requestPlayersId : -1,
 
 		init : function(game, queueServer){
 
@@ -46,6 +53,10 @@
 
 		requestPlayers : function() {
 
+			this.currentGameKey = this.getGuid();
+
+			winston.info("Requesting players, key : " + this.currentGameKey);
+
 			this.mode = MODE_WAIT;
 
 			this._callQueueServer("nextgame", function(response){
@@ -53,7 +64,13 @@
 				var responseObj = JSON.parse(response);
 
 
-			});
+			}, { key : this.currentGameKey });
+
+			this.lastPositionTime = Date.now();
+
+			clearTimeout(this.requestPlayersId);
+			clearTimeout(this.joinTimeoutId);
+			this.joinTimeoutId = setTimeout(this.gameStartTimeout.bind(this), JOIN_TIMEOUT);
 
 		},
 
@@ -65,6 +82,7 @@
 				this.players[idx].start();
 			}
 
+			clearTimeout(this.requestPlayersId);
 			clearTimeout(this.joinTimeoutId);
 
 			this.game.startGame(this.onGoal.bind(this), this.onReflect.bind(this));
@@ -91,7 +109,8 @@
 			this.players = {};
 
 			// wait for a while before requesting new players
-			setTimeout(this.requestPlayers.bind(this), 5000);
+			clearTimeout(this.requestPlayersId);
+			this.requestPlayersId = setTimeout(this.requestPlayers.bind(this), 5000);
 
 		},
 
@@ -100,16 +119,30 @@
 			var playerId = player.playerId;
 			this.players[playerId] = player;
 			player.on("position", function(data) {
+
+				this.lastPositionTime = Date.now();
+
 				//console.log("* Game Manager : position from player " + data.id + " : " + data.position);
 				this.game.setPlayerPosition(data.id, data.position);
 			}.bind(this));
 
+			// restart the timer waiting for both players
 
-			if (this.players["a"] && this.players["b"])
+			clearTimeout(this.joinTimeoutId);
+			this.joinTimeoutId = setTimeout(this.gameStartTimeout.bind(this), JOIN_TIMEOUT);
+
+
+
+			if (!this.gamePlaying && this.players["a"] && this.players["b"])
 				this.startGame();
-			else {
-				this.joinTimeoutId = setTimeout(this.endGame.bind(this), JOIN_TIMEOUT);
-			}
+			
+		},
+
+		gameStartTimeout : function(){
+
+			winston.error("Timeout whilst waiting for players to join");
+			this.endGame();
+
 		},
 
 		addMaster : function(master){
@@ -120,6 +153,7 @@
 		addRenderer : function(renderer){
 			this.renderers.push(renderer)
 
+			console.log("Total renderers : " + this.renderers.length);
 		},
 
 
@@ -131,14 +165,26 @@
 			if (this.gamePlaying && !this.gamePaused){
 				this.game.update(dt);
 
+				// check the scores, end the game if max score reached
 				if (this.game.scores.a >= MAX_SCORE || this.game.scores.b >= MAX_SCORE){
 					this.endGame();
 				}
+
+				// check the time since we last had a position update
+				// end the game if it's more than INACTIVITY_TIMEOUT
+				var sinceLastPosition = this.lastUpdate - this.lastPositionTime;
+				if ( sinceLastPosition > INACTIVITY_TIMEOUT ){
+					winston.error("INACTIVITY TIMEOUT, restarting game");
+					this.endGame();
+				}
+
 			}
 
 			this.render();
 
 			this.lastUpdate = Date.now();
+
+			
 
 		},
 
@@ -185,7 +231,7 @@
 			}
 		},
 
-		_callQueueServer : function(aMethod, aCallback){
+		_callQueueServer : function(aMethod, aCallback, aArguments){
 
 			winston.info("calling " + aMethod + " on queue server : " + this.queueServer);
 			
@@ -194,6 +240,13 @@
 				port : 8080,
 				path : "/?method=" + aMethod
 			};
+
+			if (aArguments){
+				for (var idx in aArguments){
+					options.path += "&" + encodeURIComponent(idx) + "="	+ encodeURIComponent(aArguments[idx]);
+				}
+				
+			}
 
 			var req = http.request(options, function(response) {
 
@@ -218,6 +271,18 @@
 
 			req.end();
 
+		},
+
+
+		getGuid : function() {
+
+			function s4() {
+				return Math.floor((1 + Math.random()) * 0x10000)
+				.toString(16)
+				.substring(1);
+			};
+		
+			return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 		}
 
 

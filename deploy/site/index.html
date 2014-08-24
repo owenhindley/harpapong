@@ -44,6 +44,7 @@
 		}
 
 	</script>
+	<script src="js/libs/fastclick.js"></script>
 	<script src="js/libs/howler.js"></script>
 	<script src="libs/bootstrap/js/bootstrap.js"></script>
 
@@ -86,6 +87,8 @@
 			
 			audioManager = AudioManager.init(false);
 
+			FastClick.attach(document.body);
+
 		});
 
 		function onJoinQueueClick() {
@@ -115,20 +118,22 @@
 			seconds = (seconds < 9) ? "0" + seconds : seconds; 
 			$("#timeMarker").html(mins + ":" + seconds);
 
-			if (aPosition == 0){
+			if (aPosition <= 1){
 				$("#queueInfo").addClass("doFlash");
+			} else {
+				$("#queueInfo").removeClass("doFlash");
 			}
 
 			// _debug("Joining game as player " + aPlayerId);
 
 		};
 
-		function onJoinGame(aPlayerId) {
+		function onJoinGame(aPlayerId, aGameKey) {
 
 			// redirect to controller page
 
 			var rootUrl = document.location.href.split("?")[0];
-			document.location.href =  rootUrl + "/controller/?player=" + aPlayerId;
+			document.location.href =  rootUrl + "/controller/?player=" + aPlayerId + "&key=" + encodeURIComponent(aGameKey);
 
 			_debug("Joining game as player " + aPlayerId);
 

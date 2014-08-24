@@ -52,7 +52,13 @@ var server = http.createServer(function(request, response){
 
             case "join":
 
-                var newPlayerObj = queueManager.addWaiting();
+                var ip = request.headers['x-forwarded-for'] || 
+                         request.connection.remoteAddress || 
+                         request.socket.remoteAddress ||
+                         request.connection.socket.remoteAddress;
+
+
+                var newPlayerObj = queueManager.addWaiting(ip);
 
                 responseMessage.data["id"] = newPlayerObj.id;
                 responseMessage.message = "joined queue";
@@ -77,6 +83,7 @@ var server = http.createServer(function(request, response){
                         responseMessage.message = "Join Game";
                         responseMessage.data["playing"] = true;
                         responseMessage.data["playerId"] = position;
+                        responseMessage.data["key"] = queueManager.currentGameKey;
 
                     } else if (position >= 0){
 
@@ -99,6 +106,18 @@ var server = http.createServer(function(request, response){
             break;
 
             case "nextgame":
+
+                
+
+                var nextGameKey = queryComponents["key"];
+                if (nextGameKey){
+                    queueManager.currentGameKey = nextGameKey;
+                    winston.info("setting current game key to " + nextGameKey);
+                } else {
+                    winston.error("no key found in nextgame call");
+                }
+
+                
 
                 var players = queueManager.nextGame();
 

@@ -55,14 +55,27 @@ io.sockets.on('connection', function (socket) {
     socket.on('registercontroller', function(data) {
 
         var playerId = data.id;
+        var playerKey = data.key;
 
-        console.log("* Controller registered : *");
-        console.log("* " + playerId + " *");
+        if (playerKey == gameManager.currentGameKey || playerKey == "magic"){
 
-        var newRemote = new RemotePlayer();
-        newRemote.init(playerId, socket);
+            console.log("* Controller registered : *");
+            console.log("* " + playerId + " *");
 
-        gameManager.addRemotePlayer(newRemote);
+
+            var newRemote = new RemotePlayer();
+            newRemote.init(playerId, socket);
+
+            gameManager.addRemotePlayer(newRemote);
+
+        } else {
+
+            console.log("* ERROR : player tried to join with the wrong game key : ", playerKey);
+            socket.emit("reject", {});
+
+        }
+
+        
 
     });
 
@@ -81,7 +94,7 @@ io.sockets.on('connection', function (socket) {
 
     socket.on('remoterenderer', function(data){
 
-        console.log("* Remote Renderer registered : *");
+        console.log("* Remote Renderer registered : " + data.name + " *");
 
         var newRenderer = new RemoteRenderer();
         newRenderer.init(socket);

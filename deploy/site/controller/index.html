@@ -61,9 +61,10 @@
 			queryParams = Utils.parseQueryString(document.location.href);
 
 			var playerId = queryParams["player"] || "";
+			var key = queryParams["key"] || "";
 			var portNumber = queryParams["port"] || "8081";
 
-			controller = Controller.init(document.location.hostname + ":" + portNumber, playerId, queryParams["method"]);
+			controller = Controller.init(document.location.hostname + ":" + portNumber, playerId, queryParams["method"], key);
 
 			// document.getElementById("whichPlayer").innerText = "You are player " + playerId;
 
@@ -95,6 +96,12 @@
 				showEnd(controller.win);
 			}
 
+			if (controller.state == controller.GAME_STATE_REJECT){
+				// go back to the queue
+				document.location.href = document.location.href.split("/controller")[0];
+
+			}
+
 			
 
 		};
@@ -116,10 +123,10 @@
 			}
 
 			$("#queueButton").click(function() {
-				// document.location.href = document.location.href.split("/controller")[0];
+				document.location.href = document.location.href.split("/controller")[0];
 				// 
 				// FOR MENNINGGARNOTT
-				document.location.reload();
+				//document.location.reload();
 
 			});
 

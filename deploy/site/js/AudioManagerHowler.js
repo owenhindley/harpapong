@@ -1,5 +1,6 @@
 (function() {
 
+	var BOUNCE_SOUND_OFFSET = 9;
 	var NUM_BOUNCE_SOUNDS = 5;
 	var NUM_GOAL_SOUNDS = 1;
 	var NUM_ALARM_SOUNDS = 1;
@@ -90,7 +91,7 @@
 				for (var i=0; i < NUM_BOUNCE_SOUNDS; i++){
 					
 					var newSound = new Howl({
-						urls : ["/audio/bounce-" + (i+1) + ".mp3"]
+						urls : ["/audio/bounce-" + (i+1 + BOUNCE_SOUND_OFFSET) + ".mp3"]
 					});
 					
 					this.bounceSounds.push(newSound);

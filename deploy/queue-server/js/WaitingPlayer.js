@@ -2,8 +2,8 @@
 
 	var EventEmitter = require('events').EventEmitter;
 
-	var WaitingPlayer = function() {
-		this.id = guid();
+	var WaitingPlayer = function(ipaddress) {
+		this.id = ipaddress + "_" + guid();
 		this.lastCheck = Date.now();
 	};
 
