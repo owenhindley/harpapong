@@ -350,31 +350,49 @@ section a {
   text-decoration: none;
   border: none;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/sections\/_sections\.scss}line{font-family:\0000322}}
+section a:hover {
+  text-decoration: none;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/sections\/_sections\.scss}line{font-family:\0000327}}
+section .link {
+  border-bottom: 1px solid #11b44c;
+  color: #11b44c;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/sections\/_sections\.scss}line{font-family:\0000332}}
+section .highlight {
+  color: #ababab;
+  padding: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border: 1px solid #11b44c;
+  border-radius: 1em;
+}
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/sections\/_sections\.scss}line{font-family:\0000325}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/sections\/_sections\.scss}line{font-family:\0000346}}
 #intro {
   padding-top: 0.5em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/sections\/_sections\.scss}line{font-family:\0000333}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/sections\/_sections\.scss}line{font-family:\0000354}}
 #intro .instructions p, #queueing .instructions p {
   margin-top: 1em;
   font-size: 16px;
   font-family: "quicksandregular", sans-serif !important;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/sections\/_sections\.scss}line{font-family:\0000342}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/sections\/_sections\.scss}line{font-family:\0000363}}
 #intro .credits h3, #queueing .credits h3 {
   text-transform: uppercase;
   color: #ababab;
   font-size: 16px;
   text-decoration: underline;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/sections\/_sections\.scss}line{font-family:\0000358}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/sections\/_sections\.scss}line{font-family:\0000379}}
 #intro #queueButton, #queueing #queueButton {
   margin-bottom: 0px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/sections\/_sections\.scss}line{font-family:\0000367}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/owenhindley\/Documents\/workspace\/projects\/OWE_003_HarpaPong\/scss\/sections\/_sections\.scss}line{font-family:\0000388}}
 #about h3 {
   text-transform: uppercase;
 }

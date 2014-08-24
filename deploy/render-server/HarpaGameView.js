@@ -70,7 +70,7 @@ p.render = function(game, mode){
 	//this.ctx.fillStyle = "black";
 	//this.ctx.fillRect(0,0,35, 12);
 
- 	mode = "game";
+ 	//mode = "game";
 
 	switch(mode){
 
@@ -102,11 +102,11 @@ p.render = function(game, mode){
 			//this.ctx.save();
 
 			//this.ctx.scale(this.width, this.height);
-			
+			/*
 			this.nebulaEffect.render();
 			this.ctx.fillStyle = "black";
 			this.ctx.fillRect(this.playoffset-1, 0, this.playwidth, this.canvas.height);
-
+			*/
 			this.ctx.fillStyle = "green";
 
 			// player a
@@ -129,6 +129,7 @@ p.render = function(game, mode){
 				// this.ctx.arc(game.pos.ball.x, game.pos.ball.y, game.ballSize, 0, 2 * Math.PI, false);
 				// this.ctx.fill();
 				this.ctx.fillStyle="white";
+				this.ctx.globalAlpha = 1.0;
 				var bw = game.ballSize;
 				// this.ctx.fillRect((game.pos.ball.x -bw/2) * this.width, (game.pos.ball.y - bw/2) * this.height, bw * this.width, bw * this.height);
 				this.ctx.fillRect((game.pos.ball.x -bw/2) * this.playwidth + this.playoffset, (game.pos.ball.y - bw/2) * this.height, bw * this.playwidth, bw * this.height);

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HarpaPONG</title>
+
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="HarpaPONG">
+
+	<meta name="description" content="HarpaPONG">
+	<meta property="og:title" content="HarpaPONG" />
+	<meta property="og:type" content="games" />
+	<meta property="og:url" content="http://www.harpapong.com" />
+	<meta property="og:site_name" content="Harpa PONG" />
+	<meta property="og:description" content="Harpa PONG" />
+	<meta property="og:image" content="http://www.harpapong.com/files/images/sharing.jpg" />
+
+
+    <link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    
+    <!-- <link href="libs/bootstrap/css/modern-business.css" rel="stylesheet">
+    <link href="libs/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet"> -->
+    <!-- 
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'> -->
+
+    <link href="css/fonts.css" rel='stylesheet'/>
+    <link href="css/main.css" rel='stylesheet'/>
+
+	<script src="js/libs/jquery-2.0.3.min.js"></script>
+	<script src="libs/bootstrap/js/bootstrap.js"></script>
+
+	<script src="../common/Utils.js"></script>
+	<script src="js/PongLanguageSelect.js"></script>
+	<script src="js/QueueKeeper.js"></script>
+	
+
+	<script>
+
+		document.addEventListener("DOMContentLoaded", function() {
+
+			showSection("headline");
+			showSection("intro");
+
+			queryParams = Utils.parseQueryString(document.location.href);
+
+
+		});
+
+
+		function showSection(aId){
+
+			$("section").each(function() {
+
+				if ($(this).attr('id') != "headline" && $(this).attr('id') != aId)
+					$(this).fadeOut();
+			});
+
+			$("#" +aId).delay(500).fadeIn();
+
+		};
+
+		function _debug(msg){
+			if (debugField){
+				debugField.innerHTML = debugField.innerHTML += "\n" + msg;	
+			}
+			
+
+		};
+
+	</script>
+
+</head>
+<body class="lang-is">
+
+<div id="background">
+	&nbsp;
+</div>
+
+<div id="langContainer">
+
+</div>
+
+<section id="headline">
+
+	
+		<img src="images/logo.svg"/>
+		<h1 style="display:none;">Harpa PONG</h1>
+	
+</section>
+
+<section id="intro">
+
+
+
+		<p>
+			<span class="lang-en">
+			We're really sorry, but PONG is not supported on your device or browser.<br/><br/> Please try again on a modern mobile phone or tablet.
+			</span>
+			<span class="lang-is">Því miður, en PONG er ekki stutt á tölvunni þinni<br/><br/>Reyndu aftur á nútíma síma.
+			</span>
+		</p>
+		<br/><br/>
+		<p class="small">
+			<span class="lang-en">For best performance we recommend <a class="link" href="http://www.google.com/chrome" target="_blank">Google Chrome.</a>
+			</span>
+			<span class="lang-id">
+			Fyrir besta árangur mælum við með <a class="link" href="http://www.google.com/chrome" target="_blank">Google Chrome.</a>
+			</span>
+		</p>
+
+		
+
+</section>
+
+
+<div id="debug">
+	<p id="debugField"></p>
+</div>
+
+
+</body>
+</html>

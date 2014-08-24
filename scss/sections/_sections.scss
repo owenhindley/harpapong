@@ -19,6 +19,27 @@ section {
 	a {
 		text-decoration: none;
 		border:none;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	.link {
+		border-bottom: 1px solid $site_yellow;
+		color:$site_yellow;
+	}
+
+	.highlight {
+
+		color:#ababab;
+
+		padding:1em;
+		margin-top:1em;
+		margin-bottom:1em;
+
+		border:1px solid $site_yellow;
+		border-radius: 1em;
+
 	}
 }
 
