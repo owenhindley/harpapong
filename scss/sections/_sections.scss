@@ -40,6 +40,10 @@ section {
 		border:1px solid $site_yellow;
 		border-radius: 1em;
 
+		&.red {
+			border:1px solid red;
+		}
+
 	}
 }
 

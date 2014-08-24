@@ -30,6 +30,13 @@
     <link href="css/main.css" rel='stylesheet'/>
 
 	<script src="js/libs/jquery-2.0.3.min.js"></script>
+	<script src="js/libs/modernizr.custom.92177"></script>
+	<script>
+		var _supportedBrowser = true;
+		_supportedBrowser = _supportedBrowser && Modernizr.websockets;
+		_supportedBrowser = _supportedBrowser && (Modernizr.devicemotion || Modernizr.deviceorientation);
+
+	</script>
 	<script src="libs/bootstrap/js/bootstrap.js"></script>
 
 	<script src="../common/Utils.js"></script>
@@ -46,6 +53,10 @@
 
 			queryParams = Utils.parseQueryString(document.location.href);
 
+
+			if (!_supportedBrowser){
+				$("#unsupported").css("display", "block");
+			}
 
 		});
 
@@ -99,6 +110,19 @@
 			<span class="lang-en">Play PONG on Harpa!</span>
 			<span class="lang-is">Spilaðu PONG á Hörpu!</span>
 		</p>
+
+		<div id="unsupported" class="highlight red" style="display:none">
+
+			<p class="small">
+				<span class="lang-en">Please note, PONG will not work on this device or browser.<br/><br/>Please use a modern mobile phone or tablet to play the game.
+				</span>
+
+				<span class="lang-is">
+				Athugið, PONG mun ekki virka á þessari tölvu / vafra.<br/><br/>Notaðu nútíma símann til að spila leikinn.
+				</span>
+			</p>
+
+		</div>
 
 		<div class="highlight">
 

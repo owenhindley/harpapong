@@ -33,6 +33,17 @@
     <link href="css/main.css" rel='stylesheet'/>
 
 	<script src="js/libs/jquery-2.0.3.min.js"></script>
+	<script src="js/libs/modernizr.custom.92177"></script>
+	<script>
+		var _supportedBrowser = true;
+		_supportedBrowser = _supportedBrowser && Modernizr.websockets;
+		_supportedBrowser = _supportedBrowser && (Modernizr.devicemotion || Modernizr.deviceorientation);
+
+		if (!_supportedBrowser){
+			document.location.href = document.location.href + "/fallback.html";
+		}
+
+	</script>
 	<script src="js/libs/howler.js"></script>
 	<script src="libs/bootstrap/js/bootstrap.js"></script>
 
