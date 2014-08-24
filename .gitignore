@@ -17,3 +17,5 @@ deploy/queue.log
 /deploy/render-server/node_modules/socket.io/node_modules/socket.io-client/node_modules/engine.io-client/node_modules/ws/builderror.log
 /deploy/render-server/render.log
 /scss/.sass-cache/3a95f3ae2eee187154f788f3f2f4729017352e89/_variables.scssc
+
+/assets/private/server/serverDetails.txt
