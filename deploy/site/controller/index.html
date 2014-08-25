@@ -97,6 +97,7 @@
 			}
 
 			if (controller.state == controller.GAME_STATE_REJECT){
+				playing = false;
 				// go back to the queue
 				document.location.href = document.location.href.split("/controller")[0];
 

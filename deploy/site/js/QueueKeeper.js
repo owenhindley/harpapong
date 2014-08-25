@@ -8,6 +8,7 @@
 		errorCallback : null,
 		serverURL : "",
 		queueId : null,
+		active : true,
 
 		checkPositionTimeoutId : -1,
 		joinQueueTimeoutId : -1,
@@ -25,6 +26,8 @@
 		},
 
 		joinQueue : function(aCallback) {
+
+			if (!this.active) return;
 
 
 			// check cookies to see if we've already got an ID
@@ -75,6 +78,8 @@
 		},
 
 		checkPosition : function() {
+
+			if (!this.active) return;
 
 			// check we actually have a queueId
 			if (!this.queueId){
@@ -138,6 +143,8 @@
 
 		onJoinGame : function(aPlayerId, aGameKey){
 
+			this.active = false;
+
 			clearTimeout(this.checkPositionTimeoutId);
 
 			if (this.joinCallback){
@@ -149,8 +156,8 @@
 		onError : function(aError){
 
 			console.log("ERROR getting position from server : " + aError);
-			if (errorCallback){
-				errorCallback.call(this, aError);
+			if (this.errorCallback){
+				this.errorCallback.call(this, aError);
 			}
 
 		},
@@ -184,6 +191,7 @@
 								aHandleResponse(data);
 							} catch(err) {
 								console.error("ERROR parsing json");
+								console.error("")
 								aHandleError("ERROR parsing json");
 								break;
 							}

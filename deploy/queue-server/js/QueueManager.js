@@ -74,9 +74,9 @@
 
 		nextGame : function() {
 
-			this.playing = [];
-
 			if (this.queue.length >= 2){
+
+				this.playing = [];
 				
 				this.playing.push(this.queue.shift());
 				this.playing.push(this.queue.shift());

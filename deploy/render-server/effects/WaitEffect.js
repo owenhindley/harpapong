@@ -1,5 +1,8 @@
 var Canvas = require("canvas");
 
+var LOGO_DURATION = 10 * 30;
+var INFO_DURATION = 60 * 30;
+
 var WaitEffect = function(ctx, width, height) {
 	
 	this.ctx = ctx;
@@ -9,8 +12,16 @@ var WaitEffect = function(ctx, width, height) {
 	this.flag = false;
 	this.frameCounter = 0;
 
+	this.logoCounter = 0;
+	this.infoCounter = 0;
+
+	this.mode = 0;
+
 	this.logoImage = new Canvas.Image();
 	this.logoImage.src = "images/PONG-logo.png";
+
+	this.infoImage = new Canvas.Image();
+	this.infoImage.src = "images/PONG-info.png";
 
 	this.lastCanvas = new Canvas(this.width, this.height);
 	this.lastCtx = this.lastCanvas.getContext("2d");
@@ -55,10 +66,74 @@ p.render = function() {
 	this.lastCtx.drawImage(this.ctx.canvas,0,0);
 
 	if (this.renderText){
+
+		switch(this.mode){
+
+			case 0:
+
+				this.logoCounter++;
+
+				var pos = this.logoCounter / LOGO_DURATION;
+				var alpha = 1.0;
+				if (pos < 0.1) alpha = pos * 10;
+				if (pos > 0.9) alpha = (1.0 - pos) * 10;
+
+				if (alpha < 0) alpha = 0;
+
+				// render logo
+				this.ctx.globalAlpha = alpha;
+
+				this.ctx.drawImage(this.logoImage, 0,0);
+
+				this.ctx.globalAlpha = 1.0;
+
+				if (this.logoCounter > LOGO_DURATION){
+					this.mode = 1;
+					this.logoCounter = 0;
+				}
+
+			break;
+
+			case 1:
+
+				// scroll info
+				
+				this.infoCounter++;
+
+				var pos = this.infoCounter / INFO_DURATION;
+				var alpha = 1.0;
+				if (pos < 0.1) alpha = pos * 10;
+				if (pos > 0.9) alpha = (1.0 - pos) * 10;
+
+				if (alpha < 0) alpha = 0;
+
+				this.ctx.globalAlpha = alpha;
+
+				this.ctx.save();
+
+				this.ctx.translate((this.width - (this.infoCounter / 8.0)),0)
+
+				this.ctx.drawImage(this.infoImage, 0,0);
+
+				this.ctx.restore();
+
+				this.ctx.globalAlpha = 1.0;
+
+
+				if (this.infoCounter > INFO_DURATION){
+					this.mode = 0;
+					this.infoCounter = 0;
+				}
+
+			break;
+		}
+
+		//console.log(this.mode);
+
 		// this.ctx.fillStyle = "green";
 		// this.ctx.fillText("PONG", 4, Math.floor(this.height/2) + 4);
 
-		//this.ctx.drawImage(this.logoImage, 0,0);
+		
 
 	}
 

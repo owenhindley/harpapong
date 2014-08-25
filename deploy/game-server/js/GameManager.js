@@ -6,7 +6,7 @@
 	var EventEmitter = require('events').EventEmitter;
 
 	var MAX_SCORE = 5;
-	var JOIN_TIMEOUT = 10* 1000;
+	var JOIN_TIMEOUT = 20* 1000;
 
 	var INACTIVITY_TIMEOUT = 10 * 1000;
 
@@ -92,11 +92,15 @@
 			this.gamePlaying = true;
 			this.gamePaused = false;
 
+			this.lastPositionTime = Date.now();
+
 		},
 
-		endGame : function() {
+		endGame : function(aNewGameDelay) {
 
 			winston.info("Game ended, scores : ", this.game.scores);
+
+			this.currentGameKey = "none";
 
 			for (var idx in this.players){
 				this.players[idx].removeAllListeners("position");
@@ -108,9 +112,11 @@
 
 			this.players = {};
 
+			this.lastPositionTime = Date.now();
+
 			// wait for a while before requesting new players
 			clearTimeout(this.requestPlayersId);
-			this.requestPlayersId = setTimeout(this.requestPlayers.bind(this), 5000);
+			this.requestPlayersId = setTimeout(this.requestPlayers.bind(this), aNewGameDelay);
 
 		},
 
@@ -128,20 +134,35 @@
 
 			// restart the timer waiting for both players
 
-			clearTimeout(this.joinTimeoutId);
-			this.joinTimeoutId = setTimeout(this.gameStartTimeout.bind(this), JOIN_TIMEOUT);
+			if (!this.gamePlaying){
+				
+				if (this.players["a"] && this.players["b"]){
+					clearTimeout(this.joinTimeoutId);
+					this.startGame();
+				}
+				else {
+					clearTimeout(this.joinTimeoutId);
+					this.joinTimeoutId = setTimeout(this.gameStartTimeout.bind(this), JOIN_TIMEOUT);	
+			
+				}
+
+			} else {
+				// presume they just re-connected
+				clearTimeout(this.joinTimeoutId);
+				this.players[playerId].start();
+			}
+			
 
 
 
-			if (!this.gamePlaying && this.players["a"] && this.players["b"])
-				this.startGame();
+			
 			
 		},
 
 		gameStartTimeout : function(){
 
 			winston.error("Timeout whilst waiting for players to join");
-			this.endGame();
+			this.endGame(0);
 
 		},
 
@@ -167,7 +188,7 @@
 
 				// check the scores, end the game if max score reached
 				if (this.game.scores.a >= MAX_SCORE || this.game.scores.b >= MAX_SCORE){
-					this.endGame();
+					this.endGame(5000);
 				}
 
 				// check the time since we last had a position update
@@ -175,7 +196,7 @@
 				var sinceLastPosition = this.lastUpdate - this.lastPositionTime;
 				if ( sinceLastPosition > INACTIVITY_TIMEOUT ){
 					winston.error("INACTIVITY TIMEOUT, restarting game");
-					this.endGame();
+					this.endGame(5000);
 				}
 
 			}
