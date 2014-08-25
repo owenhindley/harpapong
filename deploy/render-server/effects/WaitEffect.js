@@ -13,15 +13,20 @@ var WaitEffect = function(ctx, width, height) {
 	this.frameCounter = 0;
 
 	this.logoCounter = 0;
+	this.logoLoopCounter = 0;
 	this.infoCounter = 0;
+	this.infoLanguage = "is";
 
 	this.mode = 0;
 
 	this.logoImage = new Canvas.Image();
 	this.logoImage.src = "images/PONG-logo.png";
 
-	this.infoImage = new Canvas.Image();
-	this.infoImage.src = "images/PONG-info.png";
+	this.infoImage_is = new Canvas.Image();
+	this.infoImage_is.src = "images/PONG-info-is.png";
+
+	this.infoImage_en = new Canvas.Image();
+	this.infoImage_en.src = "images/PONG-info.png";
 
 	this.lastCanvas = new Canvas(this.width, this.height);
 	this.lastCtx = this.lastCanvas.getContext("2d");
@@ -88,8 +93,12 @@ p.render = function() {
 				this.ctx.globalAlpha = 1.0;
 
 				if (this.logoCounter > LOGO_DURATION){
-					this.mode = 1;
 					this.logoCounter = 0;
+					this.logoLoopCounter++;
+					if (this.logoLoopCounter > 2){
+						this.logoLoopCounter = 0;
+						this.mode = 1;
+					}
 				}
 
 			break;
@@ -113,7 +122,8 @@ p.render = function() {
 
 				this.ctx.translate((this.width - (this.infoCounter / 8.0)),0)
 
-				this.ctx.drawImage(this.infoImage, 0,0);
+				var whichImage = (this.infoLanguage == "is") ? this.infoImage_is : this.infoImage_en;
+				this.ctx.drawImage(whichImage, 0,0);
 
 				this.ctx.restore();
 
@@ -123,6 +133,7 @@ p.render = function() {
 				if (this.infoCounter > INFO_DURATION){
 					this.mode = 0;
 					this.infoCounter = 0;
+					this.infoLanguage = (this.infoLanguage == "is") ? "en" : "is";
 				}
 
 			break;

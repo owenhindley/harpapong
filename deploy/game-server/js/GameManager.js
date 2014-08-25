@@ -6,9 +6,9 @@
 	var EventEmitter = require('events').EventEmitter;
 
 	var MAX_SCORE = 5;
-	var JOIN_TIMEOUT = 20* 1000;
+	var JOIN_TIMEOUT = 30* 1000;
 
-	var INACTIVITY_TIMEOUT = 10 * 1000;
+	var INACTIVITY_TIMEOUT = 20 * 1000;
 
 	var MODE_WAIT = "wait";
 	var MODE_GAME = "game";
@@ -132,23 +132,22 @@
 				this.game.setPlayerPosition(data.id, data.position);
 			}.bind(this));
 
-			// restart the timer waiting for both players
+			// clear the timer waiting for both players
+			clearTimeout(this.joinTimeoutId);
 
 			if (!this.gamePlaying){
-				
+
 				if (this.players["a"] && this.players["b"]){
-					clearTimeout(this.joinTimeoutId);
+					
 					this.startGame();
 				}
 				else {
-					clearTimeout(this.joinTimeoutId);
+					// we're still waiting for one player
 					this.joinTimeoutId = setTimeout(this.gameStartTimeout.bind(this), JOIN_TIMEOUT);	
-			
 				}
 
 			} else {
 				// presume they just re-connected
-				clearTimeout(this.joinTimeoutId);
 				this.players[playerId].start();
 			}
 			
@@ -193,11 +192,11 @@
 
 				// check the time since we last had a position update
 				// end the game if it's more than INACTIVITY_TIMEOUT
-				var sinceLastPosition = this.lastUpdate - this.lastPositionTime;
-				if ( sinceLastPosition > INACTIVITY_TIMEOUT ){
-					winston.error("INACTIVITY TIMEOUT, restarting game");
-					this.endGame(5000);
-				}
+				// var sinceLastPosition = this.lastUpdate - this.lastPositionTime;
+				// if ( sinceLastPosition > INACTIVITY_TIMEOUT ){
+				// 	winston.error("INACTIVITY TIMEOUT, restarting game");
+				// 	this.endGame(5000);
+				// }
 
 			}
 

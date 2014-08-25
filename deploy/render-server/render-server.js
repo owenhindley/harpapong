@@ -4,6 +4,7 @@ var winston = require('winston');
 var io = require('socket.io-client');
 var Utils = require('../common/Utils.js').Utils;
 var Game = require("../common/Game.js").Game;
+var Scheduler = require("./scheduler/Scheduler.js");
 var http = require('http');
 var NanoTimer = require('nanotimer');
 var fs = require("fs");
@@ -42,6 +43,8 @@ console.log('Starting...');
 winston.add(winston.transports.File, { filename: 'render.log', handleExceptions : false });
 winston.info("started renderer");
 
+var scheduler = new Scheduler();
+
 var gameView = new HarpaGameView(INTERFACE_1_IP, front_patch, 36, 11);
 var scoreView = new HarpaScoreView(INTERFACE_2_IP, side_patch, 39, 9);
 
@@ -49,6 +52,8 @@ var game = Game.init();
 
 var renderTimer = new NanoTimer();
 renderTimer.setInterval(render.bind(this), '', '33m');
+
+
 
 winston.info("connecting to game server at " + GAME_SERVER_IP + ":8081");
 
@@ -76,12 +81,27 @@ function onGameUpdate(data){
 
 }
 
+function updateScheduler() {
+	scheduler.update();
+}
+setInterval(updateScheduler.bind(this), 60 * 1000);
+updateScheduler();
+
 
 function render() {
 
 	if (active){
-		gameView.render(game, gameMode);
-		scoreView.render(game, gameMode);
+
+		if (scheduler.mode == Scheduler.MODE_GAME){
+			gameView.render(game, gameMode);
+			scoreView.render(game, gameMode);	
+		} else {
+			var mode = (scheduler.mode == Scheduler.MODE_SHIMMER) ? "sleep" : "blackout";
+			gameView.render(game, mode);
+			scoreView.render(game, mode);
+		}
+
+		
 	}
 
 };

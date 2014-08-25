@@ -27,6 +27,7 @@
 		playing : [],
 
 		currentGameKey : null,
+		nextGameTimeoutId : -1,
 
 		init : function(){
 
@@ -74,10 +75,13 @@
 
 		nextGame : function() {
 
+			console.log("QueueManager : Game server called next game");
+			clearTimeout(this.nextGameTimeoutId);
+
+			this.playing = [];
+
 			if (this.queue.length >= 2){
 
-				this.playing = [];
-				
 				this.playing.push(this.queue.shift());
 				this.playing.push(this.queue.shift());
 
@@ -87,7 +91,7 @@
 				
 			} else {
 				winston.info("not enough people in this.queue (only " + this.queue.length + ") to start a game, waiting...");
-				setTimeout(this.nextGame.bind(this), 1000);
+				this.nextGameTimeoutId = setTimeout(this.nextGame.bind(this), 1000);
 				return null;
 			}
 

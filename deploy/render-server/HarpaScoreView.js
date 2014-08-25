@@ -4,6 +4,7 @@ var winston = require("winston");
 
 var GoalEffect = require("./effects/GoalEffect.js");
 var WaitEffect = require("./effects/WaitEffect.js");
+var SleepEffect = require("./effects/SleepEffect.js");
 
 var tX = 0;
 var tY = 0;
@@ -23,7 +24,9 @@ var HarpaGameView = function(ip, patchdata, width, height){
 	this.goalEffect = new GoalEffect(this.ctx, this.width, this.height);
 
 	this.waitEffect = new WaitEffect(this.ctx, this.width, this.height);
-	this.currentMode = "wait";
+	this.currentMode = "blackout";
+
+	this.sleepEffect = new SleepEffect(this.ctx, this.width, this.height);
 };
 
 var p = HarpaGameView.prototype;
@@ -124,6 +127,17 @@ p.render = function(game, mode){
 
 			this.waitEffect.render();
 
+		break;
+
+		case "sleep":
+
+			this.sleepEffect.render();
+
+		break;
+
+		case "blackout":
+			// do nothing
+			
 		break;
 
 	}
