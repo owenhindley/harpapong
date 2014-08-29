@@ -8,6 +8,13 @@ var QueueManager = require("./js/QueueManager.js").QueueManager;
 // CONFIG
 var WEB_SERVER_PORT = 8080;
 
+var ALLOWED_IPS = [
+    "89.160.129.139",
+    "192.168.33.1",
+    "86.186.133.89",
+    "194.144.243.86"
+];
+
 
 // PREAMBLE
 
@@ -141,6 +148,30 @@ var server = http.createServer(function(request, response){
                 responseMessage.message = "debug data";
                 responseMessage.data["queue"] = queueManager.queue;
                 responseMessage.data["playing"] = queueManager.playing;
+
+
+            break;
+
+            case "checkip":
+
+                var ip = request.headers['x-forwarded-for'] || 
+                         request.connection.remoteAddress || 
+                         request.socket.remoteAddress ||
+                         request.connection.socket.remoteAddress;
+
+                responseMessage.data["ip"] = ip;
+
+                winston.info("check ip request from ", ip);
+
+                var isAllowed = false;
+                for(var i =0; i < ALLOWED_IPS.length; i++){
+                    if (ALLOWED_IPS[i] == ip){
+                        isAllowed = true;
+                    }
+                }
+
+                responseMessage.status = isAllowed ? "OK" : "ERROR";
+                responseMessage.message = isAllowed ? "Allowed" : "IP is not from allowed location";
 
 
             break;

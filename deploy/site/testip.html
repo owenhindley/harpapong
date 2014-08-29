@@ -111,7 +111,7 @@
 
 								if (data.status == "OK"){
 
-									$("#support").css("display", "block");
+									document.getElementById("ipreadout").innerHTML = data.data.ip;
 
 								}
 
@@ -153,108 +153,16 @@
 
 <section id="intro">
 
-
-
-		<p>
-			<span class="lang-en">Play PONG on Harpa!</span>
-			<span class="lang-is">Spilaðu PONG á Hörpu!</span>
-		</p>
-
-		<p>
-			<span class="lang-en">Every day from 21.30 - 02:00 until August 31st</span>
-			<span class="lang-is">Á hverjum degi frá 21.30 - 02:00 til 31. Ágúst</span>
-		</p>
-
-		<div id="support" class="highlight red" style="display:none">
-			<p>
-				<span class="lang-en">On Arnarhóll but can't play?
-				</span>
-
-				<span class="lang-is">
-				Ertu á Arnarhóli en getur ekki spilað?</span>
-
-			</p>
-
-				<a href="http://134.213.27.204/">
-					<button id="supportButton">
-						<span class="lang-en">Click Here!</span>
-						<span class="lang-is"> Smelltu hér!</span>
-					</button>
-				</a>
-
-		</div>
-
-		<div id="unsupported" class="highlight red" style="display:none">
-
-			<p class="small">
-				<span class="lang-en">Please note, PONG will not work on this device or browser.<br/><br/>Please use a modern mobile phone or tablet to play the game.
-				</span>
-
-				<span class="lang-is">
-				Athugaðu að þú getur ekki spilað PONG á þessu tæki eða í þessum vafra.<br/><br/>Vinsamlegast tengdu þig netinu með snjallsíma eða spjaldtölvu.
-				</span>
-			</p>
-
-		</div>
-
 		<div class="highlight">
+			<p>
+				Your ip address is :
+				<span id="ipreadout">
 
-		<p>
-			<span class="lang-en">To play:</span>
-			<span class="lang-is">Leiðbeiningar:</span>
-		</p>
-		<br/>
+				</span>
 
-		<p class="small">
-
-			<span class="lang-en">
-			• Be in Reykjavik, Iceland.<br/><br/>
-			• Stand on Arnarhóll where you have a good view of Harpa.<br/><br/>
-			• Make sure the red Vodafone truck is between you and Harpa.<br/><br/>
-			• Pick up your smartphone and connect to ‘Vodafone Pong Wifi’.<br/><br/>
-			• Follow the instructions that pop up.<br/><br/>
-			</span>
-
-			<span class="lang-is">
-			
-			• Vertu á Arnarhóli með gott útsýni yfir Hörpu. <br/><br/>
-			• Reyndu að hafa rauða Vodafone bílinn milli þín og Hörpu.<br/><br/>
-			• Tengdu snjallsímann þinn við þráðlausa netið 'Vodafone Pong Wifi'.<br/><br/>
-			• Fylgdu leiðbeiningunum sem koma upp.<br/> 
-			</span>
-			
-		</p>
+			</p>
 
 		</div>
-		<br/>
-
-		<br/>
-
-		<p>
-			<span class="lang-is">
-			Hugmynd og framkvæmd: <br/>Atli Bollason<br/><br/>
-			Hönnun og forritun: <br/>Owen Hindley<br/><br/>
-			</span>
-			<span class="lang-en">
-			Concept and Production: <br/>Atli Bollason<br/><br/>
-			Programming and Design: <br/>Owen Hindley<br/><br/>
-			</span>
-		</p>
-		<p class="small">
-			<span class="lang-is">	
-			Unnið í samstarfi við Hörpu og Vodafone.<br/>
-			<br/>
-			Sérstakar þakkir til Hljóð-X.<br/>
-
-
-			</span>
-			<span class="lang-en">
-			Produced in co-operation with Harpa and Vodafone.<br/>
-			<br/>
-			Special thanks to Hljóð-X.<br/>
-			</span>
-		</p>
-		
 
 </section>
 
