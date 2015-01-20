@@ -44,6 +44,8 @@
 
 			this.ctx.scale(this.width, this.height);
 
+			this.ctx.fillStyle = "red";
+
 			// player a
 			aX = (game.pos.a.x - game.pw / 2);
 			aY = (game.pos.a.y - game.ph / 2);
@@ -62,6 +64,7 @@
 			this.ctx.fillRect(game.pos.balls[1].x -bw/2, game.pos.balls[1].y - bw/2, bw, bw);
 
 			// blocks
+			this.ctx.fillStyle = "green";
 			for (var i =0; i< game.pos.blocks.length; i++){
 				var block = game.pos.blocks[i];
 

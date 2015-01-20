@@ -256,11 +256,11 @@
 
 	  console.log("GOAL TO " + direction);
 
-	 //  if (direction > 0){
-		// this.lives.b--;
-	 //  } else {
-		// this.lives.a--;
-	 //  }
+	  if (direction > 0){
+		this.lives.b--;
+	  } else {
+		this.lives.a--;
+	  }
 
 	  if (this.goalCallback)
 		this.goalCallback();

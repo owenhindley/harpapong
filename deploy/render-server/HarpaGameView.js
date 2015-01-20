@@ -127,16 +127,26 @@ p.render = function(game, mode){
 
 			if (mode == "game"){
 
-				// ball
-				// this.ctx.beginPath();
-				// this.ctx.arc(game.pos.ball.x, game.pos.ball.y, game.ballSize, 0, 2 * Math.PI, false);
-				// this.ctx.fill();
+				// balls
 				this.ctx.fillStyle="white";
 				this.ctx.globalAlpha = 1.0;
 				var bw = game.ballSize;
-				// this.ctx.fillRect((game.pos.ball.x -bw/2) * this.width, (game.pos.ball.y - bw/2) * this.height, bw * this.width, bw * this.height);
-				this.ctx.fillRect((game.pos.ball.x -bw/2) * this.playwidth + this.playoffset, (game.pos.ball.y - bw/2) * this.height, bw * this.playwidth, bw * this.height);
+				
+				this.ctx.fillRect((game.pos.balls[0].x -bw/2) * this.playwidth + this.playoffset, (game.pos.balls[0].y - bw/2) * this.height, bw * this.playwidth, bw * this.height);
+				this.ctx.fillRect((game.pos.balls[1].x -bw/2) * this.playwidth + this.playoffset, (game.pos.balls[1].y - bw/2) * this.height, bw * this.playwidth, bw * this.height);
 
+				// blocks
+
+				for (var i=0; i < game.pos.blocks.length; i++){
+
+					var block = game.pos.blocks[i];
+					if (block.active){
+						this.ctx.fillStyle = "red"
+						this.ctx.fillRect((block.x - game.blockWidth/2) * this.playwidth + this.playoffset, (block.y - game.blockHeight/2) * this.height, game.blockWidth * this.playwidth, game.blockHeight * this.height);	
+					}
+					
+
+				}
 
 				// walls
 				this.ctx.moveTo(this.playoffset-1,0);
