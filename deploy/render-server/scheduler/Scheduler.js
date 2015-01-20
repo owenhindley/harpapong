@@ -2,13 +2,18 @@ var Scheduler = function() {
 
 	this.mode = Scheduler.MODE_BLACKOUT;
 
+	// this.times = {
+	//
+	// 	0.0 : Scheduler.MODE_GAME,
+	// 	2.0 : Scheduler.MODE_SHIMMER,
+	// 	6.0 : Scheduler.MODE_BLACKOUT,
+	// 	19.0 : Scheduler.MODE_SHIMMER,
+	// 	21.3 : Scheduler.MODE_GAME
+	// }
+
 	this.times = {
 
-		0.0 : Scheduler.MODE_GAME,
-		2.0 : Scheduler.MODE_SHIMMER,
-		6.0 : Scheduler.MODE_BLACKOUT,
-		19.0 : Scheduler.MODE_SHIMMER,
-		21.3 : Scheduler.MODE_GAME
+		0.0 : Scheduler.MODE_GAME
 	}
 
 

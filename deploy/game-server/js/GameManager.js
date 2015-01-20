@@ -5,7 +5,7 @@
 	var NanoTimer = require("nanotimer");
 	var EventEmitter = require('events').EventEmitter;
 
-	var MAX_SCORE = 5;
+	var MAX_SCORE = 500;
 	var JOIN_TIMEOUT = 30* 1000;
 
 	var INACTIVITY_TIMEOUT = 20 * 1000;
@@ -14,8 +14,8 @@
 	var MODE_GAME = "game";
 	var MODE_GOAL = "goal";
 
-	
-	
+
+
 	var GameManager = {
 
 		timer : null,
@@ -98,13 +98,13 @@
 
 		endGame : function(aNewGameDelay) {
 
-			winston.info("Game ended, scores : ", this.game.scores);
+			winston.info("Game ended, lives : ", this.game.lives);
 
 			this.currentGameKey = "none";
 
 			for (var idx in this.players){
 				this.players[idx].removeAllListeners("position");
-				this.players[idx].finish(this.game.scores);
+				this.players[idx].finish(this.game.lives);
 			}
 
 			this.gamePlaying = false;
@@ -138,24 +138,24 @@
 			if (!this.gamePlaying){
 
 				if (this.players["a"] && this.players["b"]){
-					
+
 					this.startGame();
 				}
 				else {
 					// we're still waiting for one player
-					this.joinTimeoutId = setTimeout(this.gameStartTimeout.bind(this), JOIN_TIMEOUT);	
+					this.joinTimeoutId = setTimeout(this.gameStartTimeout.bind(this), JOIN_TIMEOUT);
 				}
 
 			} else {
 				// presume they just re-connected
 				this.players[playerId].start();
 			}
-			
 
 
 
-			
-			
+
+
+
 		},
 
 		gameStartTimeout : function(){
@@ -185,8 +185,8 @@
 			if (this.gamePlaying && !this.gamePaused){
 				this.game.update(dt);
 
-				// check the scores, end the game if max score reached
-				if (this.game.scores.a >= MAX_SCORE || this.game.scores.b >= MAX_SCORE){
+				// check the scores, end the game if one player has no lives left
+				if (this.game.lives.a < 1 || this.game.lives.b < 1){
 					this.endGame(5000);
 				}
 
@@ -204,7 +204,7 @@
 
 			this.lastUpdate = Date.now();
 
-			
+
 
 		},
 
@@ -213,21 +213,17 @@
 			winston.info("GOOOOOOAL!");
 
 			// pause the game for a short while
-			
+
 			this.mode = MODE_GOAL;
 			this.gamePaused = true;
 
-			setTimeout(function() {
-				
-				if (this.gamePlaying)
-					this.mode = MODE_GAME;
+			if (this.gamePlaying)
+				this.mode = MODE_GAME;
 
-				this.gamePaused = false;
-
-			}.bind(this), 2000);
+			this.gamePaused = false;
 
 			for (var idx in this.players){
-				this.players[idx].goal(this.game.scores);
+				this.players[idx].goal(this.game.lives);
 			}
 
 		},
@@ -254,7 +250,7 @@
 		_callQueueServer : function(aMethod, aCallback, aArguments){
 
 			winston.info("calling " + aMethod + " on queue server : " + this.queueServer);
-			
+
 			var options = {
 				host : this.queueServer,
 				port : 8080,
@@ -265,7 +261,7 @@
 				for (var idx in aArguments){
 					options.path += "&" + encodeURIComponent(idx) + "="	+ encodeURIComponent(aArguments[idx]);
 				}
-				
+
 			}
 
 			var req = http.request(options, function(response) {
@@ -301,7 +297,7 @@
 				.toString(16)
 				.substring(1);
 			};
-		
+
 			return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 		}
 

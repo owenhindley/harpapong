@@ -79,7 +79,7 @@ p.render = function(game, mode){
 
 		case "test":
 
-			
+
 			this.ctx.strokeStyle = "red";
 			this.ctx.lineWidth = 1;
 			//this.ctx.moveTo(5, 6);
@@ -97,7 +97,7 @@ p.render = function(game, mode){
 
 		case "goal":
 
-			this.goalEffect.render();
+			//this.goalEffect.render();
 
 
 		case "game":
@@ -122,7 +122,7 @@ p.render = function(game, mode){
 			bX = (game.pos.b.x - game.pw / 2);
 			bY = (game.pos.b.y - game.ph / 2);
 			// this.ctx.fillRect(bX * this.width, bY * this.height, game.pw * this.width, game.ph * this.height);
-			// 
+			//
 			this.ctx.fillRect(bX * this.playwidth + this.playoffset, (1 * this.height)-1, game.pw * this.playwidth, 1);
 
 			if (mode == "game"){
@@ -136,7 +136,7 @@ p.render = function(game, mode){
 				var bw = game.ballSize;
 				// this.ctx.fillRect((game.pos.ball.x -bw/2) * this.width, (game.pos.ball.y - bw/2) * this.height, bw * this.width, bw * this.height);
 				this.ctx.fillRect((game.pos.ball.x -bw/2) * this.playwidth + this.playoffset, (game.pos.ball.y - bw/2) * this.height, bw * this.playwidth, bw * this.height);
-				
+
 
 				// walls
 				this.ctx.moveTo(this.playoffset-1,0);
@@ -148,9 +148,9 @@ p.render = function(game, mode){
 				this.ctx.lineTo(this.playwidth + this.playoffset + 1, this.canvas.height);
 				this.ctx.stroke();
 			}
-			
+
 			//this.ctx.restore();
-			
+
 		break;
 
 		case "wait":
@@ -167,7 +167,7 @@ p.render = function(game, mode){
 
 		case "blackout":
 			// do nothing
-			
+
 		break;
 
 	}
@@ -188,11 +188,11 @@ p.render = function(game, mode){
 
 		y = Math.floor( (i / 4) / this.width );
 		x = (i / 4) % this.width;
-		
+
 		this.pixelmapper.setPixel(x, y, imgData[i], imgData[i+1], imgData[i+2]);
-		
+
 	}
-	
+
 
 	this.pixelmapper.render();
 
