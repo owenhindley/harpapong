@@ -1,0 +1,65 @@
+body, html {
+
+    background:black;
+
+    color:#ababab;
+
+    font-size:18px;
+    font-family: "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+
+#container {
+
+    padding:2em;
+}
+
+#canvasContainer {
+    width:100%;
+    height:20em;
+}
+
+#sideContainer, #frontContainer {
+    border:1px solid rgba(255,0,0,0.2);
+    width:40%;
+    float:left;
+}
+
+canvas {
+    width:100%;
+
+}
+
+
+input {
+    height:3em;
+    width:30em;
+    margin-right:2em;
+
+    background:#121212;
+    color:white;
+    padding-left:2em;
+    padding-right:2em;
+    border:none;
+}
+
+audio {
+    display:none;
+}
+
+button {
+    height:2em;
+    font-size:18px;
+    padding:0em 1em 0em 1em;
+    background:#1a1a1a;
+    color:white;
+    border:none;
+
+}
+
+#debugOutput {
+    width:100%;
+    font-family: "Consolas", monospace;
+    color:#aaaaaa;
+}

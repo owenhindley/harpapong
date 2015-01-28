@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <title>Harpa/Sónar Visualiser Dev Environment</title>
+        <meta charset="utf-8"></meta>
+
+        <link rel="stylesheet" href="css/styles.css"/>
+
+
+
+        <script src="//localhost:35729/livereload.js"></script>
+
+        <script src="js/HarpaVisualiserBase.js"></script>
+        <script src="js/SoundCloudLoader.js"></script>
+        <script src="js/SoundCloudAudioSource.js"></script>
+
+        <!-- Custom Visualisers -->
+        <script src="js/visualisers/HarpaTestVisualiser.js"></script>
+
+        <script src="js/App.js"></script>
+
+    </head>
+
+    <body>
+        <div id="container">
+            <div id="canvasContainer">
+                    <div id="sideContainer"></div>
+                    <div id="frontContainer"></div>
+            </div>
+            <div id="soundcloudInput">
+                <p>Enter soundCloud URL here &amp; press load</p>
+                <input type="text" id="soundCloudURL" placeholder="Paste Soundcloud URL here" value="https://soundcloud.com/softwarelabel/opn-replica-matmos-remix"></input>
+                <button id="soundCloudSubmit">Load</button>
+                <button id="soundCloudPause">Play / Pause</button><br/>
+
+                <audio id="player" controls="" autoplay="" preload autobuffer></audio><br/>
+
+            </div>
+            <div id="feedback">
+                <p id="debugOutput"></p>
+            </div>
+        </div>
+
+        <script src="http://connect.soundcloud.com/sdk.js"></script>
+    </body>
+
+</html>
