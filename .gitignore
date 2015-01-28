@@ -23,6 +23,8 @@ deploy/queue.log
 
 /deploy/tests/sonar-visualiser-env-03.zip
 
+node_modules
+
 /node_modules/
 /node_modules/*
 
