@@ -20,3 +20,17 @@ deploy/queue.log
 /scss/.sass-cache/3a95f3ae2eee187154f788f3f2f4729017352e89/_variables.scssc
 
 /assets/private/server/serverDetails.txt
+
+/deploy/tests/sonar-visualiser-env-03.zip
+
+/node_modules/
+/node_modules/*
+
+/deploy/game-server/node_modules/
+/deploy/game-server/node_modules/*
+
+/deploy/queue-server/node_modules/
+/deploy/queue-server/node_modules/*
+
+/deploy/render-server/node_modules/
+/deploy/render-server/node_modules/*
