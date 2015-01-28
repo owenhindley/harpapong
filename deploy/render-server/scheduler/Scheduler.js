@@ -4,11 +4,11 @@ var Scheduler = function() {
 
 	this.times = {
 
-		0.0 : Scheduler.MODE_GAME,
-		2.0 : Scheduler.MODE_SHIMMER,
-		6.0 : Scheduler.MODE_BLACKOUT,
-		19.0 : Scheduler.MODE_SHIMMER,
-		21.3 : Scheduler.MODE_GAME
+		0.0 : Scheduler.MODE_GAME
+		// 2.0 : Scheduler.MODE_SHIMMER,
+		// 6.0 : Scheduler.MODE_BLACKOUT,
+		// 19.0 : Scheduler.MODE_SHIMMER,
+		// 21.3 : Scheduler.MODE_GAME
 	}
 
 
