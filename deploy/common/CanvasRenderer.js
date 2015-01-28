@@ -44,6 +44,8 @@
 
 			this.ctx.scale(this.width, this.height);
 
+			this.ctx.fillStyle = "red";
+
 			// player a
 			aX = (game.pos.a.x - game.pw / 2);
 			aY = (game.pos.a.y - game.ph / 2);
@@ -54,12 +56,24 @@
 			bY = (game.pos.b.y - game.ph / 2);
 			this.ctx.fillRect(bX, bY, game.pw, game.ph);
 
-			// ball
-			// this.ctx.beginPath();
-			// this.ctx.arc(game.pos.ball.x, game.pos.ball.y, game.ballSize, 0, 2 * Math.PI, false);
-			// this.ctx.fill();
+			// balls
+			
 			var bw = game.ballSize;
-			this.ctx.fillRect(game.pos.ball.x -bw/2, game.pos.ball.y - bw/2, bw, bw);
+
+			this.ctx.fillRect(game.pos.balls[0].x -bw/2, game.pos.balls[0].y - bw/2, bw, bw);
+			this.ctx.fillRect(game.pos.balls[1].x -bw/2, game.pos.balls[1].y - bw/2, bw, bw);
+
+			// blocks
+			this.ctx.fillStyle = "green";
+			for (var i =0; i< game.pos.blocks.length; i++){
+				var block = game.pos.blocks[i];
+
+				if (block.active){
+					this.ctx.fillRect(block.x - game.blockWidth/2, block.y - game.blockHeight/2, game.blockWidth, game.blockHeight);	
+				}
+				
+
+			}
 
 
 			this.ctx.restore();

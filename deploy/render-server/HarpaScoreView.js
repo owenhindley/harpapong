@@ -9,6 +9,8 @@ var SleepEffect = require("./effects/SleepEffect.js");
 var tX = 0;
 var tY = 0;
 
+var NUM_LIVES_MAX = 10;
+
 var HarpaGameView = function(ip, patchdata, width, height){
 
 	this.width = width;
@@ -100,8 +102,8 @@ p.render = function(game, mode){
 			//var startY = 0;
 		
 
-			for (var i =0; i < 5; i++){
-				if ( i < game.scores.a)
+			for (var i =0; i < NUM_LIVES_MAX; i++){
+				if ( i < game.lives.a)
 					this.ctx.fillStyle = "white";
 				else 
 					this.ctx.fillStyle = "green";
@@ -110,8 +112,8 @@ p.render = function(game, mode){
 
 			}
 
-			for (var i =0; i < 5; i++){
-				if ( i < game.scores.b)
+			for (var i =0; i < NUM_LIVES_MAX; i++){
+				if ( i < game.lives.b)
 					this.ctx.fillStyle = "white";
 				else 
 					this.ctx.fillStyle = "green";

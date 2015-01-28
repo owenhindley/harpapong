@@ -2,7 +2,7 @@
 
 var winston = require('winston');
 
-var Game = require("../common/Game.js").Game;
+var Game = require("../common/GameBreakout.js").Game;
 var GameManager = require("./js/GameManager.js").GameManager;
 var RemotePlayer = require("./js/RemotePlayer.js").RemotePlayer;
 var RemoteRenderer = require("./js/RemoteRenderer.js").RemoteRenderer;

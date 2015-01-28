@@ -3,7 +3,7 @@ var HarpaScoreView = require('./HarpaScoreView.js');
 var winston = require('winston');
 var io = require('socket.io-client');
 var Utils = require('../common/Utils.js').Utils;
-var Game = require("../common/Game.js").Game;
+var Game = require("../common/GameBreakout.js").Game;
 var Scheduler = require("./scheduler/Scheduler.js");
 var http = require('http');
 var NanoTimer = require('nanotimer');
@@ -14,9 +14,9 @@ var side_patch = require('./patchdata/side-patch-1.js');
 
 var INTERFACE_1_IP = "2.224.168.149";
 var INTERFACE_2_IP = "2.145.222.186";
-//var GAME_SERVER_IP = "http://127.0.0.1";
-var GAME_SERVER_IP = "http://134.213.27.204";
-// 
+var GAME_SERVER_IP = "http://127.0.0.1";
+// var GAME_SERVER_IP = "http://134.213.27.204";
+//
 var active = true;
 
 
@@ -94,20 +94,20 @@ function render() {
 
 		if (scheduler.mode == Scheduler.MODE_GAME){
 			gameView.render(game, gameMode);
-			scoreView.render(game, gameMode);	
+			scoreView.render(game, gameMode);
 		} else {
 			var mode = (scheduler.mode == Scheduler.MODE_SHIMMER) ? "sleep" : "blackout";
 			gameView.render(game, mode);
 			scoreView.render(game, mode);
 		}
 
-		
+
 	}
 
 };
 
 // DEBUGGING
-// 
+//
 
 // load debug page
 var debugPage = "";
@@ -177,7 +177,7 @@ var server = http.createServer(function(request, response){
 	}
 
 
-    response.writeHead(200, { 
+    response.writeHead(200, {
         'Content-Type': 'text/html',
         'Access-Control-Allow-Origin' : '*'
     });
@@ -188,5 +188,3 @@ var server = http.createServer(function(request, response){
 });
 
 server.listen(8088);
-
-	

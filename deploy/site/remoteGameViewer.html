@@ -6,7 +6,7 @@
 	<script src="js/libs/socket.io-1.0.6.js"></script>
 
 	<script src="../common/CanvasRenderer.js"></script>
-	<script src="../common/Game.js"></script>
+	<script src="../common/GameBreakout.js"></script>
 	
 
 	<script>
@@ -42,9 +42,9 @@
 
 			game.setFromSerialised(data.data);
 
-			document.getElementById("scoreA").innerHTML = game.scores.a;
+			document.getElementById("scoreA").innerHTML = game.lives.a;
 
-			document.getElementById("scoreB").innerHTML = game.scores.b;
+			document.getElementById("scoreB").innerHTML = game.lives.b;
 
 			document.getElementById("mode").innerHTML = data.mode;
 
