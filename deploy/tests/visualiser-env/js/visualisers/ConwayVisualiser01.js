@@ -100,7 +100,8 @@
             this.updateCounter = 0;
         }
 
-
+        // render perlin texture
+        
 
 
         // go through grid, create image data
@@ -133,14 +134,19 @@
 
         this.frontCtx.save();
         this.frontCtx.scale(2,1);
-        this.frontCtx.translate(this.gridSize/-2, this.gridSize/-2);
+        this.frontCtx.translate(this.gridSize/-1, this.gridSize/-1);
         this.tileAcrossCanvas(this.tempCanvas, this.frontCtx);
 
 
         this.frontCtx.restore();
 
-        this.tileAcrossCanvas(this.tempCanvas, this.sideCtx);
 
+        this.sideCtx.save();
+
+        this.sideCtx.scale(2,1);
+        this.sideCtx.translate(this.gridSize, -this.gridSize/2);
+        this.tileAcrossCanvas(this.tempCanvas, this.sideCtx);
+        this.sideCtx.restore();
 
     };
 
@@ -151,12 +157,12 @@
         var tileY = Math.ceil(destCanvasCtx.canvas.height / this.gridSize) + 1;
 
         destCanvasCtx.save();
-        destCanvasCtx.translate(-this.gridSize/2, -this.gridSize/2);
+        // destCanvasCtx.translate(-this.gridSize/2, -this.gridSize/2);
 
         var index = 0;
         for (var i=0; i < tileX; i++){
             for (var j =0; j < tileY; j++){
-                this.frontCtx.save();
+                destCanvasCtx.save();
                 if (i % 2 == 0){
                     destCanvasCtx.scale(-1,1);
 
@@ -169,6 +175,7 @@
 
                 }
 
+                // destCanvasCtx.translate((i) * this.gridSize, (j) * this.gridSize);
                 destCanvasCtx.drawImage(this.tempCanvas, 0,0);
 
                 // this.frontCtx.drawImage(this.tempCanvas, 0,0);
@@ -247,7 +254,7 @@
                     if (numNeighbours == 3){
                         // new live cell
                         this.tempGrid[i][j] = 1;
-                        
+
                     }
                 }
 
