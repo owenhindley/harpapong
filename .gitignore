@@ -34,3 +34,6 @@ deploy/queue.log
 
 /deploy/render-server/node_modules/
 /deploy/render-server/node_modules/*
+
+/deploy/site/js/.DS_Store
+/deploy/tests/.DS_Store
