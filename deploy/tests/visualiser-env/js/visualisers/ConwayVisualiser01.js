@@ -38,6 +38,8 @@
         this.gridSize = 10;
         this.defaultSeedAmount = 20;
 
+        // this.perlinNoise
+
     }
 
     var p = ConwayVisualiser.prototype = new HarpaVisualiserBase();
@@ -101,7 +103,7 @@
         }
 
         // render perlin texture
-        
+
 
 
         // go through grid, create image data

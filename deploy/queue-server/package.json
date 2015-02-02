@@ -1,0 +1,20 @@
+{
+  "name": "Harpa Pong Queue server",
+  "version": "0.0.2",
+  "description": "",
+  "main": "",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/owenhindley/harpapong/"
+  },
+  "author": {
+    "name": "Owen Hindley"
+  },
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "winston": "",
+    "socket.io": "",
+    "nanotimer":""
+  }
+}
