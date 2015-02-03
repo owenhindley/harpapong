@@ -15,8 +15,8 @@
   "dependencies": {
     "winston": "",
     "socket.io": "",
-    "http":"",
     "nanotimer":"",
-    "zmq":""
+    "zmq":"",
+    "msgpack5":""
   }
 }

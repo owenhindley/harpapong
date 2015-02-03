@@ -39,3 +39,9 @@ node_modules
 
 /deploy/site/js/.DS_Store
 /deploy/tests/.DS_Store
+
+/design/assets/HarpaBreakout-Demo-01.MOV
+/design/assets/HarpaBreakout-Demo-02.MOV
+
+/assets/HarpaLights-FrontFacade.ai
+/assets/HarpaPong - Technical Diagram.ai

@@ -35,6 +35,10 @@ var HarpaGameView = function(ip, patchdata, width, height){
 	this.sleepEffect = new SleepEffect(this.ctx, this.width, this.height);
 
 	this.nebulaEffect = new NebulaEffect(this.ctx, this.width, this.height);
+
+	this.screensaverCanvas = new Canvas(this.width, this.height);
+	this.screensaverCtx = this.screensaverCanvas.getContext("2d");
+
 };
 
 var p = HarpaGameView.prototype;
@@ -176,7 +180,20 @@ p.render = function(game, mode){
 		break;
 
 		case "blackout":
-			// do nothing
+
+			// Go black
+			this.ctx.fillStyle = "black";
+			this.ctx.fillRect(0,0,this.canvas.width, this.canvas.height);
+
+
+		break;
+
+		case "screensaver":
+
+			// write the incoming screensaver buffer to the canvas
+
+			// TODO this;
+			this.ctx.drawImage(this.screensaverCanvas,0,0);
 
 		break;
 
@@ -188,9 +205,9 @@ p.render = function(game, mode){
 	//console.log(imgData[1000]);
 	//process.exit();
 
-	for (var i=0; i< imgData.length; i++){
-		//console.log(imgData[i]);
-	}
+	// for (var i=0; i< imgData.length; i++){
+	// 	//console.log(imgData[i]);
+	// }
 
 	var x, y = 0;
 	var index = 0;

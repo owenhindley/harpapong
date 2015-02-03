@@ -13,7 +13,7 @@ var Scheduler = function() {
 
 	this.times = {
 
-		0.0 : Scheduler.MODE_GAME
+		0.0 : Scheduler.MODE_SCREENSAVER
 	}
 
 
@@ -22,6 +22,7 @@ var Scheduler = function() {
 Scheduler.MODE_BLACKOUT = "schedulerModeBlackout";
 Scheduler.MODE_SHIMMER = "schedulerModeShimmer";
 Scheduler.MODE_GAME = "schedulerModeGame";
+Scheduler.MODE_SCREENSAVER = "schedulerModeScreensaver";
 
 var p = Scheduler.prototype;
 

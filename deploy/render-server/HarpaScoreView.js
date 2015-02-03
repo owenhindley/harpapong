@@ -29,6 +29,10 @@ var HarpaGameView = function(ip, patchdata, width, height){
 	this.currentMode = "blackout";
 
 	this.sleepEffect = new SleepEffect(this.ctx, this.width, this.height);
+
+	this.screensaverCanvas = new Canvas(this.width, this.height);
+	this.screensaverCtx = this.screensaverCanvas.getContext("2d");
+
 };
 
 var p = HarpaGameView.prototype;
@@ -137,6 +141,12 @@ p.render = function(game, mode){
 
 		break;
 
+		case "screensaver":
+
+			this.ctx.drawImage(this.screensaverCanvas,0,0);
+
+		break;
+
 		case "blackout":
 			// do nothing
 			
@@ -147,13 +157,7 @@ p.render = function(game, mode){
 	// get image data and send to pixelmapper
 	var imgData = this.ctx.getImageData(0,0,this.width, this.height).data;
 
-	//console.log(imgData[1000]);
-	//process.exit();
-
-	for (var i=0; i< imgData.length; i++){
-		//console.log(imgData[i]);
-	}
-
+	
 	var x, y = 0;
 	var index = 0;
 	for (var i = 0; i < imgData.length; i+=4){

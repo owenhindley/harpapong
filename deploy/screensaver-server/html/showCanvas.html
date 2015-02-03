@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HarpaPONG screensaver canvas test</title>
+
+	<style>
+
+		body, html {
+			background:black;
+			color:green;
+			font-family: "Avenir", Helvetica, Arial, sans-serif;
+		}
+
+		img {
+			margin:1em;
+			border:1px solid green;
+
+			width:40%;
+
+		}
+
+	</style>
+
+	<script>
+
+		var sideViewImg = null;
+		var gameViewImg = null;
+
+
+		document.addEventListener("DOMContentLoaded", function() {
+
+			sideViewImg = document.getElementById("sideView");
+			gameViewImg = document.getElementById("gameView");
+
+			setInterval(updateSideView, 20);
+			setInterval(updateGameView, 20);
+
+		});
+
+		function updateSideView() {
+
+			var url = document.location.hostname + "?method=getScoreCanvasSource";
+
+			var rq = new XMLHttpRequest();
+			rq.open("GET", url, true);
+			rq.onreadystatechange = function() {
+
+				switch(rq.readyState){
+					case 0: //Uninitialized
+					case 1: //Set up
+					case 2: //Sent
+					case 3: //Partly done
+						//: do nothing
+						break;
+					case 4: //Done
+						if(rq.status < 400) {
+							sideViewImg.src = rq.responseText;
+						}
+					break;
+				}
+			}
+			rq.send(null);
+
+		};
+
+		function updateGameView() {
+
+			var url = document.location.hostname + "?method=getGameCanvasSource";
+
+			var rq = new XMLHttpRequest();
+			rq.open("GET", url, true);
+			rq.onreadystatechange = function() {
+
+				switch(rq.readyState){
+					case 0: //Uninitialized
+					case 1: //Set up
+					case 2: //Sent
+					case 3: //Partly done
+						//: do nothing
+						break;
+					case 4: //Done
+						if(rq.status < 400) {
+							gameViewImg.src = rq.responseText;
+						}
+					break;
+				}
+			}
+			rq.send(null);
+
+
+		};
+
+	</script>
+</head>
+<body>
+	<h1>Screensaver Server Debugger</h1>
+	<div id="container">
+		<img id="sideView" src=""/>
+		<img id="gameView" src=""/>
+	</div>
+
+</body>
+</html>

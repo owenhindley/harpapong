@@ -8,6 +8,11 @@ var Scheduler = require("./scheduler/Scheduler.js");
 var http = require('http');
 var NanoTimer = require('nanotimer');
 var fs = require("fs");
+var zmq = require("zmq");
+var msgpack = require("msgpack5")();
+var Canvas = require("canvas");
+var Image = Canvas.Image;
+
 
 var front_patch = require('./patchdata/front-main-patch-2.js');
 var side_patch = require('./patchdata/side-patch-1.js');
@@ -15,6 +20,8 @@ var side_patch = require('./patchdata/side-patch-1.js');
 var INTERFACE_1_IP = "2.224.168.149";
 var INTERFACE_2_IP = "2.145.222.186";
 var GAME_SERVER_IP = "http://127.0.0.1";
+var SCREENSAVER_SERVER_IP = "tcp://127.0.0.1";
+
 // var GAME_SERVER_IP = "http://134.213.27.204";
 //
 var active = true;
@@ -45,8 +52,13 @@ winston.info("started renderer");
 
 var scheduler = new Scheduler();
 
-var gameView = new HarpaGameView(INTERFACE_1_IP, front_patch, 36, 11);
-var scoreView = new HarpaScoreView(INTERFACE_2_IP, side_patch, 39, 9);
+var harpaFaces = {
+	"front" : [36,11],
+	"side" : [39,9]
+};
+
+var gameView = new HarpaGameView(INTERFACE_1_IP, front_patch, harpaFaces.front[0], harpaFaces.front[1]);
+var scoreView = new HarpaScoreView(INTERFACE_2_IP, side_patch, harpaFaces.side[0], harpaFaces.side[1]);
 
 var game = Game.init();
 
@@ -57,6 +69,8 @@ renderTimer.setInterval(render.bind(this), '', '33m');
 
 winston.info("connecting to game server at " + GAME_SERVER_IP + ":8081");
 
+
+// TODO : replace this with Zero MQ
 var gameSocket = io.connect(GAME_SERVER_IP + ':8081', {reconnect: true});
 var gameMode = "wait";
 
@@ -64,28 +78,26 @@ gameSocket.on('connect', function(){
 
 	winston.info("conected to game server!");
 
+	// handshake with server
 	gameSocket.on('identify', function() {
 		winston.info("asked to identify by server");
 
 		gameSocket.emit('remoterenderer', { name : "Harpa Renderer"});
 	});
 
+	// game update
 	gameSocket.on('render', onGameUpdate);
 
 });
 
 function onGameUpdate(data){
 
+	// deserialise game state into one currently in memory
 	gameMode = data.mode;
 	game.setFromSerialised(data.data);
 
 }
 
-function updateScheduler() {
-	scheduler.update();
-}
-setInterval(updateScheduler.bind(this), 60 * 1000);
-updateScheduler();
 
 
 function render() {
@@ -95,7 +107,14 @@ function render() {
 		if (scheduler.mode == Scheduler.MODE_GAME){
 			gameView.render(game, gameMode);
 			scoreView.render(game, gameMode);
+		} else if (scheduler.mode == Scheduler.MODE_SCREENSAVER) {
+			
+			saverSock_to.send("render");
+			gameView.render(game, "screensaver");
+			scoreView.render(game, "screensaver");
+
 		} else {
+
 			var mode = (scheduler.mode == Scheduler.MODE_SHIMMER) ? "sleep" : "blackout";
 			gameView.render(game, mode);
 			scoreView.render(game, mode);
@@ -105,6 +124,40 @@ function render() {
 	}
 
 };
+
+// Communication with screensaver server
+
+var saverSock_from = zmq.socket("pull");
+var saverSock_to = zmq.socket("push");
+var screensaver_image = new Image;
+
+saverSock_from.connect(SCREENSAVER_SERVER_IP + ":3001");
+saverSock_to.bindSync(SCREENSAVER_SERVER_IP + ":3000");
+
+
+saverSock_from.on('message', function(msg){
+	screensaver_image.src = msg;
+
+	// draw front face
+	gameView.screensaverCtx.drawImage(screensaver_image, 0,0, harpaFaces.front[0], harpaFaces.front[1], 0,0, harpaFaces.front[0], harpaFaces.front[1]);
+
+
+	// draw side face
+	scoreView.screensaverCtx.drawImage(screensaver_image, harpaFaces.front[0]+1,0,harpaFaces.side[0], harpaFaces.side[1], 0,0,harpaFaces.side[0], harpaFaces.side[1]);
+
+	
+});
+
+
+// Global scheduler, manages overall state of lights
+// game, blackout, screensaver etc
+
+function updateScheduler() {
+	scheduler.update();
+}
+setInterval(updateScheduler.bind(this), 60 * 1000);
+updateScheduler();
+
 
 // DEBUGGING
 //
