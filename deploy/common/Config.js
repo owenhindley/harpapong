@@ -1,0 +1,9 @@
+var config = {
+	"PORT_SCREENSAVER_IMG_SEND" : 3001,
+	"PORT_SCREENSAVER_CMD" : 3000,
+	"PORT_AUDIO_DATA_PUB" : 3002,
+	"PORT_OSC_RECEIVE" : 8887
+};
+
+
+module.exports = config;

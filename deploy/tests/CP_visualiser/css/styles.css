@@ -1,0 +1,103 @@
+body, html {
+
+    background:black;
+
+    color:#ababab;
+
+    font-size:18px;
+    font-family: "Avenir", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+
+#container {
+
+    padding:2em;
+    min-width:1450px;
+}
+
+#canvasContainer {
+    width:100%;
+    height:20em;
+}
+#sideTextureContainer, #frontTextureContainer {
+    width:40%;
+    float:left;
+}
+
+
+#sideContainer, #frontContainer {
+    /*border:1px solid rgba(255,0,0,0.2);*/
+    width:40%;
+    float:left;
+}
+
+#sideContainer {
+    top:10em;
+}
+
+.visualiserContainer {
+    position:relative;
+    top:2em;
+}
+
+.visualiserContainer h3{
+    position:relative;
+    margin-top:-2em;
+}
+
+.visualiserContainer .fixture{
+    /*width:20px;*/
+    width:16px;
+    position:absolute;
+
+}
+
+canvas {
+    width:100%;
+
+}
+
+#soundcloudInput {
+    float:left;
+    width:100%;
+}
+
+#feedback {
+    width:100%;
+    float:left;
+}
+
+
+
+input {
+    height:3em;
+    width:30em;
+    margin-right:2em;
+
+    background:#121212;
+    color:white;
+    padding-left:2em;
+    padding-right:2em;
+    border:none;
+}
+
+audio {
+    display:none;
+}
+
+button {
+    height:2em;
+    font-size:18px;
+    padding:0em 1em 0em 1em;
+    background:#1a1a1a;
+    color:white;
+    border:none;
+
+}
+
+#debugOutput {
+    width:100%;
+    font-family: "Consolas", monospace;
+    color:#aaaaaa;
+}

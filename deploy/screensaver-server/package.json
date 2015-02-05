@@ -18,6 +18,7 @@
     "canvas" : "",
     "nanotimer":"",
     "zmq":"",
-    "msgpack5":""
+    "msgpack5":"",
+    "osc-min":""
   }
 }

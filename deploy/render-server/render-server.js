@@ -1,3 +1,5 @@
+var AppConfig = require("../common/Config.js");
+
 var HarpaGameView = require('./HarpaGameView.js');
 var HarpaScoreView = require('./HarpaScoreView.js');
 var winston = require('winston');
@@ -9,7 +11,6 @@ var http = require('http');
 var NanoTimer = require('nanotimer');
 var fs = require("fs");
 var zmq = require("zmq");
-var msgpack = require("msgpack5")();
 var Canvas = require("canvas");
 var Image = Canvas.Image;
 
@@ -64,6 +65,7 @@ var game = Game.init();
 
 var renderTimer = new NanoTimer();
 renderTimer.setInterval(render.bind(this), '', '33m');
+// renderTimer.setInterval(render.bind(this), '', '1s');
 
 
 
@@ -98,7 +100,9 @@ function onGameUpdate(data){
 
 }
 
-
+/*
+	Main render loop
+*/
 
 function render() {
 
@@ -125,32 +129,49 @@ function render() {
 
 };
 
-// Communication with screensaver server
+/*
+ 	Communication with screensaver server (in a separate process or machine)
+*/
 
 var saverSock_from = zmq.socket("pull");
 var saverSock_to = zmq.socket("push");
 var screensaver_image = new Image;
 
-saverSock_from.connect(SCREENSAVER_SERVER_IP + ":3001");
-saverSock_to.bindSync(SCREENSAVER_SERVER_IP + ":3000");
+
+saverSock_from.connect(SCREENSAVER_SERVER_IP + ":" + AppConfig.PORT_SCREENSAVER_IMG_SEND);
+saverSock_to.bindSync(SCREENSAVER_SERVER_IP + ":" + AppConfig.PORT_SCREENSAVER_CMD);
 
 
 saverSock_from.on('message', function(msg){
-	screensaver_image.src = msg;
+	
+	if (msg.length){
 
-	// draw front face
-	gameView.screensaverCtx.drawImage(screensaver_image, 0,0, harpaFaces.front[0], harpaFaces.front[1], 0,0, harpaFaces.front[0], harpaFaces.front[1]);
+			screensaver_image.src = msg;
 
+		try {
 
-	// draw side face
-	scoreView.screensaverCtx.drawImage(screensaver_image, harpaFaces.front[0]+1,0,harpaFaces.side[0], harpaFaces.side[1], 0,0,harpaFaces.side[0], harpaFaces.side[1]);
+			// draw front face
+			gameView.screensaverCtx.drawImage(screensaver_image, harpaFaces.side[0]+1,0, harpaFaces.front[0], harpaFaces.front[1], 0,0, harpaFaces.front[0], harpaFaces.front[1]);
+
+			// draw side face
+			scoreView.screensaverCtx.drawImage(screensaver_image, 0,0,harpaFaces.side[0], harpaFaces.side[1], 0,0,harpaFaces.side[0], harpaFaces.side[1]);
+
+		} catch(e){
+
+		}
+
+	}
+	
 
 	
 });
 
 
-// Global scheduler, manages overall state of lights
-// game, blackout, screensaver etc
+/* 
+	Global scheduler, manages overall state of lights
+	game, blackout, screensaver etc
+*/
+
 
 function updateScheduler() {
 	scheduler.update();
@@ -161,19 +182,6 @@ updateScheduler();
 
 // DEBUGGING
 //
-
-// load debug page
-var debugPage = "";
-fs.readFile("./html/showCanvas.html", "utf8", function(err, data){
-
-	if (err){
-		console.log(err);
-		return;
-	}
-
-	debugPage = data;
-
-})
 
 
 var server = http.createServer(function(request, response){
@@ -192,7 +200,7 @@ var server = http.createServer(function(request, response){
 
 			case "getCanvas":
 
-				responseText = debugPage;
+				responseText = fs.readFileSync("./html/showCanvas.html", "utf8");
 
 			break;
 
@@ -222,6 +230,18 @@ var server = http.createServer(function(request, response){
 				gameView.blind();
 				scoreView.blind();
 				active = false;
+			break;
+
+			case "mode_game":
+				scheduler.mode = Scheduler.MODE_GAME;
+			break;
+
+			case "mode_shimmer":
+				scheduler.mode = Scheduler.MODE_SHIMMER;
+			break;
+
+			case "mode_screensaver":
+				scheduler.mode = Scheduler.MODE_SCREENSAVER;
 			break;
 
 		}

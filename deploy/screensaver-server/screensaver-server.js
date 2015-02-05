@@ -1,3 +1,5 @@
+var AppConfig = require("../common/Config.js");
+
 var zmq = require("zmq");
 var http = require("http");
 var NanoTimer = require('nanotimer');
@@ -5,6 +7,7 @@ var winston = require('winston');
 var ScreensaverManager = require("./js/ScreensaverManager.js");
 var fs = require("fs");
 var Utils = require('../common/Utils.js').Utils;
+var AudioDataInterface = require("./js/AudioDataInterface.js");
 
 var RENDER_SERVER_IP = "tcp://127.0.0.1";
 
@@ -28,18 +31,58 @@ console.log("**************************************************");
 console.log("");
 console.log('Starting...');
 
+/*
+	Manager, looks after starting / stopping child processes
+*/
+
 
 var manager = new ScreensaverManager();
-manager.addFace(36, 11); // front face
+manager.addFace(36,11) 	// front face
 manager.addFace(39, 9);	// side face
+
+// all the visualisers we want to include
+
+var vis = [
+	{ name : "conway01", path : "./visualisers/conway01/ConwayVisualiser01.js"},
+	{ name : "test", path : "./visualisers/test/HarpaTestVisualiser.js"},
+	{ name : "simpleBeatLines", path : "./visualisers/simpleBeatLines/SimpleBeatLinesVisualiser.js"},
+	{ name : "rainbow", path : "./visualisers/rainbowFFT/RainbowVisualiser.js"},
+	{ name : "christian_001", path : "./visualisers/christian/HarpaMSCP001.js"},
+	{ name : "christian_002", path : "./visualisers/christian/HarpaMSCP004.js"}
+];
+
+for (var i=0; i< vis.length; i++)
+	manager.addVisualiser(vis[i]);
+
+// manager.selectVisualiser(1);
+
+// process.on("exit", onExit);
+// process.on("SIGINT", onExit);
+// process.on("uncaughtException", onExit);
+
+
+function onExit(err) {
+	if (err){
+
+		console.log(err);
+	}
+
+	console.log("** Screensaver exiting, cleaning up... **");
+	manager.cleanup();
+	process.exit();
+}
+
+/*
+	AUDIO DATA
+*/
+
+var audioDataInterface = new AudioDataInterface();
+audioDataInterface.init(AppConfig.PORT_OSC_RECEIVE, AppConfig.PORT_AUDIO_DATA_PUB);
 
 /*
 	RENDERING
 */
 
-
-var renderTimer = new NanoTimer();
-renderTimer.setInterval(render.bind(this), '', '33m');
 
 var renderSock_to = zmq.socket("push");
 var renderSock_from = zmq.socket("pull");
@@ -51,6 +94,7 @@ renderSock_from.on("message", function(msg){
 	
 	if (msg.toString() == "render"){
 
+		manager.render();
 		var newBuffer = manager.getAllFaces();
 		renderSock_to.send(newBuffer);
 
@@ -61,34 +105,52 @@ renderSock_from.on("message", function(msg){
 
 
 
-// render loop
-function render() {
-
-	manager.render();
-
-};
-
-
 
 
 // DEBUGGING
-//
-
-// load debug page
-var debugPage = "";
-fs.readFile("./html/showCanvas.html", "utf8", function(err, data){
-
-	if (err){
-		console.log(err);
-		return;
-	}
-
-	debugPage = data;
-
-})
 
 
-var server = http.createServer(function(request, response){
+
+var debugSocketServer = require('socket.io').listen(8090);
+
+debugSocketServer.on("connection", function(socket){
+
+	console.log("** Debug socket connected **");
+
+	var subscribeSocket = zmq.socket("sub");
+	subscribeSocket.connect("tcp://127.0.0.1:" + AppConfig.PORT_AUDIO_DATA_PUB);
+
+	socket.on('disconnect', function() {
+		subscribeSocket.disconnect("tcp://127.0.0.1:" + AppConfig.PORT_AUDIO_DATA_PUB);
+	});
+
+	subscribeSocket.subscribe("tempoBang");
+	subscribeSocket.subscribe("rmsLevel");
+	subscribeSocket.subscribe("fft");
+	subscribeSocket.subscribe("loudnessChange");
+
+	subscribeSocket.on("message", function(subject, message){
+		socket.emit("message", { 
+			type : "audioData", 
+			channel : subject.toString(),
+			data : message.toString()
+		 });
+	});
+
+	socket.on('getImage', function() {
+		socket.emit("debugImage", manager.getDebugCanvas());
+	});
+
+	// send available visualisers
+	socket.emit("visData", vis);
+
+	socket.on("switchVisualiser", function(data){
+		manager.selectVisualiser(data);
+	});
+
+});
+
+var debugServer = http.createServer(function(request, response){
 
 	var queryComponents = Utils.parseQueryString(request.url);
 
@@ -102,18 +164,21 @@ var server = http.createServer(function(request, response){
 
 		switch(method){
 
-			case "getCanvas":
+			case "debug":
 
-				responseText = debugPage;
+				responseText = fs.readFileSync("./html/debugViewScreensaver.html", "utf8");
 
 			break;
 
-			case "getGameCanvasSource":
-				responseText = manager.faces[0].canvas.toDataURL();
+			case "selectVisualiser":
+
+				var aWhich = parseInt(queryComponents["index"]);
+				manager.selectVisualiser(aWhich);
+
 			break;
 
-			case "getScoreCanvasSource":
-				responseText = manager.faces[1].canvas.toDataURL();
+			case "getDebugImage":
+				responseText = manager.getDebugCanvas();
 			break;
 
 		}
@@ -132,5 +197,5 @@ var server = http.createServer(function(request, response){
 
 });
 
-server.listen(8089);
+debugServer.listen(8089);
 

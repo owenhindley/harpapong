@@ -3,6 +3,9 @@
 <head>
 	<title>HarpaPONG renderer canvas test</title>
 
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+
+
 	<style>
 
 		body, html {
@@ -17,9 +20,58 @@
 
 			width:40%;
 
+			image-rendering:pixelated;
+
 		}
 
+		#container {
+
+		    padding:2em;
+		    min-width:1450px;
+		}
+
+		#canvasContainer {
+		    width:100%;
+		    height:20em;
+		}
+
+		
+		.visualiserContainer {
+			position:relative;
+			top:5em;
+			width:582px;
+			float:left;
+			height:30em;
+		}
+
+		.visualiserContainer h3{
+			position:relative;
+			margin-top:-2em;
+		}
+
+		.visualiserContainer .fixture{
+			/*width:20px;*/
+			width:16px;
+			position:absolute;
+
+		}
+
+		#sideContainer {
+			top:13em;
+		}
+
+		.fixtureView {
+			position: relative;
+		}
+
+
 	</style>
+
+	<script>
+		// minified SVGFixtureView
+		(function(e){var t=function(){};var n=t.prototype;n.init=function(e,t,n,r){this.svg_source=n;this.width=e;this.height=e;this.inverted=r||false;this.element=document.createElement("div");this.element.className="fixtureView";this.fixtureWidth=20;this.offsets={x:{x:17.8*.8,y:1.06*(this.inverted?-1:1)*.8},y:{x:3.755*.8,y:28.495*.8}};this.fixtures=[];for(var i=0;i<e;i++){this.fixtures[i]=[];for(var s=0;s<t;s++){var o="fixture_"+i+"_"+s;var u=document.createElement("div");u.className="fixture";u.setAttribute("id",o);u.innerHTML=this.svg_source;var a=u.querySelector("rect");this.fixtures[i].push(a);this.element.appendChild(u);u.style.left=this.offsets.x.x*i+this.offsets.y.x*s+"px";u.style.top=this.offsets.x.y*i+this.offsets.y.y*s+"px";this.setPixel(255,255,255,i,s)}}};n.disableFixture=function(e,t){this.fixtures[e][t].parentElement.parentElement.style.display="none"};n.render=function(e){var t=e.canvas.width;var n=e.canvas.height;var r=e.getImageData(0,0,t,n).data;var i,s=0;var o=0;for(var u=0;u<r.length;u+=4){s=Math.floor(u/4/t);i=u/4%t;this.setPixel(r[u],r[u+1],r[u+2],i,s)}};n.setPixel=function(e,t,n,r,i){this.fixtures[r][i].style.fill="rgb("+e+","+t+","+n+")"};e.HarpaSVGFixtureView=(e.module||{}).exports=t})(this)
+
+	</script>
 
 	<script>
 
@@ -34,6 +86,64 @@
 
 			setInterval(updateSideView, 20);
 			setInterval(updateGameView, 20);
+
+			var harpaLts = {
+				front : {
+					width : 37,
+					height : 13
+				},
+				side : {
+					width : 39,
+					height : 9
+				}
+			};
+
+			 svgFixturesFront = new HarpaSVGFixtureView();
+			svgFixturesFront.init(harpaLts.front.width, harpaLts.front.height, document.getElementById("svg_template_front").innerHTML);
+			document.getElementById("frontContainer").appendChild(svgFixturesFront.element);
+
+			// Side
+			svgFixturesSide = new HarpaSVGFixtureView();
+			svgFixturesSide.init(harpaLts.side.width, harpaLts.side.height, document.getElementById("svg_template_side").innerHTML, true);
+			document.getElementById("sideContainer").appendChild(svgFixturesSide.element);
+
+			// disable fixtures on side panel to match shape of building
+
+			for (var i=0; i < harpaLts.side.width; i++){
+				for (var j = 0; j < harpaLts.side.height; j++){
+					if (j > (2 + Math.floor(i / (i == 1 ? 5 : 6)))){
+						svgFixturesSide.disableFixture(i,j);
+					}
+
+				}
+			}
+
+			var frontCanvas = document.createElement("canvas");
+			var sideCanvas = document.createElement("canvas");
+
+			var frontCtx = frontCanvas.getContext("2d");
+			var sideCtx = sideCanvas.getContext("2d");
+
+			frontCanvas.width = harpaLts.front.width;
+			frontCanvas.height = harpaLts.front.height;
+
+			sideCanvas.width = harpaLts.side.width;
+			sideCanvas.height = harpaLts.side.height;
+
+			render();
+
+			function render() {
+
+				window.requestAnimationFrame(render);
+
+				frontCtx.drawImage(gameViewImg,0,0);
+				sideCtx.drawImage(sideViewImg,0,0);
+
+				svgFixturesFront.render(frontCtx);
+				svgFixturesSide.render(sideCtx);
+
+			};
+
 
 		});
 
@@ -93,11 +203,60 @@
 	</script>
 </head>
 <body>
-	<h1>Render Server Debugger</h1>
 	<div id="container">
-		<img id="sideView" src=""/>
-		<img id="gameView" src=""/>
+	<div class="row">
+		<div class="">
+			<h1>Render Server Debugger</h1>
+		</div>
 	</div>
 
+	<div class="row">
+		<div id="canvasContainer">
+			<div class="visualiserContainer" id="sideContainer">
+				<h3>Side Facade</h3>
+			</div>
+			<div class="visualiserContainer" id="frontContainer">
+				<h3>Front Facade</h3>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		
+			<img id="sideView" src=""/>
+			<img id="gameView" src=""/>
+		
+	</div>
+
+	 <div id="svg_template_front" style="display:none">
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="0 0 20 32" enable-background="new 0 0 20 32" xml:space="preserve">
+            <g id="Layer_1">
+                <polygon fill="none" stroke="#757E82" stroke-width="0.2" stroke-miterlimit="10" points="2.2,3.4 10.4,0.8 14.4,0 20,4.5
+                17.8,28.6 13.9,29.3 5.8,32 0,27.7 	"/>
+                <polyline fill="none" stroke="#757E82" stroke-width="0.2" stroke-miterlimit="10" points="0,27.7 8.5,24.6 13.9,29.3 	"/>
+            </g>
+            <g id="Layer_2">
+
+                <rect x="8.9" y="1.8" transform="matrix(0.9969 7.922842e-02 -7.922842e-02 0.9969 1.0598 -0.7118)" fill="#FF0000" width="1.2" height="22.4"/>
+            </g>
+        </svg>
+        </div>
+        <div id="svg_template_side" style="display:none">
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="0 0 20 32" enable-background="new 0 0 20 32" xml:space="preserve">
+            <g id="Layer_1">
+                <polygon fill="none" stroke="#757E82" stroke-width="0.2" stroke-miterlimit="10" points="17.8,28.6 9.6,31.2 5.6,32 0,27.5
+                2.2,3.4 6.1,2.7 14.2,0 20,4.3 	"/>
+                <polyline fill="none" stroke="#757E82" stroke-width="0.2" stroke-miterlimit="10" points="20,4.3 11.5,7.4 6.1,2.7 	"/>
+            </g>
+            <g id="Layer_2">
+
+                <rect x="9.9" y="7.8" transform="matrix(-0.9969 -7.922840e-02 7.922840e-02 -0.9969 19.4617 38.7722)" fill="#FF0000" width="1.2" height="22.4"/>
+            </g>
+        </svg>
+
+        </div>
+    </div>
 </body>
 </html>
