@@ -22,13 +22,8 @@
 		this.vis0 = new Vis01(37*scale, 13*scale);
 		this.vis1 = new Vis01(39*scale, 9*scale);
 
-		this.colors = [ 
-						[93, 65, 87],
-						[131, 134, 137],
-						[168, 202, 186],
-						[202, 215, 178],
-						[235, 227, 170]
-						]
+		this.colors = [ [255, 78, 80],[252, 145, 58],[249, 212, 35],[237, 229, 116],[225, 245, 196]];
+		// this.colors = [ [93, 65, 87],[131, 134, 137],[168, 202, 186],[202, 215, 178],[235, 227, 170]];
 
 		// ColourLovers.getRandomPalette(this, this._onColor);
 		var that = this;
@@ -64,7 +59,7 @@
 		var MAX_WAVES = 10;
 		// ** Volume visualisation **
 
-		var threshold = .2;
+		var threshold = .5;
 		var highThreshold = .8;
 		if(this.currentBeatValue > threshold) {
 			//	CREATE NEW RIPPLE
@@ -173,7 +168,7 @@
 
 				if(fullColor) waveHeight = 1.0;
 				if(waveHeight > 1.0) waveHeight = 1.0;
-				
+
 				data[i]   = mix(c1[0], c2[0], offset) * waveHeight;
 				data[i+1] = mix(c1[1], c2[1], offset) * waveHeight;
 				data[i+2] = mix(c1[2], c2[2], offset) * waveHeight;
@@ -201,7 +196,7 @@
 			var generalWaveHeight = .25;
 			var distToWave = distance(wave.center, coord);
 			if(Math.abs(distToWave - wave.waveFront) < wave.waveLength) {
-				return (1.0 - Math.sin(Math.abs(distToWave - wave.waveFront)/wave.waveLength * Math.PI * .5)) * generalWaveHeight;
+				return (1.0 - Math.sin(Math.abs(distToWave - wave.waveFront)/wave.waveLength * Math.PI * .5)) * generalWaveHeight * wave.brightness;
 			} else {
 				return 0;
 			}
@@ -223,6 +218,7 @@
 			this.waveFront = .0;
 			this.duration = random(5000, 13000);
 			this.waveLength = random(.05, .15);
+			this.brightness = 1.0;
 			this.tween;
 		}
 
@@ -230,7 +226,7 @@
 
 		p.start = function(x, y) {
 			this.center = {x:x, y:y};
-			this.tween = new TWEEN.Tween(this).to({"waveFront":2.5}, this.duration).easing(TWEEN.Easing.Cubic.Out).start();
+			this.tween = new TWEEN.Tween(this).to({"waveFront":2.5, brightness:0.0}, this.duration).easing(TWEEN.Easing.Cubic.Out).start();
 			return this;
 		};
 	})();
