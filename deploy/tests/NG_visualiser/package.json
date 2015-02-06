@@ -1,0 +1,29 @@
+{
+    "name": "HarpaVisualiser",
+    "version": "0.0.0",
+    "private": true,
+    "dependencies": {
+
+    },
+    "devDependencies": {
+        "grunt": "~0.4.4",
+        "grunt-express-server": "~0.4.17",
+        "grunt-contrib-watch": "~0.6.1",
+        "grunt-contrib-sass": "~0.3.0",
+        "grunt-contrib-compass": "~0.3.0",
+        "grunt-contrib-jshint": "~0.7.1",
+        "load-grunt-tasks": "~0.4.0",
+        "grunt-node-inspector": "~0.1.5",
+        "time-grunt": "~0.3.1",
+        "grunt-concurrent": "~0.5.0",
+        "grunt-nodemon": "~0.2.1",
+        "open": "0.0.5"
+    },
+    "engines": {
+
+    },
+    "scripts": {
+
+    }
+
+}

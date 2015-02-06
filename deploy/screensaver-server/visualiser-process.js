@@ -6,6 +6,7 @@
 
 
 var AppConfig = require("../common/Config.js");
+var ScreensaverPostProcessing = require("./js/ScreensaverPostProcessing.js");
 var zmq = require("zmq");
 
 var visualiser_path = process.argv[2];
@@ -16,6 +17,8 @@ var VisualiserClass = require(visualiser_path);
 var visualiser = new VisualiserClass();
 var socket_transmit = zmq.socket("push");
 var socket_audio_data_in = zmq.socket("sub");
+
+var postProcessing = new ScreensaverPostProcessing();
 
 var socket_address = null;
 
@@ -31,12 +34,21 @@ process.on("message", function(message) {
 
 		case "init":
 			visualiser.init(message.front.width, message.front.height, message.side.width, message.side.height);
+			postProcessing.init(message.front.width, message.front.height, message.side.width, message.side.height);
+
+			
 		break;
 
 		case "connect":
 			socket_address = message.address;
 			socket_transmit.bindSync(socket_address);
 
+			postProcessing.fadeIn();
+			
+		break;
+
+		case "fadeOut":
+			postProcessing.fadeOut();
 		break;
 
 		case "disconnect":
@@ -47,7 +59,8 @@ process.on("message", function(message) {
 		case "render":
 			visualiser.render();
 			if (socket_transmit){
-				socket_transmit.send(visualiser.getBuffer());
+				postProcessing.processCanvases(visualiser.faces.front, visualiser.faces.side);
+				socket_transmit.send(postProcessing.getBuffer());
 			}
 
 		break;

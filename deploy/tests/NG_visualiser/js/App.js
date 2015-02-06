@@ -45,9 +45,8 @@ document.addEventListener("DOMContentLoaded", function() {
         to test
     */
 
-    // visualiser = new HarpaTestVisualiser();
-    // visualiser = new ConwayVisualiser();
-    visualiser = new HarpaMSCP004();
+    // visualiser = new HarpaVisualiserBase(harpaLts.front.width, harpaLts.front.height, harpaLts.side.width, harpaLts.side.height);
+    visualiser = new HarpaTestVisualiser();
 
     // init with the light dimensions
     visualiser.init(harpaLts.front.width, harpaLts.front.height, harpaLts.side.width, harpaLts.side.height);
@@ -97,10 +96,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // start render cycle (every browser frame)
     window.requestAnimationFrame(render);
 
-    // start update cycle - this is less frequent, every 50ms
-    clearInterval(updateIntervalId);
-    setInterval(update, 50);
-
 
 });
 
@@ -122,7 +117,9 @@ function loadSuccess() {
     soundcloudPlayer.playStream(soundcloudLoader.streamUrl());
 
 
-
+    // start update cycle - this is less frequent, every 50ms
+    clearInterval(updateIntervalId);
+    setInterval(update, 50);
 
 };
 

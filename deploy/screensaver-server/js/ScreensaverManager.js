@@ -52,24 +52,59 @@ p.selectVisualiser = function(aIndex) {
 		return;
 	}
 
-	console.log(processdata);
+	// console.log(processdata);
+
+	
+
+	if (this.current_vis_process){
+
+		// tell visualiser to fade out
+		try {
+			this.current_vis_process.send({ cmd : "fadeOut" });
+		} catch(e){
+			console.error("** Error whilst trying to fade out process **");
+		}
+
+		setTimeout(function() {
+
+		// kill old process
+		if (this.current_vis_process){
+			console.log("Killing previous visualiser processs")
+			try {
+				this.current_vis_process.send({ cmd : "disconnect" });	
+				this.current_vis_process.kill();
+			} catch(error){
+				console.error("** Error  whilst trying to kill process : **");
+				console.error(error);
+			}
+			
+			
+		}
+
+		this._startNewProcess(processdata);
+
+	}.bind(this), 2000);
+
+
+	} else {
+
+		this._startNewProcess(processdata);
+
+	}
+
+	
+
+	
+
+
+};
+
+p._startNewProcess = function(processdata) {
 
 	console.log(" ** Spinning up new process for " + processdata.name + " **");
 
-	var newProcess = ChildProcess.fork("./visualiser-process.js", [processdata.path]);
 
-	// kill old process
-	if (this.current_vis_process){
-		try {
-			this.current_vis_process.send({ cmd : "disconnect" });	
-			this.current_vis_process.kill();
-		} catch(error){
-			console.error("** Error  whilst trying to kill process : **");
-			console.error(error);
-		}
-		
-		
-	}
+	var newProcess = ChildProcess.fork("./visualiser-process.js", [processdata.path]);
 
 	// start new process
 	this.current_vis_process = newProcess;
@@ -97,6 +132,7 @@ p.selectVisualiser = function(aIndex) {
 		console.error("** Error when trying to initialise new visualiser **");
 	}
 	
+
 
 };
 

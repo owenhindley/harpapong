@@ -151,6 +151,8 @@
 
 			debugSocket.on("connect", function() {
 
+			var tempoFlip = false;
+
 			debugSocket.on("message", function(msg){
 				
 					if (msg.type == "audioData"){
@@ -158,10 +160,14 @@
 						switch(msg.channel){
 
 							case "tempoBang":
-								$("#tempoKick").addClass("fill");
-								setTimeout(function(){
-									$("#tempoKick").removeClass("fill");
-								}, 10);
+
+								if (tempoFlip){
+									$("#tempoKick").css('background', 'red');
+								} else {
+									$("#tempoKick").css('background', 'yellow');
+								}
+
+								tempoFlip = !tempoFlip;
 							break;
 							case "rmsLevel":
 								var level = parseFloat(msg.data);
@@ -218,6 +224,18 @@
 					debugSocket.emit("switchVisualiser", selected);
 				}
 
+			});
+
+			$("#startCycle").click(function() {
+				if (debugSocket){
+					debugSocket.emit("startCycle");
+				}
+			});
+
+			$("#stopCycle").click(function() {
+				if (debugSocket){
+					debugSocket.emit("stopCycle");
+				}
 			});
 		
 
@@ -279,12 +297,19 @@
 		</div>
 
 		<div class="row">
-			<h6>Select Visualiser Number</h6>
-			<div class="col-md-6">
+			
+			<div class="col-md-4">
+				<h6>Select Visualiser Number</h6>
 				<select id="visualiserNumber" value="0">
 
 				</select>
 				<button id="switchVisualiser">Change Visualiser</button>
+			</div>
+
+			<div class="col-md-4">
+			<h6>Start / Stop cycle</h6>
+			<button id="startCycle">Start</button>
+			<button id="stopCycle">Stop</button>
 			</div>
 		</div>
 	</div>

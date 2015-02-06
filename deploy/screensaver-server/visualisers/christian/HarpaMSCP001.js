@@ -108,6 +108,7 @@ var HarpaVisualiserBase = require("../common/HarpaVisualiserBase.js");
 
 		// stores the current volume
 		this.currentVolume = 0;
+		this.lastVolumeSampleTime = Date.now();
 
 		// stores the current beat envelope / value
 		this.currentBeatValue = 0;
@@ -198,7 +199,7 @@ var HarpaVisualiserBase = require("../common/HarpaVisualiserBase.js");
 
 		// this.frontCtx.fillStyle = "rgba(10,200,10,.7)";
 
-		var normalizedVol = 1 - (this.currentVolume / 2);
+		var normalizedVol = 1 - (this.currentVolume/2);
 
 		// var scaledHeight = 1 - (this.currentVolume / 20000);
 		normalizedVol = Math.min(1, normalizedVol);
@@ -224,22 +225,29 @@ var HarpaVisualiserBase = require("../common/HarpaVisualiserBase.js");
 		
 		this.sideCtx.globalAlpha = 1.0;
 		this.sideCtx.fillStyle = "black";
-		this.sideCtx.fillRect(0,0,this.faces.front.width,this.faces.front.height);
+		this.sideCtx.fillRect(0,0,this.faces.side.width,this.faces.side.height);
 		this.sideCtx.fillStyle = "white";
 		this.sideCtx.globalAlpha = 1.0;
 
-
+		var volVal = 0;
 		for (var i=0;i<this._btmSquares.length;i++){
 
+			// var volVal = 0;
+			if (i == 0){
+				volVal = this._volHistory[0];
+			} else {
+				volVal = this._volHistory[i *3];
+			}
 		  
-			var volVal = i == 0 ? this._volHistory[0] : this._volHistory[i*4];
-			// magic numbers..
-
-			// volVal *= 2;
-
-
+			// var volVal = parseFloat(i == 0 ? this._volHistory[0] : this._volHistory[i*3]);
+			volVal = (volVal);
 			this._btmSquares[i].render(this.sideCtx, this.faces.side, volVal);
+			
+
 		}
+		// this console log is here to ensure things work. fuck knows why.
+		console.log(volVal);
+
 
 		// for (var i=0;i<this._middleSquares.length;i++){
  
@@ -266,14 +274,19 @@ var HarpaVisualiserBase = require("../common/HarpaVisualiserBase.js");
 
 	p.signal = function(channel, value) {
 
-		// store volume values from channel 1
+		// store beat values from channel 1
 		if (channel == 1){
 			this.currentBeatValue = value;
 		}
 
-		// store beat values from channel 2
+		// store volume values from channel 2
 		if (channel == 2){
-			this.currentVolume = value;
+			var dateNow = Date.now();
+			if (dateNow - this.lastVolumeSampleTime > 50){
+				this.currentVolume = value;
+				this.lastVolumeSampleTime = dateNow;	
+			}
+			
 		}
 	};
 

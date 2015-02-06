@@ -44,15 +44,37 @@ manager.addFace(39, 9);	// side face
 
 var vis = [
 	{ name : "conway01", path : "./visualisers/conway01/ConwayVisualiser01.js"},
-	{ name : "test", path : "./visualisers/test/HarpaTestVisualiser.js"},
-	{ name : "simpleBeatLines", path : "./visualisers/simpleBeatLines/SimpleBeatLinesVisualiser.js"},
-	{ name : "rainbow", path : "./visualisers/rainbowFFT/RainbowVisualiser.js"},
+	{ name : "simpleBeatBar", path : "./visualisers/simpleBeatBar/SimpleBeatBar.js"},
+	// { name : "simpleBeatLines", path : "./visualisers/simpleBeatLines/SimpleBeatLinesVisualiser.js"},
+	// { name : "rainbow", path : "./visualisers/rainbowFFT/RainbowVisualiser.js"},
 	{ name : "christian_001", path : "./visualisers/christian/HarpaMSCP001.js"},
-	{ name : "christian_002", path : "./visualisers/christian/HarpaMSCP004.js"}
+	{ name : "christian_002", path : "./visualisers/christian/HarpaMSCP004.js"},
+	{ name : "crash_and_burn", path : "./visualisers/crashAndBurn/CrashAndBurn.js"},
+	{ name : "symbolRipples", path : "./visualisers/symbolRipples/SymbolRipplesVisualiser.js"}
 ];
 
 for (var i=0; i< vis.length; i++)
 	manager.addVisualiser(vis[i]);
+
+// temp cycle through visualisers
+var currentVisualiserIndex = 0;
+var cycleVisualiserTimeout = -1;
+function nextVisualiser() {
+
+	console.log(" *&*&*& cycling to next visualiser *&*&*& ");
+
+	manager.selectVisualiser(currentVisualiserIndex);
+
+	cycleVisualiserTimeout = setTimeout(nextVisualiser, 30 * 1000);
+	
+	currentVisualiserIndex++;
+	if (currentVisualiserIndex > vis.length) currentVisualiserIndex = 0;
+
+
+}
+
+nextVisualiser();
+
 
 // manager.selectVisualiser(1);
 
@@ -173,8 +195,17 @@ var debugServer = http.createServer(function(request, response){
 			case "selectVisualiser":
 
 				var aWhich = parseInt(queryComponents["index"]);
+				currentVisualiserIndex = aWhich;
 				manager.selectVisualiser(aWhich);
 
+			break;
+
+			case "startCycle":
+				nextVisualiser();
+			break;
+
+			case "stopCycle":
+				clearTimeout(cycleVisualiserTimeout);
 			break;
 
 			case "getDebugImage":
