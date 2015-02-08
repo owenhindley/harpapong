@@ -2,3 +2,7 @@
 /server/node_modules
 /vagrant
 OWE_003_HarpaPong.sublime-workspace
+/deploy/queue-server/node_modules/socket.io/node_modules/engine.io/node_modules/ws/
+/deploy/queue-server/node_modules/socket.io/node_modules/socket.io-adapter/
+/deploy/queue-server/node_modules/socket.io/node_modules/socket.io-client/node_modules/engine.io-client/node_modules/ws/
+/deploy/queue-server/node_modules/socket.io/node_modules/socket.io-parser/
