@@ -6717,3 +6717,297 @@
 {"level":"info","message":"Score View changed mode to wait","timestamp":"2015-02-08T18:09:59.083Z"}
 {"level":"info","message":"Score View changed mode to screensaver","timestamp":"2015-02-08T18:10:07.330Z"}
 {"level":"info","message":"Score View changed mode to screensaver","timestamp":"2015-02-08T18:10:07.332Z"}
+{"level":"info","message":"Score View changed mode to waitReady","timestamp":"2015-02-08T18:15:17.165Z"}
+{"level":"info","message":"Score View changed mode to waitReady","timestamp":"2015-02-08T18:15:17.172Z"}
+{"level":"info","message":"Score View changed mode to game","timestamp":"2015-02-08T18:15:21.192Z"}
+{"level":"info","message":"Score View changed mode to game","timestamp":"2015-02-08T18:15:21.282Z"}
+{"level":"info","message":"Score View changed mode to goal","timestamp":"2015-02-08T18:15:23.733Z"}
+{"level":"info","message":"Score View changed mode to goal","timestamp":"2015-02-08T18:15:23.743Z"}
+{"level":"info","message":"Score View changed mode to game","timestamp":"2015-02-08T18:15:25.680Z"}
+{"level":"info","message":"Score View changed mode to game","timestamp":"2015-02-08T18:15:25.776Z"}
+{"level":"info","message":"Score View changed mode to goal","timestamp":"2015-02-08T18:15:28.204Z"}
+{"level":"info","message":"Score View changed mode to goal","timestamp":"2015-02-08T18:15:28.215Z"}
+{"level":"info","message":"Score View changed mode to game","timestamp":"2015-02-08T18:15:30.168Z"}
+{"level":"info","message":"Score View changed mode to game","timestamp":"2015-02-08T18:15:30.259Z"}
+{"level":"info","message":"Score View changed mode to goal","timestamp":"2015-02-08T18:15:32.712Z"}
+{"level":"info","message":"Score View changed mode to goal","timestamp":"2015-02-08T18:15:32.715Z"}
+{"level":"info","message":"Score View changed mode to game","timestamp":"2015-02-08T18:15:34.655Z"}
+{"level":"info","message":"Score View changed mode to game","timestamp":"2015-02-08T18:15:34.753Z"}
+{"level":"info","message":"Score View changed mode to goal","timestamp":"2015-02-08T18:15:37.151Z"}
+{"level":"info","message":"Score View changed mode to goal","timestamp":"2015-02-08T18:15:37.163Z"}
+{"level":"info","message":"Score View changed mode to game","timestamp":"2015-02-08T18:15:39.143Z"}
+{"level":"info","message":"Score View changed mode to game","timestamp":"2015-02-08T18:15:39.234Z"}
+{"level":"info","message":"Score View changed mode to goal","timestamp":"2015-02-08T18:15:45.231Z"}
+{"level":"info","message":"Score View changed mode to goal","timestamp":"2015-02-08T18:15:45.242Z"}
+{"level":"info","message":"Score View changed mode to game","timestamp":"2015-02-08T18:15:47.220Z"}
+{"level":"info","message":"Score View changed mode to game","timestamp":"2015-02-08T18:15:47.339Z"}
+{"level":"info","message":"Score View changed mode to goal","timestamp":"2015-02-08T18:15:53.406Z"}
+{"level":"info","message":"Score View changed mode to goal","timestamp":"2015-02-08T18:15:53.418Z"}
+{"level":"info","message":"Score View changed mode to wait","timestamp":"2015-02-08T18:15:58.316Z"}
+{"level":"info","message":"Score View changed mode to wait","timestamp":"2015-02-08T18:15:58.319Z"}
+{"level":"info","message":"Score View changed mode to screensaver","timestamp":"2015-02-08T18:16:06.567Z"}
+{"level":"info","message":"Score View changed mode to screensaver","timestamp":"2015-02-08T18:16:06.568Z"}
+{"level":"info","message":"started renderer","timestamp":"2015-02-08T18:16:30.481Z"}
+{"level":"info","message":"connecting to game server at http://46.149.24.223:8081","timestamp":"2015-02-08T18:16:30.524Z"}
+{"level":"info","message":"conected to game server!","timestamp":"2015-02-08T18:16:30.825Z"}
+{"level":"info","message":"asked to identify by server","timestamp":"2015-02-08T18:16:30.825Z"}
+{"level":"info","message":"Score View changed mode to screensaver","timestamp":"2015-02-08T18:17:03.977Z"}
+{"level":"info","message":"Score View changed mode to screensaver","timestamp":"2015-02-08T18:17:03.978Z"}
+{"level":"info","message":"started renderer","timestamp":"2015-02-08T18:17:08.425Z"}
+{"level":"info","message":"connecting to game server at http://46.149.24.223:8081","timestamp":"2015-02-08T18:17:08.455Z"}
+{"level":"info","message":"conected to game server!","timestamp":"2015-02-08T18:17:08.757Z"}
+{"level":"info","message":"asked to identify by server","timestamp":"2015-02-08T18:17:08.758Z"}
+{"level":"info","message":"View changed mode to waitReady","timestamp":"2015-02-08T18:17:13.563Z"}
+{"level":"info","message":"View changed mode to waitReady","timestamp":"2015-02-08T18:17:13.570Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:17:17.555Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:17:17.559Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:17:20.030Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:17:20.032Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:17:22.043Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:17:22.044Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:17:24.518Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:17:24.522Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:17:26.532Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:17:26.535Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:17:29.006Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:17:29.008Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:17:31.019Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:17:31.022Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:17:37.091Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:17:37.096Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:17:39.104Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:17:39.107Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:17:41.579Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:17:41.580Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:17:43.592Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:17:43.596Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:17:46.068Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:17:46.075Z"}
+{"level":"info","message":"View changed mode to wait","timestamp":"2015-02-08T18:17:51.083Z"}
+{"level":"info","message":"View changed mode to wait","timestamp":"2015-02-08T18:17:51.085Z"}
+{"level":"info","message":"View changed mode to waitReady","timestamp":"2015-02-08T18:17:54.219Z"}
+{"level":"info","message":"View changed mode to waitReady","timestamp":"2015-02-08T18:17:54.220Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:17:58.211Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:17:58.217Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:18:00.686Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:18:00.687Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:18:02.699Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:18:02.706Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:18:05.174Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:18:05.179Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:18:07.187Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:18:07.196Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:18:09.662Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:18:09.665Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:18:11.675Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:18:11.686Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:18:14.150Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:18:14.156Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:18:16.163Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:18:16.176Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:18:18.638Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:18:18.639Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:18:20.652Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:18:20.667Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:18:26.728Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:18:26.734Z"}
+{"level":"info","message":"View changed mode to wait","timestamp":"2015-02-08T18:18:31.739Z"}
+{"level":"info","message":"View changed mode to wait","timestamp":"2015-02-08T18:18:31.740Z"}
+{"level":"info","message":"View changed mode to screensaver","timestamp":"2015-02-08T18:19:04.739Z"}
+{"level":"info","message":"View changed mode to screensaver","timestamp":"2015-02-08T18:19:04.740Z"}
+{"level":"info","message":"View changed mode to waitReady","timestamp":"2015-02-08T18:24:46.202Z"}
+{"level":"info","message":"View changed mode to waitReady","timestamp":"2015-02-08T18:24:46.212Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:24:50.183Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:24:50.205Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:24:52.668Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:24:52.671Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:24:54.671Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:24:54.700Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:24:57.131Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:24:57.140Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:24:59.159Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:24:59.215Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:25:01.609Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:25:01.621Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:25:03.647Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:25:03.681Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:25:06.134Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:25:06.147Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:25:08.135Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:25:08.191Z"}
+{"level":"info","message":"started renderer","timestamp":"2015-02-08T18:25:12.875Z"}
+{"level":"info","message":"connecting to game server at http://46.149.24.223:8081","timestamp":"2015-02-08T18:25:12.916Z"}
+{"level":"info","message":"conected to game server!","timestamp":"2015-02-08T18:25:13.258Z"}
+{"level":"info","message":"asked to identify by server","timestamp":"2015-02-08T18:25:13.262Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:25:13.438Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:25:13.439Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:25:15.091Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:25:15.115Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:25:17.101Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:25:17.102Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:25:19.576Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:25:19.580Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:25:21.589Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:25:21.591Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:25:24.110Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:25:24.112Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:25:26.077Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:25:26.079Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:25:28.578Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:25:28.579Z"}
+{"level":"info","message":"started renderer","timestamp":"2015-02-08T18:25:35.887Z"}
+{"level":"info","message":"connecting to game server at http://46.149.24.223:8081","timestamp":"2015-02-08T18:25:35.935Z"}
+{"level":"info","message":"conected to game server!","timestamp":"2015-02-08T18:25:36.291Z"}
+{"level":"info","message":"asked to identify by server","timestamp":"2015-02-08T18:25:36.292Z"}
+{"level":"info","message":"View changed mode to waitReady","timestamp":"2015-02-08T18:25:40.771Z"}
+{"level":"info","message":"View changed mode to waitReady","timestamp":"2015-02-08T18:25:40.788Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:25:44.807Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:25:44.811Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:25:47.272Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:25:47.277Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:25:49.284Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:25:49.286Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:25:59.052Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:25:59.056Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:26:01.065Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:26:01.076Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:26:03.543Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:26:03.549Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:26:05.553Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:26:05.557Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:26:11.625Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:26:11.628Z"}
+{"level":"info","message":"started renderer","timestamp":"2015-02-08T18:34:15.268Z"}
+{"level":"info","message":"connecting to game server at http://46.149.24.223:8081","timestamp":"2015-02-08T18:34:15.293Z"}
+{"level":"info","message":"View changed mode to wait","timestamp":"2015-02-08T18:34:15.321Z"}
+{"level":"info","message":"View changed mode to wait","timestamp":"2015-02-08T18:34:15.323Z"}
+{"level":"info","message":"conected to game server!","timestamp":"2015-02-08T18:34:15.600Z"}
+{"level":"info","message":"asked to identify by server","timestamp":"2015-02-08T18:34:15.601Z"}
+{"level":"info","message":"View changed mode to waitReady","timestamp":"2015-02-08T18:34:40.005Z"}
+{"level":"info","message":"View changed mode to waitReady","timestamp":"2015-02-08T18:34:40.013Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:34:43.998Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:34:44.000Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:34:46.473Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:34:46.475Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:34:48.486Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:34:48.487Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:34:50.961Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:34:50.963Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:34:52.974Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:34:52.975Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:34:55.449Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:34:55.450Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:34:57.462Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:34:57.464Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:34:59.937Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:34:59.939Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:35:01.950Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:35:01.955Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:35:04.425Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:35:04.426Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:35:06.438Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:35:06.441Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:35:08.947Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:35:08.953Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:35:10.926Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:35:10.931Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:35:13.402Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:35:13.405Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:35:15.414Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:35:15.418Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:35:21.486Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:35:21.487Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:35:23.499Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T18:35:23.508Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:35:25.975Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T18:35:25.979Z"}
+{"level":"info","message":"View changed mode to wait","timestamp":"2015-02-08T18:35:31.023Z"}
+{"level":"info","message":"View changed mode to wait","timestamp":"2015-02-08T18:35:31.025Z"}
+{"level":"info","message":"View changed mode to screensaver","timestamp":"2015-02-08T18:36:03.991Z"}
+{"level":"info","message":"View changed mode to screensaver","timestamp":"2015-02-08T18:36:03.993Z"}
+{"level":"info","message":"started renderer","timestamp":"2015-02-08T18:59:52.146Z"}
+{"level":"info","message":"connecting to game server at http://46.149.24.223:8081","timestamp":"2015-02-08T18:59:52.175Z"}
+{"level":"info","message":"View changed mode to wait","timestamp":"2015-02-08T18:59:52.212Z"}
+{"level":"info","message":"View changed mode to wait","timestamp":"2015-02-08T18:59:52.219Z"}
+{"level":"info","message":"conected to game server!","timestamp":"2015-02-08T18:59:52.464Z"}
+{"level":"info","message":"asked to identify by server","timestamp":"2015-02-08T18:59:52.465Z"}
+{"level":"info","message":"View changed mode to waitReady","timestamp":"2015-02-08T19:00:01.378Z"}
+{"level":"info","message":"View changed mode to waitReady","timestamp":"2015-02-08T19:00:01.383Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:05.341Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:05.343Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:07.812Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:07.815Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:09.825Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:09.827Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:12.300Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:12.305Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:14.314Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:14.316Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:16.788Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:16.793Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:18.801Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:18.804Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:21.276Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:21.277Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:23.289Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:23.293Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:25.764Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:25.768Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:27.777Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:27.780Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:30.252Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:30.254Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:32.265Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:32.270Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:41.637Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:41.642Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:43.650Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:43.658Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:46.125Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:46.126Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:48.138Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:00:48.152Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:54.218Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:00:54.235Z"}
+{"level":"info","message":"View changed mode to wait","timestamp":"2015-02-08T19:00:59.226Z"}
+{"level":"info","message":"View changed mode to wait","timestamp":"2015-02-08T19:00:59.229Z"}
+{"level":"info","message":"View changed mode to screensaver","timestamp":"2015-02-08T19:01:32.226Z"}
+{"level":"info","message":"View changed mode to screensaver","timestamp":"2015-02-08T19:01:32.228Z"}
+{"level":"info","message":"View changed mode to waitReady","timestamp":"2015-02-08T19:06:25.762Z"}
+{"level":"info","message":"View changed mode to waitReady","timestamp":"2015-02-08T19:06:25.765Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:06:29.754Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:06:29.776Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:06:35.833Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:06:35.836Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:06:37.839Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:06:37.862Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:06:40.327Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:06:40.334Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:06:42.327Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:06:42.355Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:06:44.781Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:06:44.800Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:06:46.815Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:06:46.855Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:06:49.284Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:06:49.292Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:06:51.303Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:06:51.338Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:06:53.782Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:06:53.785Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:06:55.793Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:06:55.831Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:06:58.288Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:06:58.295Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:07:00.279Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:07:00.328Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:07:06.356Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:07:06.359Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:07:08.365Z"}
+{"level":"info","message":"View changed mode to game","timestamp":"2015-02-08T19:07:08.437Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:07:14.437Z"}
+{"level":"info","message":"View changed mode to goal","timestamp":"2015-02-08T19:07:14.441Z"}
+{"level":"info","message":"View changed mode to wait","timestamp":"2015-02-08T19:07:19.453Z"}
+{"level":"info","message":"View changed mode to wait","timestamp":"2015-02-08T19:07:19.456Z"}
+{"level":"info","message":"View changed mode to screensaver","timestamp":"2015-02-08T19:07:52.452Z"}
+{"level":"info","message":"View changed mode to screensaver","timestamp":"2015-02-08T19:07:52.454Z"}

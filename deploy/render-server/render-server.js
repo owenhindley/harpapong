@@ -16,7 +16,7 @@ var Canvas = require("canvas");
 var Image = Canvas.Image;
 
 
-var front_patch = require('./patchdata/front-main-patch-2.js');
+var front_patch = require('./patchdata/front-main-patch-3-extended.js');
 var side_patch = require('./patchdata/side-patch-1.js');
 
 var INTERFACE_1_IP = "2.224.168.149";
@@ -57,7 +57,7 @@ winston.info("started renderer");
 var scheduler = new Scheduler();
 
 var harpaFaces = {
-	"front" : [36,11],
+	"front" : [38,13],
 	"side" : [39,9]
 };
 

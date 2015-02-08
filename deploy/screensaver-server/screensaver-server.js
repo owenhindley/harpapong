@@ -37,7 +37,7 @@ console.log('Starting...');
 
 
 var manager = new ScreensaverManager();
-manager.addFace(36,11) 	// front face
+manager.addFace(38,13) 	// front face
 manager.addFace(39, 9);	// side face
 
 // all the visualisers we want to include

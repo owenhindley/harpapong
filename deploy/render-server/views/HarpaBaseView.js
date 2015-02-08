@@ -44,7 +44,7 @@ p.init = function(ip, patchdata, width, height){
 p.render = function(game, mode){
 
 	if (mode != this.currentMode){
-		winston.info("Score View changed mode to " + mode);
+		winston.info("View changed mode to " + mode);
 	}
 
 	this.currentMode = mode;
@@ -95,7 +95,7 @@ p.render = function(game, mode){
 			this._renderGame(game, "wait");
 
 			this.textEffect.sparkles = false;
-			this.textEffect.textToRender = "GET READY!";
+			this.textEffect.textToRender = "    GET READY!";
 			this.textEffect.render();
 
 		break;

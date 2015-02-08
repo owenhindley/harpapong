@@ -17,6 +17,7 @@ p.init = function(ip, patchdata, width, height) {
 	s.init.call(this, ip, patchdata, width, height);
 
 	this.playwidth = Math.floor(this.width/1.5);
+	this.playheight = this.height-1;
 	this.playoffset = Math.floor((this.width -this.playwidth ) * 0.5);
 
 	this.textEffect.renderText = true;
@@ -68,14 +69,14 @@ p._renderGame = function(game, mode) {
 	aX = (game.pos.a.x - game.pw / 2);
 	aY = (game.pos.a.y - game.ph / 2);
 	// this.ctx.fillRect(aX * this.width, aY * this.height, game.pw * this.width, game.ph * this.height);
-	this.ctx.fillRect(aX * this.playwidth + this.playoffset, 0 * this.height, game.pw * this.playwidth, 1);
+	this.ctx.fillRect(aX * this.playwidth + this.playoffset, 0 * this.playheight, game.pw * this.playwidth, 1);
 
 	// player b
 	bX = (game.pos.b.x - game.pw / 2);
 	bY = (game.pos.b.y - game.ph / 2);
 	// this.ctx.fillRect(bX * this.width, bY * this.height, game.pw * this.width, game.ph * this.height);
 	//
-	this.ctx.fillRect(bX * this.playwidth + this.playoffset, (1 * this.height)-1, game.pw * this.playwidth, 1);
+	this.ctx.fillRect(bX * this.playwidth + this.playoffset, (1 * this.playheight)-1, game.pw * this.playwidth, 1);
 
 	if (mode == "game"){
 
@@ -84,8 +85,8 @@ p._renderGame = function(game, mode) {
 		this.ctx.globalAlpha = 1.0;
 		var bw = game.ballSize;
 		
-		this.ctx.fillRect((game.pos.balls[0].x -bw/2) * this.playwidth + this.playoffset, (game.pos.balls[0].y - bw/2) * this.height, bw * this.playwidth, bw * this.height);
-		this.ctx.fillRect((game.pos.balls[1].x -bw/2) * this.playwidth + this.playoffset, (game.pos.balls[1].y - bw/2) * this.height, bw * this.playwidth, bw * this.height);
+		this.ctx.fillRect((game.pos.balls[0].x -bw/2) * this.playwidth + this.playoffset, (game.pos.balls[0].y - bw/2) * this.playheight, bw * this.playwidth, bw * this.playheight);
+		this.ctx.fillRect((game.pos.balls[1].x -bw/2) * this.playwidth + this.playoffset, (game.pos.balls[1].y - bw/2) * this.playheight, bw * this.playwidth, bw * this.playheight);
 
 		// blocks
 
@@ -94,7 +95,7 @@ p._renderGame = function(game, mode) {
 			var block = game.pos.blocks[i];
 			if (block.active){
 				this.ctx.fillStyle = "red"
-				this.ctx.fillRect((block.x - game.blockWidth/2) * this.playwidth + this.playoffset, (block.y - game.blockHeight/2) * this.height, game.blockWidth * this.playwidth, game.blockHeight * this.height);	
+				this.ctx.fillRect((block.x - game.blockWidth/2) * this.playwidth + this.playoffset, (block.y - game.blockHeight/2) * this.playheight, game.blockWidth * this.playwidth, game.blockHeight * this.playheight);	
 			}
 			
 

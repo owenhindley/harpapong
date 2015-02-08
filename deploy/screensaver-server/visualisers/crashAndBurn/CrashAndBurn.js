@@ -562,7 +562,7 @@ var noise = require("./perlin.js").noise;
 
         // store volume values from channel 2
         if (channel == 2){
-            this.currentVolume = value;
+            this.currentVolume = value * 1.3;
         }
     };
 
