@@ -70,8 +70,6 @@ var game = Game.init();
 
 var renderTimer = new NanoTimer();
 renderTimer.setInterval(render.bind(this), '', '33m');
-// renderTimer.setInterval(render.bind(this), '', '1s');
-
 
 
 winston.info("connecting to game server at " + GAME_SERVER_IP + ":" + AppConfig.ips.game_server.port);
@@ -80,6 +78,7 @@ winston.info("connecting to game server at " + GAME_SERVER_IP + ":" + AppConfig.
 // TODO : replace this with Zero MQ
 var gameSocket = io.connect(GAME_SERVER_IP + ':' + AppConfig.ips.game_server.port, {reconnect: true});
 var gameMode = "wait";
+var waitTime = 0;
 
 gameSocket.on('connect', function(){
 
@@ -103,6 +102,19 @@ function onGameUpdate(data){
 	gameMode = data.mode;
 	game.setFromSerialised(data.data);
 
+	if (gameMode == "wait"){
+		waitTime++;
+
+		// if we've been waiting for a long time, override the gameMode to show the screensaver
+		if (waitTime > 1000){
+			gameMode = "screensaver";
+		}
+	} else {
+		screensaverMode = false;
+		waitTime = 0;
+	}
+
+
 }
 
 /*
@@ -113,7 +125,9 @@ function render() {
 
 	if (active){
 
-		if (gameMode == "wait" || scheduler.mode == Scheduler.MODE_SCREENSAVER){
+		// if we're waiting, or in screensaver mode, keep the screensaver server rendering
+		if (gameMode == "wait" || gameMode == "screensaver" || scheduler.mode == Scheduler.MODE_SCREENSAVER){
+			screensaverMode = true;
 			saverSock_to.send("render");
 		}
 

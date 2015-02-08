@@ -76,6 +76,7 @@
 
 		startGame : function() {
 
+			
 			winston.info("starting game..");
 
 			for (var idx in this.players){
@@ -87,12 +88,20 @@
 
 			this.game.startGame(this.onGoal.bind(this), this.onReflect.bind(this));
 
-			this.mode = MODE_GAME;
-
-			this.gamePlaying = true;
-			this.gamePaused = false;
-
+			
 			this.lastPositionTime = Date.now();
+
+
+			// give 4 seconds to get ready
+			this.gamePlaying = true;
+			this.gamePaused = true;
+			this.mode = MODE_WAIT_READY;
+			setTimeout(function() {
+
+				this.mode = MODE_GAME;
+				this.gamePaused = false;
+
+			}.bind(this), 4000);
 
 		},
 

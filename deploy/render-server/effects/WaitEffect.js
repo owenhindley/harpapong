@@ -139,6 +139,17 @@ p.render = function() {
 				}
 
 			break;
+
+			case 2:
+				// countdown mode
+
+				this.ctx.globalAlpha = 1.0;
+				this.ctx.fillStyle = "red";
+				this.ctx.fillRect(0,0, 10, 10);
+
+				this.ctx.fillStyle = "white";
+
+			break;
 		}
 
 		//console.log(this.mode);

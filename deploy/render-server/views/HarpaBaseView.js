@@ -2,7 +2,7 @@ var ArtnetPixelMapper = require("../ArtnetPixelMapper.js").ArtnetPixelMapper;
 var Canvas = require("canvas");
 var winston = require("winston");
 
-var GoalEffect = require("../effects/GoalEffect.js");
+var TextEffect = require("../effects/TextEffect.js");
 var WaitEffect = require("../effects/WaitEffect.js");
 var SleepEffect = require("../effects/SleepEffect.js");
 
@@ -29,7 +29,7 @@ p.init = function(ip, patchdata, width, height){
 	// this.ctx.antialias = "none";
 	this.ctx.font = "2pt Arial";
 
-	this.goalEffect = new GoalEffect(this.ctx, this.width, this.height);
+	this.textEffect = new TextEffect(this.ctx, this.width, this.height);
 
 	this.waitEffect = new WaitEffect(this.ctx, this.width, this.height);
 	this.currentMode = "blackout";
@@ -69,13 +69,14 @@ p.render = function(game, mode){
 
 		case "scoreTest":
 			
-			
 
 		break;
 
 		case "goal":
 
-			this.goalEffect.render();
+			this.textEffect.sparkles = true;
+			this.textEffect.textToRender = "GOAL!";
+			this.textEffect.render();
 
 		case "game":
 
@@ -86,6 +87,16 @@ p.render = function(game, mode){
 		case "wait":
 
 			this.waitEffect.render();
+
+		break;
+
+		case "waitReady":
+
+			this._renderGame(game, "wait");
+
+			this.textEffect.sparkles = false;
+			this.textEffect.textToRender = "GET READY!";
+			this.textEffect.render();
 
 		break;
 
@@ -131,7 +142,7 @@ p.render = function(game, mode){
 
 p._renderGoal = function() {
 
-	this.goalEffect.render();
+	this.textEffect.render();
 
 };
 

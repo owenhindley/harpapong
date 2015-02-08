@@ -22,7 +22,7 @@ p.init = function(ip, patchdata, width, height) {
 	this.playwidth = Math.floor(this.width/1.5);
 	this.playoffset = Math.floor((this.width -this.playwidth ) * 0.5);
 
-	this.goalEffect.renderText = true;
+	this.textEffect.renderText = true;
 	this.waitEffect.renderText = true;
 
 
@@ -35,13 +35,16 @@ p.render = function(game, mode) {
 		switch(mode){
 
 			case "goal":
-				this.goalEffect.start();
+				this.textEffect.start();
 			break;
 			case "wait":
 				this.waitEffect.start();
 			break;
 			case "game":
 
+			break;
+			case "waitReady":
+				this.textEffect.start();
 			break;
 		}
 
