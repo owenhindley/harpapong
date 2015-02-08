@@ -2,8 +2,10 @@
 
 var winston = require('winston');
 
-var Game = require("../common/GameBreakout.js").Game;
-var GameManager = require("./js/GameManager.js").GameManager;
+var Config = require("../common/Config.js");
+
+var Game = require("../common/GamePong.js").Game;
+var GameManager = require("./js/GameManagerPong.js").GameManager;
 var RemotePlayer = require("./js/RemotePlayer.js").RemotePlayer;
 var RemoteRenderer = require("./js/RemoteRenderer.js").RemoteRenderer;
 var MasterController = require("./js/MasterController.js").MasterController;
@@ -39,7 +41,7 @@ gameManager.requestPlayers();
 
 // START SERVER
 
-var io = require('socket.io').listen(8081);
+var io = require('socket.io').listen(Config.ips.game_server.port);
 
 // io.set("origins = *");
 // io.set("log level", 1); // reduce logging

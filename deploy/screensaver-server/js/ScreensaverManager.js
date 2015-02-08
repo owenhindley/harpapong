@@ -43,6 +43,10 @@ p.addVisualiser = function(aData) {
 
 };
 
+p.resetVisData = function() {
+	this.vis_data = [];
+}
+
 p.selectVisualiser = function(aIndex) {
 
 	var processdata = this.vis_data[aIndex];
@@ -83,7 +87,7 @@ p.selectVisualiser = function(aIndex) {
 
 		this._startNewProcess(processdata);
 
-	}.bind(this), 2000);
+	}.bind(this), 1000);
 
 
 	} else {
@@ -120,7 +124,9 @@ p._startNewProcess = function(processdata) {
 			side : {
 				width: this.faces[1][0],
 				height: this.faces[1][1],
-			}
+			},
+			options : processdata.options
+	
 			});
 
 		// connect to the zmq socket to send data across

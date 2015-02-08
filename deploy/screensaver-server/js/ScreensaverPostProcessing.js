@@ -1,4 +1,5 @@
 var Canvas = require("canvas");
+var Filters = require("../libs/canvas-filters.js");
 
 /*
 	
@@ -42,9 +43,16 @@ p.init = function(frontWidth, frontHeight, sideWidth, sideHeight, aOptions) {
 	this.fadeValue = 1;
 	this.targetFadeValue = 1;
 
+	this.tempImageData = null;
+
 	// this canvas gets used to export out the image buffer data
+
 	this.exportCanvas = new Canvas(sideCanvas.width + frontCanvas.width, Math.max(sideCanvas.height, frontCanvas.height));
 	this.exportCtx = this.exportCanvas.getContext('2d');
+	this.exportCtx.fillStyle = "black";
+
+	this.ghostCanvas = new Canvas(this.exportCanvas.width, this.exportCanvas.height);
+	this.ghostCtx = this.ghostCanvas.getContext("2d");
 
 	this.options = aOptions || {};
 	
@@ -52,13 +60,19 @@ p.init = function(frontWidth, frontHeight, sideWidth, sideHeight, aOptions) {
 		this.options.enableContrast = false;
 
 	if (typeof(this.options.contrastAmount) == "undefined") 
-		this.options.contrastAmount = 0.5;
+		this.options.contrastAmount = 1;
 
 	if (typeof(this.options.enableBrightness) == "undefined") 
 		this.options.enableBrightness = false;
 
 	if (typeof(this.options.brightnessAmount) == "undefined") 
-		this.options.brightnessAmount = 0.1;
+		this.options.brightnessAmount = 0;
+
+	if (typeof(this.options.ghostEnabled) == "undefined") 
+		this.options.ghostEnabled = false;
+
+	if (typeof(this.options.ghostAmount) == "undefined") 
+		this.options.ghostAmount = 0.1;
 };
 
 
@@ -75,6 +89,9 @@ p.fadeOut = function() {
 
 p.processCanvases = function(aFrontCanvas, aSideCanvas) {
 
+	// make black
+	this.exportCtx.fillRect(0,0,this.exportCanvas.width, this.exportCanvas.height);
+
 	this.exportCtx.globalAlpha = 1.0;
 
 	// render both to export canvas
@@ -82,11 +99,26 @@ p.processCanvases = function(aFrontCanvas, aSideCanvas) {
 	this.exportCtx.drawImage(aFrontCanvas,this.faces.side.width+1,0);
 
 
-	// TODO : contrast
+	// brightnexx & contrast
 
+	this.tempImageData = this.exportCtx.getImageData(0,0,this.exportCanvas.width, this.exportCanvas.height);
+	var brightness = 0;
+	var contrast = 1;
+	if (this.options.enableBrightness) brightness = this.options.brightnessAmount;
+	if (this.options.enableContrast) contrast = this.options.contrastAmount;
+	this.tempImageData = Filters.brightnessContrast(this.tempImageData, brightness, contrast);
+	
+	this.exportCtx.putImageData(this.tempImageData,0,0);
+	
 
-	// TODO : brightness
+	// TODO : ghosting
+	if (this.options.ghostEnabled){
 
+		this.exportCtx.globalAlpha = this.options.ghostAmount;
+		this.exportCtx.drawImage(this.ghostCanvas,0,0);
+		this.exportCtx.globalAlpha = 1.0;
+
+	}
 
 	// Fading
 	var fadeDiff = Math.abs(this.targetFadeValue - this.fadeValue)
@@ -101,6 +133,8 @@ p.processCanvases = function(aFrontCanvas, aSideCanvas) {
 	this.exportCtx.globalAlpha = this.fadeValue;
 	this.exportCtx.fillStyle = "black";
 	this.exportCtx.fillRect(0,0,this.exportCanvas.width, this.exportCanvas.height);
+
+	this.ghostCtx.drawImage(this.exportCanvas,0,0);
 
 };
 

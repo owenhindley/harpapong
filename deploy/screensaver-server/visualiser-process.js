@@ -8,6 +8,7 @@
 var AppConfig = require("../common/Config.js");
 var ScreensaverPostProcessing = require("./js/ScreensaverPostProcessing.js");
 var zmq = require("zmq");
+var NanoTimer = require("NanoTimer");
 
 var visualiser_path = process.argv[2];
 console.log("path : ", visualiser_path);
@@ -34,7 +35,7 @@ process.on("message", function(message) {
 
 		case "init":
 			visualiser.init(message.front.width, message.front.height, message.side.width, message.side.height);
-			postProcessing.init(message.front.width, message.front.height, message.side.width, message.side.height);
+			postProcessing.init(message.front.width, message.front.height, message.side.width, message.side.height, message.options);
 
 			
 		break;
@@ -105,6 +106,31 @@ socket_audio_data_in.on("message", function(subject, message) {
 	
 
 })
+
+/*
+	DEBUGGING
+*/
+
+if (process.argv.length > 3){
+	
+	if (process.argv[3].indexOf("debug") != -1){
+
+		var dummyRenderTimer = new NanoTimer();
+
+		visualiser.init(36,9,39,11);
+		postProcessing.init(36,9,39,11);
+		postProcessing.fadeIn();
+
+		dummyRenderTimer.setInterval(visualiser.render, "", "33m");
+
+				
+
+
+	}
+
+
+}
+
 
 // keep this process alive
 process.stdin.resume();

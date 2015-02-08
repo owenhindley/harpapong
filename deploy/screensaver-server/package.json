@@ -19,6 +19,8 @@
     "nanotimer":"",
     "zmq":"",
     "msgpack5":"",
-    "osc-min":""
+    "osc-min":"",
+    "requirejs":"",
+    "colourlovers":""
   }
 }

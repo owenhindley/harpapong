@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HarpaPONG</title>
+
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="HarpaPONG">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+	<meta name="description" content="HarpaPONG">
+	<meta property="og:title" content="HarpaPONG" />
+	<meta property="og:type" content="games" />
+	<meta property="og:url" content="http://www.harpapong.com" />
+	<meta property="og:site_name" content="Harpa PONG" />
+	<meta property="og:description" content="Harpa PONG" />
+	<meta property="og:image" content="http://www.harpapong.com/files/images/sharing.jpg" />
+
+
+    <link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    
+    <!-- <link href="libs/bootstrap/css/modern-business.css" rel="stylesheet">
+    <link href="libs/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet"> -->
+    <!-- 
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'> -->
+
+    <link href="./css/fonts.css" rel='stylesheet'/>
+    <link href="./css/main.css" rel='stylesheet'/>
+
+	<script src="./js/libs/jquery-2.0.3.min.js"></script>
+	<script src="./js/libs/modernizr.custom.92177.js"></script>
+	<script>
+		var _supportedBrowser = true;
+		_supportedBrowser = _supportedBrowser && Modernizr.websockets;
+		_supportedBrowser = _supportedBrowser && (Modernizr.devicemotion || Modernizr.deviceorientation);
+
+		if (!_supportedBrowser){
+			document.location.href = "http://" + document.location.hostname + "/fallback.html";
+		}
+
+	</script>
+	<script src="./js/libs/fastclick.js"></script>
+	<script src="./js/libs/howler.js"></script>
+	<script src="./libs/bootstrap/js/bootstrap.js"></script>
+
+	<script src="../common/Utils.js"></script>
+	<script src="../common/Config.js"></script>
+	<script src="./js/QueueKeeper.js"></script>
+	<script src="./js/PongLanguageSelect.js"></script>
+
+	<script src="./js/AudioManagerHowler.js"></script>
+	
+
+	<script>
+
+		var queueKeeper;
+		var audioManager;
+
+		var debugField;
+
+		document.addEventListener("DOMContentLoaded", function() {
+
+			showSection("headline");
+			showSection("intro");
+
+			queryParams = Utils.parseQueryString(document.location.href);
+
+			var serverPort = queryParams["port"] || PongConfig.ips.queue_server.port;
+
+			var serverUrl = "http://" + document.location.hostname + ":" + serverPort;
+
+			queueKeeper = QueueKeeper.init(serverUrl, onPosition, onJoinGame, onError);
+
+			$('#queueButton').click(onJoinQueueClick.bind(this));
+
+			if (queryParams["debug"]){
+				var debugSection = document.getElementById("debug");
+				debugSection.style.display = "block";
+				debugSection.style.opacity = "1";
+				debugField = document.getElementById("debugField");
+			}
+
+			
+			audioManager = AudioManager.init(false);
+
+			FastClick.attach(document.body);
+
+		});
+
+		function onJoinQueueClick() {
+
+			showSection("joiningQueue");
+
+			queueKeeper.joinQueue(function() {
+				// joined queue
+				_debug("queueId : " + queueKeeper.queueId);
+
+
+			}.bind(this));
+
+		};
+
+		function onPosition(aPosition){
+
+			showSection("queueing");
+
+			$("#headline").fadeOut();
+
+			$("#positionMarker").html(parseInt(aPosition) + 1);
+
+			var timeUntilGame = Math.ceil((aPosition + 1) / 2.0) * 3 * 60;
+			var mins = Math.floor(timeUntilGame / 60);
+			var seconds = timeUntilGame % 60;
+			seconds = (seconds < 9) ? "0" + seconds : seconds; 
+			$("#timeMarker").html(mins + ":" + seconds);
+
+			if (aPosition <= 1){
+				$("#queueInfo").addClass("doFlash");
+			} else {
+				$("#queueInfo").removeClass("doFlash");
+			}
+
+			// _debug("Joining game as player " + aPlayerId);
+
+		};
+
+		function onJoinGame(aPlayerId, aGameKey) {
+
+			// redirect to controller page
+
+			var rootUrl = document.location.hostname;
+			document.location.href = "http://" + rootUrl + "/controller/?player=" + aPlayerId + "&key=" + encodeURIComponent(aGameKey);
+
+			_debug("Joining game as player " + aPlayerId);
+
+		};
+
+		function onError() {
+
+
+		};
+
+		function showSection(aId){
+
+			$("section").each(function() {
+
+				if ($(this).attr('id') != "headline" && $(this).attr('id') != aId)
+					$(this).fadeOut();
+			});
+
+			$("#" +aId).delay(500).fadeIn();
+
+		};
+
+		function _debug(msg){
+			if (debugField){
+				debugField.innerHTML = debugField.innerHTML += "\n" + msg;	
+			}
+			
+
+		};
+
+	</script>
+
+</head>
+<body class="lang-is">
+
+<div id="background">
+	&nbsp;
+</div>
+
+
+<div id="langContainer">
+
+</div>
+
+<section id="headline">
+
+	
+		<img src="images/logo.svg"/>
+		<h1 style="display:none;">Harpa PONG</h1>
+	
+</section>
+
+<section id="intro">
+
+		<!-- <p>Play PONG on Harpa!</p> -->
+		<!-- <br/>
+		<p class="small" >Click 'Join Queue' below</p>
+		<p class="small">Wait your turn!</p> -->
+
+		<!-- <p class="small">
+			<span class="lang-is">Athugaðu að þú getur ekki tengst vefnum né skoðað póstinn þinn hér.</span>
+			<span class="lang-en">Please note that you can not access the web or check your messages through this network.
+			</span>
+		</p> -->
+		
+
+		<button id="queueButton">
+			<span class="lang-is">Spila PONG</span>
+			<span class="lang-en">Play PONG</span>
+		</button>
+
+		<div class="credits">
+			<a href="about.html"> 
+			<h3>
+				<span class="lang-en">About / Credits</span>
+				<span class="lang-is">Um verkið</span>
+			</h3>
+			</a>
+		</div>
+
+</section>
+
+<section id="joiningQueue">
+	<p>
+		<span class="lang-en">Joining queue...</span>
+		<span class="lang-is">Fer í röð...</span>
+
+	</p>
+</section>
+
+<section id="queueing">
+	<div id="queueInfo">
+	<p>
+		<span class="lang-en">You're number </span>
+		<span class="lang-is">Þú ert númer </span>
+		<span id="positionMarker"></span>
+		<span class="lang-en">in line.</span>
+		<span class="lang-is">í röðinni.</span>
+	</p>
+
+	<p>
+		<span class="lang-en">Approx. time</span>
+		<span class="lang-is">Biðtími ca.</span>
+	</p>
+	<h1 id="timeMarker"></h1>
+	</div>
+
+
+	<div class="instructions">
+		<p class="dark">
+			<span class="lang-en">INSTRUCTIONS:</span>
+			<span class="lang-is">LEIÐBEININGAR:</span>
+		</p>
+		<p class="lower">
+			<span class="lang-en">
+			• Wait your turn.<br/>
+			• Look at Harpa.<br/>
+			• Rest your thumb on the phone screen.<br/>
+			• Tilt your phone right and left to move the paddle.<br/>
+			• First to 5 points wins!
+			</span>
+			<span class="lang-is">
+			• Bíddu þar til kemur að þér.<br/>
+			• Horfðu á Hörpu.<br/>
+			• Hvíldu þumalinn á símaskjánum.<br/>
+			• Hallaðu símanum til hægri og vinstri til að stýra spöðunum.<br/>
+			• Leikurinn er upp í 5.
+			</span>
+		</p>
+
+		
+	</div>
+
+
+</section>
+
+<div id="debug">
+	<p id="debugField"></p>
+</div>
+
+
+</body>
+</html>

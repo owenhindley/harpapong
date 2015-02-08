@@ -2,11 +2,12 @@
 var http = require('http');
 var winston = require('winston');
 var Utils = require('../common/Utils.js').Utils;
+var Config = require("../common/config.js");
 
 var QueueManager = require("./js/QueueManager.js").QueueManager;
 
 // CONFIG
-var WEB_SERVER_PORT = 8080;
+var WEB_SERVER_PORT = Config.ips.queue_server.port;
 
 var ALLOWED_IPS = [
     "89.160.129.139",

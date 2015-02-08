@@ -237,6 +237,13 @@
 					debugSocket.emit("stopCycle");
 				}
 			});
+
+			$("#updateConfig").click(function() {
+				if (debugSocket){
+					debugSocket.emit("updateConfig");
+				}
+
+			});
 		
 
 		});
@@ -303,7 +310,8 @@
 				<select id="visualiserNumber" value="0">
 
 				</select>
-				<button id="switchVisualiser">Change Visualiser</button>
+				<button id="switchVisualiser">Change Visualiser</button><br/>
+				<button id="updateConfig">Update config</button>
 			</div>
 
 			<div class="col-md-4">

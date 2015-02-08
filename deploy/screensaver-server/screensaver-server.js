@@ -41,17 +41,7 @@ manager.addFace(36,11) 	// front face
 manager.addFace(39, 9);	// side face
 
 // all the visualisers we want to include
-
-var vis = [
-	{ name : "conway01", path : "./visualisers/conway01/ConwayVisualiser01.js"},
-	{ name : "simpleBeatBar", path : "./visualisers/simpleBeatBar/SimpleBeatBar.js"},
-	// { name : "simpleBeatLines", path : "./visualisers/simpleBeatLines/SimpleBeatLinesVisualiser.js"},
-	// { name : "rainbow", path : "./visualisers/rainbowFFT/RainbowVisualiser.js"},
-	{ name : "christian_001", path : "./visualisers/christian/HarpaMSCP001.js"},
-	{ name : "christian_002", path : "./visualisers/christian/HarpaMSCP004.js"},
-	{ name : "crash_and_burn", path : "./visualisers/crashAndBurn/CrashAndBurn.js"},
-	{ name : "symbolRipples", path : "./visualisers/symbolRipples/SymbolRipplesVisualiser.js"}
-];
+var vis = require("./config.js");
 
 for (var i=0; i< vis.length; i++)
 	manager.addVisualiser(vis[i]);
@@ -170,6 +160,35 @@ debugSocketServer.on("connection", function(socket){
 		manager.selectVisualiser(data);
 	});
 
+	socket.on("startCycle", function() {
+		console.log("** SCREENSAVER CYCLE STARTED **");
+		nextVisualiser();
+	});
+
+	socket.on("stopCycle", function() {
+		console.log("** SCREENSAVER CYCLE STOPPED **");
+		clearTimeout(cycleVisualiserTimeout);
+	});
+
+	socket.on("updateConfig", function() {
+
+		console.log("*** UPDATING SCREENSAVER CONFIG ** ");
+
+		delete require.cache[require.resolve("./config.js")];
+		vis = require("./config.js");
+
+		manager.resetVisData();
+		for (var i=0; i< vis.length; i++){
+			manager.addVisualiser(vis[i]);
+		}
+
+		this.currentVisualiserIndex = 0;
+		clearTimeout(cycleVisualiserTimeout);
+		
+
+		socket.emit("visData", vis);
+	});
+
 });
 
 var debugServer = http.createServer(function(request, response){
@@ -198,14 +217,6 @@ var debugServer = http.createServer(function(request, response){
 				currentVisualiserIndex = aWhich;
 				manager.selectVisualiser(aWhich);
 
-			break;
-
-			case "startCycle":
-				nextVisualiser();
-			break;
-
-			case "stopCycle":
-				clearTimeout(cycleVisualiserTimeout);
 			break;
 
 			case "getDebugImage":

@@ -9,9 +9,6 @@
     <meta name="description" content="">
     <meta name="author" content="HarpaPONG">
 
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
 	<meta name="description" content="HarpaPONG">
 	<meta property="og:title" content="HarpaPONG" />
 	<meta property="og:type" content="games" />
@@ -29,38 +26,25 @@
     <!-- 
     <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'> -->
 
-    <link href="./css/fonts.css" rel='stylesheet'/>
-    <link href="./css/main.css" rel='stylesheet'/>
+    <link href="css/fonts.css" rel='stylesheet'/>
+    <link href="css/main.css" rel='stylesheet'/>
 
-	<script src="./js/libs/jquery-2.0.3.min.js"></script>
-	<script src="./js/libs/modernizr.custom.92177.js"></script>
+	<script src="js/libs/jquery-2.0.3.min.js"></script>
+	<script src="js/libs/modernizr.custom.92177.js"></script>
 	<script>
 		var _supportedBrowser = true;
 		_supportedBrowser = _supportedBrowser && Modernizr.websockets;
 		_supportedBrowser = _supportedBrowser && (Modernizr.devicemotion || Modernizr.deviceorientation);
 
-		if (!_supportedBrowser){
-			document.location.href = document.location.href + "/fallback.html";
-		}
-
 	</script>
-	<script src="./js/libs/fastclick.js"></script>
-	<script src="./js/libs/howler.js"></script>
-	<script src="./libs/bootstrap/js/bootstrap.js"></script>
+	<script src="libs/bootstrap/js/bootstrap.js"></script>
 
 	<script src="../common/Utils.js"></script>
-	<script src="./js/QueueKeeper.js"></script>
-	<script src="./js/PongLanguageSelect.js"></script>
-
-	<script src="./js/AudioManagerHowler.js"></script>
+	<script src="js/PongLanguageSelect.js"></script>
+	<script src="js/QueueKeeper.js"></script>
 	
 
 	<script>
-
-		var queueKeeper;
-		var audioManager;
-
-		var debugField;
 
 		document.addEventListener("DOMContentLoaded", function() {
 
@@ -69,80 +53,20 @@
 
 			queryParams = Utils.parseQueryString(document.location.href);
 
-			var serverPort = queryParams["port"] || "8080";
 
-			var serverUrl = "http://" + document.location.hostname + ":" + serverPort;
-
-			queueKeeper = QueueKeeper.init(serverUrl, onPosition, onJoinGame, onError);
-
-			$('#queueButton').click(onJoinQueueClick.bind(this));
-
-			if (queryParams["debug"]){
-				var debugSection = document.getElementById("debug");
-				debugSection.style.display = "block";
-				debugSection.style.opacity = "1";
-				debugField = document.getElementById("debugField");
+			if (!_supportedBrowser){
+				$("#unsupported").css("display", "block");
 			}
 
+			try {
+				checkIP();
+			} catch(e){
+				// do nothing
+			}
 			
-			audioManager = AudioManager.init(false);
-
-			FastClick.attach(document.body);
 
 		});
 
-		function onJoinQueueClick() {
-
-			showSection("joiningQueue");
-
-			queueKeeper.joinQueue(function() {
-				// joined queue
-				_debug("queueId : " + queueKeeper.queueId);
-
-
-			}.bind(this));
-
-		};
-
-		function onPosition(aPosition){
-
-			showSection("queueing");
-
-			$("#headline").fadeOut();
-
-			$("#positionMarker").html(parseInt(aPosition) + 1);
-
-			var timeUntilGame = Math.ceil((aPosition + 1) / 2.0) * 3 * 60;
-			var mins = Math.floor(timeUntilGame / 60);
-			var seconds = timeUntilGame % 60;
-			seconds = (seconds < 9) ? "0" + seconds : seconds; 
-			$("#timeMarker").html(mins + ":" + seconds);
-
-			if (aPosition <= 1){
-				$("#queueInfo").addClass("doFlash");
-			} else {
-				$("#queueInfo").removeClass("doFlash");
-			}
-
-			// _debug("Joining game as player " + aPlayerId);
-
-		};
-
-		function onJoinGame(aPlayerId, aGameKey) {
-
-			// redirect to controller page
-
-			var rootUrl = document.location.href.split("?")[0];
-			document.location.href =  rootUrl + "/controller/?player=" + aPlayerId + "&key=" + encodeURIComponent(aGameKey);
-
-			_debug("Joining game as player " + aPlayerId);
-
-		};
-
-		function onError() {
-
-
-		};
 
 		function showSection(aId){
 
@@ -164,6 +88,48 @@
 
 		};
 
+		function checkIP() {
+
+			var aUrl = "http://134.213.27.204:8080/?method=checkip"
+
+			var rq = new XMLHttpRequest();
+			rq.open("GET", aUrl, true);
+			rq.onreadystatechange = function(){
+				switch(rq.readyState) {
+					case 0: //Uninitialized
+					case 1: //Set up
+					case 2: //Sent
+					case 3: //Partly done
+						//: do nothing
+						break;
+					case 4: //Done
+						if(rq.status < 400) {
+							try	{
+								var data = JSON.parse(rq.responseText);
+									
+								console.log(data);
+
+								if (data.status == "OK"){
+
+									$("#support").css("display", "block");
+
+								}
+
+
+							} catch(err) {
+								console.error("ERROR parsing json");
+								break;
+							}
+							
+						}
+						break;
+				}
+
+			}
+			rq.send(null);
+
+		};
+
 	</script>
 
 </head>
@@ -172,7 +138,6 @@
 <div id="background">
 	&nbsp;
 </div>
-
 
 <div id="langContainer">
 
@@ -188,87 +153,111 @@
 
 <section id="intro">
 
-		<!-- <p>Play PONG on Harpa!</p> -->
-		<!-- <br/>
-		<p class="small" >Click 'Join Queue' below</p>
-		<p class="small">Wait your turn!</p> -->
 
-		<p class="small">
-			<span class="lang-is">Athugaðu að þú getur ekki tengst vefnum né skoðað póstinn þinn hér.</span>
-			<span class="lang-en">Please note that you can not access the web or check your messages through this network.
-			</span>
+
+		<p>
+			<span class="lang-en">Play PONG on Harpa!</span>
+			<span class="lang-is">Spilaðu PONG á Hörpu!</span>
 		</p>
-		
 
-		<button id="queueButton">
-			<span class="lang-is">Spila PONG</span>
-			<span class="lang-en">Play PONG</span>
-		</button>
+		<p>
+			<span class="lang-en">At Sónar Reykjavik 12th - 14th February 2015</span>
+			<span class="lang-is">Á Sónar Reykjavik frá 12. til 14. Febrúar</span>
+		</p>
 
-		<div class="credits">
-			<a href="about.html"> 
-			<h3>
-				<span class="lang-en">About / Credits</span>
-				<span class="lang-is">Um verkið</span>
-			</h3>
-			</a>
+		<div id="support" class="highlight red" style="display:none">
+			<p>
+				<span class="lang-en">On Arnarhóll but can't play?
+				</span>
+
+				<span class="lang-is">
+				Ertu á Arnarhóli en getur ekki spilað?</span>
+
+			</p>
+
+				<a href="http://134.213.27.204/">
+					<button id="supportButton">
+						<span class="lang-en">Click Here!</span>
+						<span class="lang-is"> Smelltu hér!</span>
+					</button>
+				</a>
+
 		</div>
 
-</section>
+		<div id="unsupported" class="highlight red" style="display:none">
 
-<section id="joiningQueue">
-	<p>
-		<span class="lang-en">Joining queue...</span>
-		<span class="lang-is">Fer í röð...</span>
+			<p class="small">
+				<span class="lang-en">Please note, PONG will not work on this device or browser.<br/><br/>Please use a modern mobile phone or tablet to play the game.
+				</span>
 
-	</p>
-</section>
+				<span class="lang-is">
+				Athugaðu að þú getur ekki spilað PONG á þessu tæki eða í þessum vafra.<br/><br/>Vinsamlegast tengdu þig netinu með snjallsíma eða spjaldtölvu.
+				</span>
+			</p>
 
-<section id="queueing">
-	<div id="queueInfo">
-	<p>
-		<span class="lang-en">You're number </span>
-		<span class="lang-is">Þú ert númer </span>
-		<span id="positionMarker"></span>
-		<span class="lang-en">in line.</span>
-		<span class="lang-is">í röðinni.</span>
-	</p>
+		</div>
 
-	<p>
-		<span class="lang-en">Approx. time</span>
-		<span class="lang-is">Biðtími ca.</span>
-	</p>
-	<h1 id="timeMarker"></h1>
-	</div>
+		<!-- <div class="highlight">
 
-
-	<div class="instructions">
-		<p class="dark">
-			<span class="lang-en">INSTRUCTIONS:</span>
-			<span class="lang-is">LEIÐBEININGAR:</span>
+		<p>
+			<span class="lang-en">To play:</span>
+			<span class="lang-is">Leiðbeiningar:</span>
 		</p>
-		<p class="lower">
+		<br/>
+
+		<p class="small">
+
 			<span class="lang-en">
-			• Wait your turn.<br/>
-			• Look at Harpa.<br/>
-			• Rest your thumb on the phone screen.<br/>
-			• Tilt your phone right and left to move the paddle.<br/>
-			• First to 5 points wins!
+			• Be in Reykjavik, Iceland.<br/><br/>
+			• Stand on Arnarhóll where you have a good view of Harpa.<br/><br/>
+			• Make sure the red Vodafone truck is between you and Harpa.<br/><br/>
+			• Pick up your smartphone and connect to ‘Vodafone Pong Wifi’.<br/><br/>
+			• Follow the instructions that pop up.<br/><br/>
 			</span>
+
 			<span class="lang-is">
-			• Bíddu þar til kemur að þér.<br/>
-			• Horfðu á Hörpu.<br/>
-			• Hvíldu þumalinn á símaskjánum.<br/>
-			• Hallaðu símanum til hægri og vinstri til að stýra spöðunum.<br/>
-			• Leikurinn er upp í 5.
+			
+			• Vertu á Arnarhóli með gott útsýni yfir Hörpu. <br/><br/>
+			• Reyndu að hafa rauða Vodafone bílinn milli þín og Hörpu.<br/><br/>
+			• Tengdu snjallsímann þinn við þráðlausa netið 'Vodafone Pong Wifi'.<br/><br/>
+			• Fylgdu leiðbeiningunum sem koma upp.<br/> 
 			</span>
+			
 		</p>
 
-		
-	</div>
+		</div> -->
+		<br/>
 
+		<br/>
+
+		<p>
+			<span class="lang-is">
+			Hugmynd og framkvæmd: <br/>Atli Bollason<br/><br/>
+			Hönnun og forritun: <br/>Owen Hindley<br/><br/>
+			</span>
+			<span class="lang-en">
+			Concept and Production: <br/>Atli Bollason<br/><br/>
+			Programming and Design: <br/>Owen Hindley<br/><br/>
+			</span>
+		</p>
+		<p class="small">
+			<span class="lang-is">	
+			Unnið í samstarfi við Hörpu<br/>
+			<br/>
+			Sérstakar þakkir til Hljóð-X.<br/>
+
+
+			</span>
+			<span class="lang-en">
+			Produced in co-operation with Harpa<br/>
+			<br/>
+			Special thanks to Hljóð-X.<br/>
+			</span>
+		</p>
+		
 
 </section>
+
 
 <div id="debug">
 	<p id="debugField"></p>

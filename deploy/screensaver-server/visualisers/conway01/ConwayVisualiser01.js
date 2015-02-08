@@ -2,6 +2,7 @@ var HarpaVisualiserBase = require("../common/HarpaVisualiserBase.js");
 var SimplexNoise = require("./libs/perlin-noise-simplex.js");
 var Color = require("./libs/color.js");
 var Canvas = require("canvas");
+var COLOURlovers = require("colourlovers");
 
 /*
 
@@ -51,9 +52,36 @@ var ConwayVisualiser = function() {
 
 	this.colours = [
 		Color('rgb(255,255,255)'),
-		Color('rgb(0,128,255)'),
-		Color('rgb(0,128,50)')
+		// Color('rgb(0,128,255)'),
+		// Color('rgb(0,128,50)')
+		Color('rgb(0,0,0)'),
+		Color('rgb(0,0,0)')
 	];
+
+	setInterval(function() {
+
+		// get random colours periodically
+		COLOURlovers.get('/palettes/top', {
+				format:"json",	
+				showPaletteWidths:1,
+				numResults:1,
+				resultOffset:Math.floor(Math.random() * 50)
+			}, function(err, data){
+				// console.log(data);
+
+				if (data[0] && data[0].colors){
+					for (var i=1; i < 3; i++){
+						this.colours[i] = Color("#" + data[0].colors[i]);
+						//console.log(data[0].colors[i]);
+					}
+
+				}
+
+			}.bind(this));
+
+
+	}.bind(this), 20 * 1000);
+	
 
 }
 

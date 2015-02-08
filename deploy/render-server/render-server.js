@@ -1,11 +1,12 @@
 var AppConfig = require("../common/Config.js");
 
-var HarpaGameView = require('./HarpaGameView.js');
-var HarpaScoreView = require('./HarpaScoreView.js');
+
+var HarpaGameView = require('./HarpaGameViewPong.js');
+var HarpaScoreView = require('./HarpaScoreViewPong.js');
 var winston = require('winston');
 var io = require('socket.io-client');
 var Utils = require('../common/Utils.js').Utils;
-var Game = require("../common/GameBreakout.js").Game;
+var Game = require("../common/GamePong.js").Game;
 var Scheduler = require("./scheduler/Scheduler.js");
 var http = require('http');
 var NanoTimer = require('nanotimer');
@@ -20,10 +21,12 @@ var side_patch = require('./patchdata/side-patch-1.js');
 
 var INTERFACE_1_IP = "2.224.168.149";
 var INTERFACE_2_IP = "2.145.222.186";
-var GAME_SERVER_IP = "http://127.0.0.1";
+
 var SCREENSAVER_SERVER_IP = "tcp://127.0.0.1";
 
-// var GAME_SERVER_IP = "http://134.213.27.204";
+// change between local & remote game servers
+//var GAME_SERVER_IP = "http://127.0.0.1";
+var GAME_SERVER_IP = "http://" + AppConfig.ips.game_server.url;
 //
 var active = true;
 
@@ -69,11 +72,11 @@ renderTimer.setInterval(render.bind(this), '', '33m');
 
 
 
-winston.info("connecting to game server at " + GAME_SERVER_IP + ":8081");
+winston.info("connecting to game server at " + GAME_SERVER_IP + ":" + AppConfig.ips.game_server.port);
 
 
 // TODO : replace this with Zero MQ
-var gameSocket = io.connect(GAME_SERVER_IP + ':8081', {reconnect: true});
+var gameSocket = io.connect(GAME_SERVER_IP + ':' + AppConfig.ips.game_server.port, {reconnect: true});
 var gameMode = "wait";
 
 gameSocket.on('connect', function(){
