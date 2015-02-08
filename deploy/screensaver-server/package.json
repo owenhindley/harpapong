@@ -21,6 +21,8 @@
     "msgpack5":"",
     "osc-min":"",
     "requirejs":"",
-    "colourlovers":""
+    "colourlovers":"",
+    "fluent-ffmpeg":"",
+    "toxiclibsjs":""
   }
 }
