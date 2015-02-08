@@ -30,7 +30,7 @@ var WaitEffect = function(ctx, width, height) {
 
 	this.lastCanvas = new Canvas(this.width, this.height);
 	this.lastCtx = this.lastCanvas.getContext("2d");
-	this.ctx.globalCompositeOperation = "overlay";
+	
 	this.ctx.font = "2pt Arial";
 	this.renderText = false;
 
@@ -46,6 +46,8 @@ p.start = function() {
 
 p.render = function() {
 
+	var lastCompositeOperation = this.ctx.globalCompositeOperation;
+	// this.ctx.globalCompositeOperation = "overlay";
 
 	this.flag = !this.flag;
 	this.frameCounter++;
@@ -57,7 +59,6 @@ p.render = function() {
 	this.ctx.drawImage(this.lastCanvas, 0,0);
 	this.ctx.globalAlpha = 1.0;
 	
-
 	if (this.frameCounter % 10 == 0){
 		this.ctx.fillStyle = "white";
 		for (var i=0; i < 2; i++){
@@ -67,6 +68,7 @@ p.render = function() {
 		}
 	
 	} 
+
 
 	this.lastCtx.drawImage(this.ctx.canvas,0,0);
 
@@ -144,7 +146,7 @@ p.render = function() {
 		// this.ctx.fillStyle = "green";
 		// this.ctx.fillText("PONG", 4, Math.floor(this.height/2) + 4);
 
-		
+		this.ctx.globalCompositeOperation = lastCompositeOperation;
 
 	}
 

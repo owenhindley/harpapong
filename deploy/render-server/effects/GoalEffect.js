@@ -9,7 +9,7 @@ var GoalEffect = function(ctx, width, height) {
 
 	this.renderText = false;
 	this.textToRender = "GOAL!";
-	this.ctx.font = "2pt Arial";
+	
 
 
 }
@@ -24,6 +24,7 @@ p.start = function() {
 
 p.render = function() {
 
+	this.ctx.font = "6pt Arial";
 
 	this.flag = !this.flag;
 	this.frameCounter++;

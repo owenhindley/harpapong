@@ -1,8 +1,8 @@
 var AppConfig = require("../common/Config.js");
 
 
-var HarpaGameView = require('./HarpaGameViewPong.js');
-var HarpaScoreView = require('./HarpaScoreViewPong.js');
+var HarpaGameView = require('./views/HarpaGameViewPong.js');
+var HarpaScoreView = require('./views/HarpaScoreViewPong.js');
 var winston = require('winston');
 var io = require('socket.io-client');
 var Utils = require('../common/Utils.js').Utils;
@@ -61,8 +61,10 @@ var harpaFaces = {
 	"side" : [39,9]
 };
 
-var gameView = new HarpaGameView(INTERFACE_1_IP, front_patch, harpaFaces.front[0], harpaFaces.front[1]);
-var scoreView = new HarpaScoreView(INTERFACE_2_IP, side_patch, harpaFaces.side[0], harpaFaces.side[1]);
+var gameView = new HarpaGameView();
+gameView.init(INTERFACE_1_IP, front_patch, harpaFaces.front[0], harpaFaces.front[1]);
+var scoreView = new HarpaScoreView();
+scoreView.init(INTERFACE_2_IP, side_patch, harpaFaces.side[0], harpaFaces.side[1]);
 
 var game = Game.init();
 
@@ -111,12 +113,15 @@ function render() {
 
 	if (active){
 
+		if (gameMode == "wait" || scheduler.mode == Scheduler.MODE_SCREENSAVER){
+			saverSock_to.send("render");
+		}
+
 		if (scheduler.mode == Scheduler.MODE_GAME){
 			gameView.render(game, gameMode);
 			scoreView.render(game, gameMode);
 		} else if (scheduler.mode == Scheduler.MODE_SCREENSAVER) {
 			
-			saverSock_to.send("render");
 			gameView.render(game, "screensaver");
 			scoreView.render(game, "screensaver");
 

@@ -19,7 +19,7 @@ var SleepEffect = function(ctx, width, height) {
 
 	this.lastCanvas = new Canvas(this.width, this.height);
 	this.lastCtx = this.lastCanvas.getContext("2d");
-	this.ctx.globalCompositeOperation = "overlay";
+	
 	this.ctx.font = "2pt Arial";
 	this.renderText = false;
 
@@ -34,6 +34,9 @@ p.start = function() {
 };
 
 p.render = function() {
+
+	var lastCompositeOperation = this.ctx.globalCompositeOperation;
+	this.ctx.globalCompositeOperation = "overlay";
 
 
 	this.flag = !this.flag;
@@ -60,6 +63,8 @@ p.render = function() {
 	} 
 
 	this.lastCtx.drawImage(this.ctx.canvas,0,0);
+
+	this.ctx.globalCompositeOperation = lastCompositeOperation;
 
 
 };
