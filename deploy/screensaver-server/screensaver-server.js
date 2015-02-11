@@ -41,7 +41,8 @@ manager.addFace(38,13) 	// front face
 manager.addFace(39, 9);	// side face
 
 // all the visualisers we want to include
-var vis = require("./config.js");
+var screensaverConfigPath = "./config-aList.js"
+var vis = require(screensaverConfigPath);
 
 for (var i=0; i< vis.length; i++)
 	manager.addVisualiser(vis[i]);
@@ -51,14 +52,17 @@ var currentVisualiserIndex = 0;
 var cycleVisualiserTimeout = -1;
 function nextVisualiser() {
 
-	console.log(" *&*&*& cycling to next visualiser *&*&*& ");
+	console.log(" ****** ******* ** **** ********** ****** ");
+	console.log(" ****** cycling to next visualiser ****** ");
+	console.log(" ****** ******* ** **** ********** ****** ");
 
 	manager.selectVisualiser(currentVisualiserIndex);
 
-	cycleVisualiserTimeout = setTimeout(nextVisualiser, 30 * 1000);
+	cycleVisualiserTimeout = setTimeout(nextVisualiser, 40 * 1000);
 	
-	currentVisualiserIndex++;
-	if (currentVisualiserIndex > vis.length) currentVisualiserIndex = 0;
+	currentVisualiserIndex = Math.floor(Math.random() * (vis.length + 1));
+	if (currentVisualiserIndex > vis.length) currentVisualiserIndex = vis.length-1;
+	// if (currentVisualiserIndex > vis.length) currentVisualiserIndex = 0;
 
 
 }
@@ -174,8 +178,8 @@ debugSocketServer.on("connection", function(socket){
 
 		console.log("*** UPDATING SCREENSAVER CONFIG ** ");
 
-		delete require.cache[require.resolve("./config.js")];
-		vis = require("./config.js");
+		delete require.cache[require.resolve(screensaverConfigPath)];
+		vis = require(screensaverConfigPath);
 
 		manager.resetVisData();
 		for (var i=0; i< vis.length; i++){
