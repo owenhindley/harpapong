@@ -187,7 +187,7 @@ var noise = require("./perlin.js").noise;
         // MAGIC NUMBER
 
         // BSOD if the volume is too high - damn kids these days!
-        if ((1 - volume) >= 0.99)
+        if ((1 - volume) >= 0.999)
         {
             for (var i = 0; i < this.MAX; i++)
                 this.buffer[i] = 280;

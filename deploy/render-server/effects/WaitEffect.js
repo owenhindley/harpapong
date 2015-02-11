@@ -97,10 +97,13 @@ p.render = function() {
 				if (this.logoCounter > LOGO_DURATION){
 					this.logoCounter = 0;
 					this.logoLoopCounter++;
-					if (this.logoLoopCounter > 2){
-						this.logoLoopCounter = 0;
-						this.mode = 1;
-					}
+
+					// TEMP: DISABLE INFO SCROLLER
+					
+					// if (this.logoLoopCounter > 2){
+					// 	this.logoLoopCounter = 0;
+					// 	this.mode = 1;
+					// }
 				}
 
 			break;
