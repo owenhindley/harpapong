@@ -133,7 +133,7 @@ p.render = function() {
     // this.frontCtx.fillRect(this.faces.front.width / 2, 0, barWidth / 2, this.faces.front.height);
     // this.frontCtx.fillRect(this.faces.front.width / 2 - barWidth/2, 0, barWidth / 2, this.faces.front.height);
 
-    var barHeight = this.currentBeatValue * this.faces.front.height;
+    var barHeight = this.currentBeatValue * (this.faces.front.height * (0.5 + this.currentVolume * 0.5));
     this.frontCtx.fillRect(0, this.faces.front.height - barHeight,this.faces.front.width, barHeight);
 
     this.sideCtx.fillStyle = this.flagColours[this.colourIndex];
@@ -142,7 +142,7 @@ p.render = function() {
     // this.sideCtx.fillRect(this.faces.side.width - barWidth, 0, barWidth, this.faces.side.height);
     // this.sideCtx.fillRect(this.faces.side.width / 2 - barWidth/2, 0, barWidth / 2, this.faces.side.height);
 
-    barHeight = this.currentBeatValue * this.faces.side.height;
+    barHeight = this.currentBeatValue * (this.faces.side.height * (0.5 + this.currentVolume * 0.5));
     this.sideCtx.fillRect(0, this.faces.side.height - barHeight, this.faces.side.width, barHeight);
 
     // add noise

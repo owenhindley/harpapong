@@ -118,8 +118,8 @@ var HarpaVisualiserBase = require("../common/HarpaVisualiserBase.js");
         this.sideCtx.fillStyle = 'black';
         this.sideCtx.fillRect(0, 0, this.faces.side.width, this.faces.side.height);
 
-        if ((frame % 30) == 0) {
-        //if (this.currentBeatValue == 1) {
+        // if ((frame % 30) == 0) {
+        if (this.currentBeatValue == 1) {
             SHAPES.push(new Shape(
                 r(1,1),
                 r(4,front.cols),
@@ -143,6 +143,8 @@ var HarpaVisualiserBase = require("../common/HarpaVisualiserBase.js");
         }
 
         frame++;
+
+        this.currentBeatValue *= 0.8;
     }
 
     p.signal = function(channel, value) {

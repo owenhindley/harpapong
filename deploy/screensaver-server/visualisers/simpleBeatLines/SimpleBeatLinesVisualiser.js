@@ -52,13 +52,16 @@ p.render = function() {
 
 	this.frontCtx.fillStyle = "white";
 	this.frontCtx.globalCompositeOperation = "source-over";
-	var numLines = Math.floor((this.faces.front.width / this.lineSpacing) / 2);
+	// var numLines = Math.floor((this.faces.front.width / this.lineSpacing) / 2);
+	var numLines = Math.floor((this.faces.front.width / this.lineSpacing) / 1);
 	var centerX = Math.floor(this.faces.front.width / 2);
 	for (var i = 0; i < numLines; i++){
 		// this.frontCtx.globalAlpha = (1.0 - (numLines / i));
 		this.frontCtx.globalAlpha = 0.2 * (numLines - i);
-		this.frontCtx.fillRect(centerX + (i * this.lineSpacing) + this.lineIndex, 0, 1, this.faces.front.height);
-		this.frontCtx.fillRect(centerX - (i * this.lineSpacing) - this.lineIndex, 0, 1, this.faces.front.height);
+		// this.frontCtx.fillRect(centerX + (i * this.lineSpacing) + this.lineIndex, 0, 1, this.faces.front.height);
+		// this.frontCtx.fillRect(centerX - (i * this.lineSpacing) - this.lineIndex, 0, 1, this.faces.front.height);
+		this.frontCtx.fillRect((i * this.lineSpacing) + this.lineIndex, 0, 1, this.faces.front.height);
+		// this.frontCtx.fillRect(centerX - (i * this.lineSpacing) - this.lineIndex, 0, 1, this.faces.front.height);
 	}
 	this.frontCtx.globalAlpha = 1.0;
 
@@ -67,7 +70,7 @@ p.render = function() {
 	var numLines = Math.floor((this.faces.side.width / this.lineSpacing));
 	for (var i = 0; i < numLines; i++){
 		// this.frontCtx.globalAlpha = (1.0 - (numLines / i));
-		this.sideCtx.globalAlpha = 0.2 * ((numLines - i) / numLines);
+		this.sideCtx.globalAlpha = 0.2 * ((numLines - i));
 		this.sideCtx.fillRect(this.faces.side.width - (i * this.lineSpacing) - this.lineIndex, 0, 1, this.faces.front.height);
 		
 	}
@@ -83,8 +86,9 @@ p.render = function() {
 	this.tempFrontCtx.fillStyle = "white";
 
 	var barWidth = (1 - this.currentBeatValue) * this.faces.front.width;
-	this.tempFrontCtx.fillRect(this.faces.front.width / 2, 0, barWidth / 2, this.faces.front.height);
-	this.tempFrontCtx.fillRect(this.faces.front.width / 2 - barWidth/2, 0, barWidth / 2, this.faces.front.height);
+	// this.tempFrontCtx.fillRect(this.faces.front.width / 2, 0, barWidth / 2, this.faces.front.height);
+	// this.tempFrontCtx.fillRect(this.faces.front.width / 2 - barWidth/2, 0, barWidth / 2, this.faces.front.height);
+	this.tempFrontCtx.fillRect(0, 0, barWidth, this.faces.front.height);
 
 	this.frontCtx.globalCompositeOperation = "multiply"
 	this.frontCtx.drawImage(this.tempFrontCanvas,0,0);

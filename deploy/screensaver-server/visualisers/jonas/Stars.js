@@ -18,6 +18,9 @@ var HarpaVisualiserBase = require("../common/HarpaVisualiserBase.js");
     //var TWINKLE_FREQUENZY = currentBeatValue;
     var MAX_VELOCITY = 0.8;
 
+    var THE_COLOUR = "rgb(255,255,255)";
+    var THE_COLOUR = "rgb(155, 216, 29)";
+
     var front = {
         ctx:'',
         rows:39,
@@ -50,6 +53,7 @@ var HarpaVisualiserBase = require("../common/HarpaVisualiserBase.js");
         s.init.call(this, frontWidth, frontHeight, sideWidth, sideHeight);
         front.ctx = this.frontCtx;
         side.ctx = this.sideCtx;
+        this.beatFlip = false;
         for (var i = 0; i < SHAPES_TOTAL; i++){
             SHAPES.push(new Shape(
                 1,
@@ -106,7 +110,7 @@ var HarpaVisualiserBase = require("../common/HarpaVisualiserBase.js");
         }
         this.Draw = function(){
             if (Math.round((Math.random()*TWINKLE_FREQUENZY)) == 1){
-                this._face.ctx.fillStyle = "rgba(255,255,255,1)";
+                this._face.ctx.fillStyle = THE_COLOUR;
                  this._face.ctx.fillRect(
                     this._x-(this._width*0.5),
                     this._y-(this._height*0.5),
@@ -114,7 +118,7 @@ var HarpaVisualiserBase = require("../common/HarpaVisualiserBase.js");
                     this._height*2
                 );
             } else {
-                 this._face.ctx.fillStyle = "rgba(255,255,255,0.5)";
+                 this._face.ctx.fillStyle = THE_COLOUR;
                  this._face.ctx.fillRect(
                     this._x,
                     this._y,
@@ -126,6 +130,21 @@ var HarpaVisualiserBase = require("../common/HarpaVisualiserBase.js");
     }
 
     p.render = function(){
+
+        this.frontCtx.save();
+
+        if (this.currentBeatValue > 0.6){
+            if (this.beatFlip){
+                this.frontCtx.scale(4 * this.currentBeatValue,1);    
+            } else {
+                this.frontCtx.scale(1, 4 * this.currentBeatValue);
+            }
+            
+            // THE_COLOUR = "rgb(255,255,0)";
+        } else {
+            // THE_COLOUR = "rgb(255,255,0)";
+        }
+
         this.frontCtx.fillStyle = 'black';
         this.frontCtx.fillRect(0, 0, this.faces.front.width, this.faces.front.height);
         this.sideCtx.fillStyle = 'black';
@@ -135,12 +154,16 @@ var HarpaVisualiserBase = require("../common/HarpaVisualiserBase.js");
             SHAPES[i].Draw();
         }
         frame++;
+
+        this.frontCtx.restore();
+        this.currentBeatValue *= 0.95;
     }
 
     p.signal = function(channel, value) {
         if (channel == 1){
             this.currentBeatValue = value;
             currentBeatValue = this.currentBeatValue;
+            this.beatFlip = !this.beatFlip;
         }
         if (channel == 2){
             this.currentVolume = value * 20000;

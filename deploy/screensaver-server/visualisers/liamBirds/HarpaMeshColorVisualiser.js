@@ -91,8 +91,10 @@ var toxi = require("toxiclibsjs");
         // Clear Side
         this.sideCtx.globalAlpha = 1.0;
         this.sideCtx.fillStyle = "black";
+        
         this.sideCtx.fillRect(0,0,this.faces.side.width,this.faces.side.height);
         this.sideCtx.drawImage(this._canvas, 0,0, this.faces.side.width,this.totalHeight, 0,0, this.faces.side.width,this.faces.side.height);
+        
 
         // Clear Front
         this.frontCtx.globalAlpha = 1.0;
