@@ -23,7 +23,7 @@
 		this.vis1 = new Vis01(39*scale, 9*scale);
 
 		this.colors = [ [255, 78, 80],[252, 145, 58],[249, 212, 35],[237, 229, 116],[225, 245, 196]];
-		// this.colors = [ [93, 65, 87],[131, 134, 137],[168, 202, 186],[202, 215, 178],[235, 227, 170]];
+		this.colors = [ [93, 65, 87],[131, 134, 137],[168, 202, 186],[202, 215, 178],[235, 227, 170]];
 
 		// ColourLovers.getRandomPalette(this, this._onColor);
 		var that = this;
@@ -51,7 +51,7 @@
 			this.colors[i] = getHex(color.colors[i]);
 		}
 
-		console.log(this.colors);
+		console.log(this.colors.toString());
 	};
 
 	p.render = function() {

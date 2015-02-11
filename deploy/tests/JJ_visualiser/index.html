@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <title>Harpa/Sónar Visualiser Dev Environment</title>
+        <meta charset="utf-8"></meta>
+
+        <link rel="stylesheet" href="css/styles.css"/>
+
+
+
+        <script src="//localhost:35729/livereload.js"></script>
+
+        <script src="js/HarpaVisualiserBase.js"></script>
+        <script src="js/SoundCloudLoader.js"></script>
+        <script src="js/SoundCloudAudioSource.js"></script>
+        <script src="js/TempoSource.js"></script>
+
+        <script src="js/HarpaSVGFixtureView.js"></script>
+
+        <!-- Custom Visualisers -->
+        <script src="js/visualisers/libs/Perlin.js"></script>
+        <script src="js/visualisers/libs/perlin-noise-simplex.js"></script>
+        <script src="js/visualisers/libs/color.js"></script>
+
+        <script src="js/visualisers/HarpaTestVisualiser.js"></script>
+
+
+        <script src="js/visualisers/ConwayVisualiser01.js"></script>
+
+        <script src="js/App.js"></script>
+
+    </head>
+
+    <body>
+        <div id="container">
+            <h3>Harpa Sónar Visualiser Test Environment</h3>
+            <div id="canvasContainer">
+                    <div class="visualiserContainer" id="sideContainer">
+                        <h3>Side Facade</h3>
+                    </div>
+                    <div class="visualiserContainer" id="frontContainer">
+                        <h3>Front Facade</h3>
+                    </div>
+            </div>
+            <h3>Textures</h3>
+            <div id="textureContainer">
+                <div id="sideTextureContainer">
+
+                </div>
+                <div id="frontTextureContainer">
+
+                </div>
+            </div>
+            <div id="soundcloudInput">
+                <h6>Test channel sources:</h6>
+                <p><strong>Channel 1 / Volume signal</strong> : Enter soundCloud URL here &amp; press load</p>
+                <input type="text" id="soundCloudURL" placeholder="Paste Soundcloud URL here" value="https://soundcloud.com/softwarelabel/opn-replica-matmos-remix"></input>
+                <button id="soundCloudSubmit">Load</button>
+                <button id="soundCloudPause">Play / Pause</button>
+
+                <audio id="player" controls="" autoplay="" preload autobuffer></audio><br/>
+                <br/>
+                <p><strong>Channel 2 / Tempo pulse</strong> : Tap in or type BPM below</p>
+                <input type="text" id="bpmValue" value="60"></input>
+                <button id="tapTempo">Tap BPM</button>
+            </div>
+            <div id="feedback">
+                <p id="debugOutput"></p>
+            </div>
+        </div>
+
+        <div id="svg_template_front" style="display:none">
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="0 0 20 32" enable-background="new 0 0 20 32" xml:space="preserve">
+            <g id="Layer_1">
+                <polygon fill="none" stroke="#757E82" stroke-width="0.2" stroke-miterlimit="10" points="2.2,3.4 10.4,0.8 14.4,0 20,4.5
+                17.8,28.6 13.9,29.3 5.8,32 0,27.7 	"/>
+                <polyline fill="none" stroke="#757E82" stroke-width="0.2" stroke-miterlimit="10" points="0,27.7 8.5,24.6 13.9,29.3 	"/>
+            </g>
+            <g id="Layer_2">
+
+                <rect x="8.9" y="1.8" transform="matrix(0.9969 7.922842e-02 -7.922842e-02 0.9969 1.0598 -0.7118)" fill="#FF0000" width="1.2" height="22.4"/>
+            </g>
+        </svg>
+        </div>
+        <div id="svg_template_side" style="display:none">
+            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="0 0 20 32" enable-background="new 0 0 20 32" xml:space="preserve">
+            <g id="Layer_1">
+                <polygon fill="none" stroke="#757E82" stroke-width="0.2" stroke-miterlimit="10" points="17.8,28.6 9.6,31.2 5.6,32 0,27.5
+                2.2,3.4 6.1,2.7 14.2,0 20,4.3 	"/>
+                <polyline fill="none" stroke="#757E82" stroke-width="0.2" stroke-miterlimit="10" points="20,4.3 11.5,7.4 6.1,2.7 	"/>
+            </g>
+            <g id="Layer_2">
+
+                <rect x="9.9" y="7.8" transform="matrix(-0.9969 -7.922840e-02 7.922840e-02 -0.9969 19.4617 38.7722)" fill="#FF0000" width="1.2" height="22.4"/>
+            </g>
+        </svg>
+
+        </div>
+
+        <script src="http://connect.soundcloud.com/sdk.js"></script>
+    </body>
+
+</html>
