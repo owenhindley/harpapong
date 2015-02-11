@@ -19,8 +19,8 @@ var Image = Canvas.Image;
 var front_patch = require('./patchdata/front-main-patch-3-extended.js');
 var side_patch = require('./patchdata/side-patch-1.js');
 
-var INTERFACE_1_IP = "2.224.168.149";
-var INTERFACE_2_IP = "2.145.222.186";
+var INTERFACE_1_IP = "2.224.168.181";
+var INTERFACE_2_IP = "2.224.168.149";
 
 var SCREENSAVER_SERVER_IP = "tcp://127.0.0.1";
 
