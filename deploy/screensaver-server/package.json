@@ -23,6 +23,7 @@
     "requirejs":"",
     "colourlovers":"",
     "fluent-ffmpeg":"",
-    "toxiclibsjs":""
+    "toxiclibsjs":"",
+    "three":""
   }
 }

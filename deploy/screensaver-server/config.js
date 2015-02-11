@@ -17,7 +17,7 @@ var VisConfig = [
 	// { name : "simpleBeatLines", path : "./visualisers/simpleBeatLines/SimpleBeatLinesVisualiser.js"},
 	{ name : "rainbow", path : "./visualisers/rainbowFFT/RainbowVisualiser.js"},
 	// { name : "rainbowShapes", path : "./visualisers/rainbowShapes/RainbowShapes.js"},
-	{ name : "perlinShapes", path : "./visualisers/perlinShapes/PerlinShapes.js"},
+	//{ name : "perlinShapes", path : "./visualisers/perlinShapes/PerlinShapes.js"},
 	{ name : "christian_001", path : "./visualisers/christian/HarpaMSCP001.js", options : { 
 			enableBrightness : false, 
 			ghostEnabled : true,
@@ -60,7 +60,8 @@ var VisConfig = [
 			brightnessAmount : 0.1, 
 			ghostEnabled : true,
 			ghostAmount : 0.6
-		}}
+		}},
+	{ name : "eduConway", path : "./visualisers/eduConway/EduVisualiser.js" }
 ];
 
 

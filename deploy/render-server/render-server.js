@@ -19,8 +19,9 @@ var Image = Canvas.Image;
 var front_patch = require('./patchdata/front-main-patch-3-extended.js');
 var side_patch = require('./patchdata/side-patch-1.js');
 
-var INTERFACE_1_IP = "2.224.168.149";
-var INTERFACE_2_IP = "2.145.222.186";
+// var INTERFACE_1_IP = "2.224.168.149";
+var INTERFACE_1_IP = "2.224.168.181";
+var INTERFACE_2_IP = "2.224.168.149";
 
 var SCREENSAVER_SERVER_IP = "tcp://127.0.0.1";
 
@@ -106,9 +107,10 @@ function onGameUpdate(data){
 		waitTime++;
 
 		// if we've been waiting for a long time, override the gameMode to show the screensaver
-		if (waitTime > 1000){
-			gameMode = "screensaver";
-		}
+		// OH DEBUG - disable this for now
+		// if (waitTime > 1000){
+		// 	gameMode = "screensaver";
+		// }
 	} else {
 		screensaverMode = false;
 		waitTime = 0;
@@ -123,7 +125,16 @@ function onGameUpdate(data){
 
 function render() {
 
+	// OHDEBUG - put in test mode
+	/*
+	gameMode = "test";
+	gameView.render(game, "test");
+	scoreView.render(game, "test");
+
+	return;
+	*/
 	if (active){
+
 
 		// if we're waiting, or in screensaver mode, keep the screensaver server rendering
 		if (gameMode == "wait" || gameMode == "screensaver" || scheduler.mode == Scheduler.MODE_SCREENSAVER){
@@ -142,6 +153,7 @@ function render() {
 		} else {
 
 			var mode = (scheduler.mode == Scheduler.MODE_SHIMMER) ? "sleep" : "blackout";
+
 			gameView.render(game, mode);
 			scoreView.render(game, mode);
 		}
@@ -194,6 +206,7 @@ saverSock_from.on('message', function(msg){
 	game, blackout, screensaver etc
 */
 
+// OHDEBUG : remove scheduler for now
 
 function updateScheduler() {
 	scheduler.update();

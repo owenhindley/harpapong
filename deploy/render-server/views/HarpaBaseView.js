@@ -57,13 +57,16 @@ p.render = function(game, mode){
 
 		case "test":
 
-			this.ctx.strokeStyle = "green";
-			this.ctx.lineWidth = 1;
-			this.ctx.moveTo(0,tY);
-			this.ctx.lineTo(this.width,tY);
-			tY++;
-			if (tY > this.height) tY = 0;
-			this.ctx.stroke();
+			this.ctx.fillStyle = "green";
+			this.ctx.fillRect(0,0,this.canvas.width, this.canvas.height);
+
+			// this.ctx.strokeStyle = "green";
+			// this.ctx.lineWidth = 1;
+			// this.ctx.moveTo(0,tY);
+			// this.ctx.lineTo(this.width,tY);
+			// tY++;
+			// if (tY > this.height) tY = 0;
+			// this.ctx.stroke();
 
 		break;
 
