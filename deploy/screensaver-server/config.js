@@ -8,6 +8,13 @@ var VisConfig = [
 			ghostEnabled : true,
 			ghostAmount : 0.5
 		}},
+	{ name : "conwayVideoMask", path : "./visualisers/conway01/ConwayVideoMask.js", 
+		options : { 
+			enableBrightness : true,
+			brightnessAmount : 0.15, 
+			ghostEnabled : true,
+			ghostAmount : 0.5
+		}},
 	{ name : "simpleBeatBar", path : "./visualisers/simpleBeatBar/SimpleBeatBar.js", 
 		options : { 
 			enableBrightness : false, 
