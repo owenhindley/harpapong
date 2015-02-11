@@ -1,7 +1,8 @@
 var DmxClient = require('./DmxClient.js').DmxClient;
 
 var INTERFACE_2_IP = "2.145.222.186";
-var INTERFACE_1_IP = "2.224.168.149";
+var INTERFACE_1_IP = "2.224.168.181";
+
 
 
 

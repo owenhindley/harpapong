@@ -8,6 +8,13 @@ var VisConfig = [
 			ghostEnabled : true,
 			ghostAmount : 0.5
 		}},
+	{ name : "conwayVideoMask", path : "./visualisers/conway01/ConwayVideoMask.js", 
+		options : { 
+			enableBrightness : true,
+			brightnessAmount : 0.15, 
+			ghostEnabled : true,
+			ghostAmount : 0.5
+		}},
 	{ name : "simpleBeatBar", path : "./visualisers/simpleBeatBar/SimpleBeatBar.js", 
 		options : { 
 			enableBrightness : false, 
@@ -17,7 +24,7 @@ var VisConfig = [
 	// { name : "simpleBeatLines", path : "./visualisers/simpleBeatLines/SimpleBeatLinesVisualiser.js"},
 	{ name : "rainbow", path : "./visualisers/rainbowFFT/RainbowVisualiser.js"},
 	// { name : "rainbowShapes", path : "./visualisers/rainbowShapes/RainbowShapes.js"},
-	{ name : "perlinShapes", path : "./visualisers/perlinShapes/PerlinShapes.js"},
+	//{ name : "perlinShapes", path : "./visualisers/perlinShapes/PerlinShapes.js"},
 	{ name : "christian_001", path : "./visualisers/christian/HarpaMSCP001.js", options : { 
 			enableBrightness : false, 
 			ghostEnabled : true,
@@ -43,10 +50,14 @@ var VisConfig = [
 			enableBrightness : true,
 			brightnessAmount : 0.05, 
 		}},
+	{ name : "wenRipplesVideoMask", path : "./visualisers/wenRipples2D/WenRipplesVideoMask.js", options : { 
+			enableBrightness : true,
+			brightnessAmount : 0.05, 
+		}},
 	{ name : "aurora", path : "./visualisers/aurora/AuroraVisualiser.js"},
 	{ name : "simpleVideo", path : "./visualisers/simpleVideoPlayer/SimpleVideoPlayer.js", options : { 
 			enableBrightness : true,
-			brightnessAmount : 0.15, 
+			brightnessAmount : 0.08, 
 		}},
 
 	{ name : "liamBirds", path : "./visualisers/liamBirds/HarpaMeshColorVisualiser.js", options : { 
@@ -55,12 +66,20 @@ var VisConfig = [
 			ghostEnabled : true,
 			ghostAmount : 0.6
 		}},
-	{ name : "videoMask", path : "./visualisers/liamBirds/HarpaVideoMaskMesh.js",  options : { 
+	{ name : "liamBirdsvideoMask", path : "./visualisers/liamBirds/HarpaVideoMaskMesh.js",  options : { 
 			enableBrightness : true,
 			brightnessAmount : 0.1, 
 			ghostEnabled : true,
 			ghostAmount : 0.6
-		}}
+		}},
+	{ name : "eduConway", path : "./visualisers/eduConway/EduVisualiser.js" },
+	{ name : "jonasLines", path : "./visualisers/jonas/Lines.js" },
+	{ name : "jonasLissajious", path : "./visualisers/jonas/Lissajious.js" },
+	{ name : "jonasStars", path : "./visualisers/jonas/Stars.js" },
+	{ name : "jonasLinesVideoMask", path : "./visualisers/jonas/LinesVideoMask.js" },
+	{ name : "jonasLissajiousVideoMask", path : "./visualisers/jonas/LissajiousVideoMask.js" },
+	{ name : "jonasStarsVideoMask", path : "./visualisers/jonas/StarsVideoMask.js" },
+	{ name : "simpleBeatLinesVideoMask", path : "./visualisers/simpleBeatLines/SimpleBeatVideoMask.js" }
 ];
 
 

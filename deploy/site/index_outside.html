@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HarpaPONG</title>
+
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="HarpaPONG">
+
+	<meta name="description" content="HarpaPONG">
+	<meta property="og:title" content="HarpaPONG" />
+	<meta property="og:type" content="games" />
+	<meta property="og:url" content="http://www.harpapong.com" />
+	<meta property="og:site_name" content="Harpa PONG" />
+	<meta property="og:description" content="Harpa PONG" />
+	<meta property="og:image" content="http://www.harpapong.com/files/images/sharing.jpg" />
+
+
+    <link href="libs/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    
+    <!-- <link href="libs/bootstrap/css/modern-business.css" rel="stylesheet">
+    <link href="libs/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet"> -->
+    <!-- 
+    <link href='http://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'> -->
+
+    <link href="css/fonts.css" rel='stylesheet'/>
+    <link href="css/main.css" rel='stylesheet'/>
+
+	<script src="js/libs/jquery-2.0.3.min.js"></script>
+	<script src="js/libs/modernizr.custom.92177.js"></script>
+	<script>
+		var _supportedBrowser = true;
+		_supportedBrowser = _supportedBrowser && Modernizr.websockets;
+		_supportedBrowser = _supportedBrowser && (Modernizr.devicemotion || Modernizr.deviceorientation);
+
+	</script>
+	<script src="libs/bootstrap/js/bootstrap.js"></script>
+
+	<script src="../common/Utils.js"></script>
+	<script src="js/PongLanguageSelect.js"></script>
+	<script src="js/QueueKeeper.js"></script>
+	
+
+	<script>
+
+		document.addEventListener("DOMContentLoaded", function() {
+
+			showSection("headline");
+			showSection("intro");
+
+			queryParams = Utils.parseQueryString(document.location.href);
+
+
+			if (!_supportedBrowser){
+				$("#unsupported").css("display", "block");
+			}
+
+			try {
+				checkIP();
+			} catch(e){
+				// do nothing
+			}
+			
+
+		});
+
+
+		function showSection(aId){
+
+			$("section").each(function() {
+
+				if ($(this).attr('id') != "headline" && $(this).attr('id') != aId)
+					$(this).fadeOut();
+			});
+
+			$("#" +aId).delay(500).fadeIn();
+
+		};
+
+		function _debug(msg){
+			if (debugField){
+				debugField.innerHTML = debugField.innerHTML += "\n" + msg;	
+			}
+			
+
+		};
+
+		function checkIP() {
+
+			var aUrl = "http://134.213.27.204:8080/?method=checkip"
+
+			var rq = new XMLHttpRequest();
+			rq.open("GET", aUrl, true);
+			rq.onreadystatechange = function(){
+				switch(rq.readyState) {
+					case 0: //Uninitialized
+					case 1: //Set up
+					case 2: //Sent
+					case 3: //Partly done
+						//: do nothing
+						break;
+					case 4: //Done
+						if(rq.status < 400) {
+							try	{
+								var data = JSON.parse(rq.responseText);
+									
+								console.log(data);
+
+								if (data.status == "OK"){
+
+									$("#support").css("display", "block");
+
+								}
+
+
+							} catch(err) {
+								console.error("ERROR parsing json");
+								break;
+							}
+							
+						}
+						break;
+				}
+
+			}
+			rq.send(null);
+
+		};
+
+	</script>
+
+</head>
+<body class="lang-is">
+
+<div id="background">
+	&nbsp;
+</div>
+
+<div id="langContainer">
+
+</div>
+
+<section id="headline">
+
+	
+		<img src="images/logo.svg"/>
+		<h1 style="display:none;">Harpa PONG</h1>
+	
+</section>
+
+<section id="intro">
+
+
+
+		<p>
+			<span class="lang-en">Play PONG on Harpa!</span>
+			<span class="lang-is">Spilaðu PONG á Hörpu!</span>
+		</p>
+
+		<p>
+			<span class="lang-en">At Sónar Reykjavik 12th - 14th February 2015</span>
+			<span class="lang-is">Á Sónar Reykjavik frá 12. til 14. Febrúar</span>
+		</p>
+
+		<div id="support" class="highlight red" style="display:none">
+			<p>
+				<span class="lang-en">On Arnarhóll but can't play?
+				</span>
+
+				<span class="lang-is">
+				Ertu á Arnarhóli en getur ekki spilað?</span>
+
+			</p>
+
+				<a href="http://134.213.27.204/">
+					<button id="supportButton">
+						<span class="lang-en">Click Here!</span>
+						<span class="lang-is"> Smelltu hér!</span>
+					</button>
+				</a>
+
+		</div>
+
+		<div id="unsupported" class="highlight red" style="display:none">
+
+			<p class="small">
+				<span class="lang-en">Please note, PONG will not work on this device or browser.<br/><br/>Please use a modern mobile phone or tablet to play the game.
+				</span>
+
+				<span class="lang-is">
+				Athugaðu að þú getur ekki spilað PONG á þessu tæki eða í þessum vafra.<br/><br/>Vinsamlegast tengdu þig netinu með snjallsíma eða spjaldtölvu.
+				</span>
+			</p>
+
+		</div>
+
+		<div class="highlight">
+
+		<p>
+			<span class="lang-en">To play:</span>
+			<span class="lang-is">Leiðbeiningar:</span>
+		</p>
+		<br/>
+
+		<p class="small">
+
+			<span class="lang-en">
+			• Be in Reykjavik, Iceland.<br/><br/>
+			• Stand outside Harpa with a good view of the front façade.<br/><br/>
+			• Get out your smartphone and join the wi-fi network ‘Play PONG’.<br/><br/>
+			• Wait a few seconds. You will be redirected to a splash screen. Tap ‘Play Pong’ and wait your turn.<br/><br/>
+			• If for some reason you are connected to the network but not redirected to the game, log on to harpapong.com.<br/><br/>
+			</span>
+
+			<span class="lang-is">
+			• Komdu þér fyrir framan við Hörpu. <br/><br/>
+			• Tengdu snjallsímann þinn við þráðlausa netið 'Play PONG'.<br/><br/>
+			• Bíddu augnablik. Þú verður sendur á forsíðu leiksins. Smelltu á 'spila Pong' og bíddu þar til kemur að þér.<br/><br/>
+			• Ef forsíðan kemur ekki sjálfvirkt upp skaltu fara á harpapong.com.<br/><br/>
+			</span>
+			
+		</p>
+
+		</div>
+		<br/>
+
+		<br/>
+
+		<p>
+			<span class="lang-is">
+			Hugmynd og framkvæmd: <br/>Atli Bollason<br/><br/>
+			Hönnun og forritun: <br/>Owen Hindley<br/><br/>
+			</span>
+			<span class="lang-en">
+			Concept and Production: <br/>Atli Bollason<br/><br/>
+			Programming and Design: <br/>Owen Hindley<br/><br/>
+			</span>
+		</p>
+		<p class="small">
+			<span class="lang-is">	
+			Unnið í samstarfi við Hörpu<br/>
+			<br/>
+			Sérstakar þakkir til Hljóð-X.<br/>
+
+
+			</span>
+			<span class="lang-en">
+			Produced in co-operation with Harpa<br/>
+			<br/>
+			Special thanks to Hljóð-X.<br/>
+			</span>
+		</p>
+		
+
+</section>
+
+
+<div id="debug">
+	<p id="debugField"></p>
+</div>
+
+
+</body>
+</html>

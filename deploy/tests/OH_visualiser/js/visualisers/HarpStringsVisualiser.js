@@ -6,12 +6,17 @@
 
 	*/
 
+	var INITIAL_STRING_NUMBER = 10;
+	var AGE_LIMIT = 1000;
+
 	var HarpString = function() {
 
 		this.twangAmount = 0;
-		this.fadeAmount = 0;
+		this.fadeAmount = 1;
 		this.x = 0;
 		this.y = 0;
+
+		this.age = Math.random() * AGE_LIMIT * 0.5;
 
 	};
 
@@ -37,8 +42,8 @@
 	p.render = function(ctx) {
 
 		
-		ctx.strokeWidth = Math.floor(this.distance * 2);
-		ctx.globalAlpha = this.distance;
+		ctx.lineWidth = Math.floor(this.distance * 3);
+		ctx.globalAlpha = (0.4 + (this.distance * 0.6)) * this.fadeAmount;
 		
 
 		if (this.twangAmount == 0){
@@ -75,19 +80,25 @@
 			}
 
 
-			// if (this.fadeAmount < 1)
-			// 	this.fadeAmount += 0.01;
-			// else this.fadeAmount = 1;
 
 		}
 
 		ctx.globalAlpha = 1.0;
+
+		// if we're starting to fade, continue
+		if (this.fadeAmount < 1)
+			this.fadeAmount *= 0.99;
+		
+
+		this.age++;
 
 	};
 
 	p.twang = function() {
 
 		this.twangAmount = 1.0;
+		this.age *= 0.8;
+		this.fadeAmount = 1;
 
 	};
 
@@ -120,7 +131,7 @@
 
 
 		// pre-populate with strings
-		for (var i=0; i < 20; i++){
+		for (var i=0; i < INITIAL_STRING_NUMBER; i++){
 			this.createNewString();
 		}
 	}
@@ -130,13 +141,17 @@
 		this.stringCtx.fillStyle = "black";
 		this.stringCtx.fillRect(0,0,this.stringCanvas.width, this.stringCanvas.height);
 
+		// fade out ageing strings
+		// & remove faded-out strings
+		for (var i=0; i < this.strings.length; i++){
+			if (this.strings[i].age > AGE_LIMIT && this.strings[i].fadeAmount == 1){
+				this.strings[i].fadeAmount = 0.9;
+			}
 
-		// // remove old strings
-		// for (var i=0; i < this.strings.length; i++){
-		// 	if (this.strings[i].fadeAmount >= 1){
-		// 		this.strings.splice(i, 1);
-		// 	}
-		// }
+			if (this.strings[i].fadeAmount < 0.1){
+				this.strings.splice(i, 1);
+			}
+		}
 
 		// translate
 		this.stringCtx.save();
@@ -169,7 +184,7 @@
 		var newString = new HarpString();
 
 		var newX1 = Math.floor(Math.random() * this.stringCanvas.width);
-		var newX2 = newX1 + (Math.random() - 0.5) * this.stringCanvas.width * 0.01;
+		var newX2 = newX1 + (Math.random() - 0.5) * this.stringCanvas.width * 0.5;
 		var newDistance = Math.random();
 		newString.init(newX1, newX2, newDistance, "#FFEE22", "#22EEFF", this.stringCtx);
 
@@ -179,8 +194,11 @@
 
 	p.twangRandomString = function() {
 
-		var stringIndex = Math.floor(Math.random() * this.strings.length);
-		this.strings[stringIndex].twang();
+		if (this.strings.length){
+			var stringIndex = Math.floor(Math.random() * this.strings.length);
+			this.strings[stringIndex].twang();	
+		}
+		
 
 	};
 
@@ -197,7 +215,11 @@
 			this.beatFlip = !this.beatFlip;
 
 			if (value >= 0.9){
-				this.twangRandomString();
+
+				if (this.beatFlip)
+					this.twangRandomString();
+				else
+					this.createNewString();
 				
 			} 
 		}

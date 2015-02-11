@@ -11,7 +11,11 @@ var fs = require("fs");
 
 var VIDEOS_AVAILABLE = [
 	"video-1",
-	"video-2"
+	"video-2",
+	"1",
+	"2",
+	"3",
+	"4",
 	// "video-3"
 ];
 

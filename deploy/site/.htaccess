@@ -1,4 +1,7 @@
 RewriteEngine On
 
 
-RewriteRule common(.*)$ ../common$1 [L]
+#RewriteRule common(.*)$ ../common$1 [L]
+
+
+

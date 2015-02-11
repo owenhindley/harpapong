@@ -45,9 +45,10 @@ document.addEventListener("DOMContentLoaded", function() {
 		to test
 	*/
 
-	// visualiser = new HarpaTestVisualiser();
+	 visualiser = new HarpaTestVisualiser();
 	// visualiser = new ConwayVisualiser();
-	visualiser = new SymbolRipplesVisualiser();
+	// visualiser = new SymbolRipplesVisualiser();
+	//visualiser = new EduVisualiser();
 
 	// init with the light dimensions
 	visualiser.init(harpaLts.front.width, harpaLts.front.height, harpaLts.side.width, harpaLts.side.height);
