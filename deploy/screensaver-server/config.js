@@ -61,7 +61,14 @@ var VisConfig = [
 			ghostEnabled : true,
 			ghostAmount : 0.6
 		}},
-	{ name : "eduConway", path : "./visualisers/eduConway/EduVisualiser.js" }
+	{ name : "eduConway", path : "./visualisers/eduConway/EduVisualiser.js" },
+	{ name : "jonasLines", path : "./visualisers/jonas/Lines.js" },
+	{ name : "jonasLissajious", path : "./visualisers/jonas/Lissajious.js" },
+	{ name : "jonasStars", path : "./visualisers/jonas/Stars.js" },
+	{ name : "jonasLinesVideoMask", path : "./visualisers/jonas/LinesVideoMask.js" },
+	{ name : "jonasLissajiousVideoMask", path : "./visualisers/jonas/LissajiousVideoMask.js" },
+	{ name : "jonasStarsVideoMask", path : "./visualisers/jonas/StarsVideoMask.js" },
+	{ name : "simpleBeatLinesVideoMask", path : "./visualisers/simpleBeatLines/SimpleBeatVideoMask.js" }
 ];
 
 

@@ -24,24 +24,24 @@ var COLOURlovers = require("colourlovers");
 		this.vis0 = new Vis01(37*scale, 13*scale);
 		this.vis1 = new Vis01(39*scale, 9*scale);
 
-		// this.colors = [ [255, 78, 80],[252, 145, 58],[249, 212, 35],[237, 229, 116],[225, 245, 196]];
-		this.colors = [ [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0] ];
+		 this.colors = [ [255, 78, 80],[252, 145, 58],[249, 212, 35],[237, 229, 116],[225, 245, 196]];
+		// this.colors = [ [0,0,0], [0,0,0], [0,0,0], [0,0,0], [0,0,0] ];
 		// this.colors = [ [93, 65, 87],[131, 134, 137],[168, 202, 186],[202, 215, 178],[235, 227, 170]];
 
 		// get random colour scheme
-		COLOURlovers.get('/palettes/top', {
-			format:"json",
-			showPaletteWidths:1,
-			numResults:1,
-			resultOffset:Math.floor(Math.random() * 50)
-		}, function(err, data){
-			// console.log(data);
+		// COLOURlovers.get('/palettes/top', {
+		// 	format:"json",
+		// 	showPaletteWidths:1,
+		// 	numResults:1,
+		// 	resultOffset:Math.floor(Math.random() * 50)
+		// }, function(err, data){
+		// 	// console.log(data);
 
-			if (data[0].colors){
-				this._onColor(data[0]);
-			}
+		// 	if (data[0].colors){
+		// 		this._onColor(data[0]);
+		// 	}
 
-		}.bind(this));
+		// }.bind(this));
 
 		// ColourLovers.getRandomPalette(this, this._onColor);
 		// var that = this;
