@@ -50,10 +50,14 @@ var VisConfig = [
 			enableBrightness : true,
 			brightnessAmount : 0.05, 
 		}},
+	{ name : "wenRipplesVideoMask", path : "./visualisers/wenRipples2D/WenRipplesVideoMask.js", options : { 
+			enableBrightness : true,
+			brightnessAmount : 0.05, 
+		}},
 	{ name : "aurora", path : "./visualisers/aurora/AuroraVisualiser.js"},
 	{ name : "simpleVideo", path : "./visualisers/simpleVideoPlayer/SimpleVideoPlayer.js", options : { 
 			enableBrightness : true,
-			brightnessAmount : 0.15, 
+			brightnessAmount : 0.08, 
 		}},
 
 	{ name : "liamBirds", path : "./visualisers/liamBirds/HarpaMeshColorVisualiser.js", options : { 
@@ -62,7 +66,7 @@ var VisConfig = [
 			ghostEnabled : true,
 			ghostAmount : 0.6
 		}},
-	{ name : "videoMask", path : "./visualisers/liamBirds/HarpaVideoMaskMesh.js",  options : { 
+	{ name : "liamBirdsvideoMask", path : "./visualisers/liamBirds/HarpaVideoMaskMesh.js",  options : { 
 			enableBrightness : true,
 			brightnessAmount : 0.1, 
 			ghostEnabled : true,
