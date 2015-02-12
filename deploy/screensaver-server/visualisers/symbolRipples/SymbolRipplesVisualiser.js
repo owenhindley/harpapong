@@ -4,7 +4,7 @@ var HarpaVisualiserBase = require("../common/HarpaVisualiserBase.js");
 
     //////////////////////////////////////////
     //CHANGE THIS TO VARY THE OVERALL SPEED (higher = slower, lower = faster)
-    var FRAMES_PER_BEAT = 30;
+    var FRAMES_PER_BEAT = 15;
     /////////////////////////////////////////
 
     var HEIGHT = 13;
