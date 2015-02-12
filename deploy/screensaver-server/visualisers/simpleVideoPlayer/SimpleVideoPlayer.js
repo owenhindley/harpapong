@@ -16,7 +16,9 @@ var VIDEOS_AVAILABLE = [
 	"2",
 	"3",
 	"4",
-	// "video-3"
+	"4738",
+	"4821",
+	
 ];
 
 var SimpleVideoPlayer = function() {
@@ -74,22 +76,33 @@ p.render = function() {
 
 
 		// clear canvas
-		this.videoCtx.fillStyle = "black";
-		this.videoCtx.fillRect(0,0,this.videoCanvas.width, this.videoCanvas.height);
+		// this.videoCtx.fillStyle = "black";
+		// this.videoCtx.fillRect(0,0,this.videoCanvas.width, this.videoCanvas.height);
 
 		this.frameImage = this.frames[this.frameIndex];
 		if (this.frameImage.width){
+			
+			// this.videoCtx.drawImage(this.frameImage,0,0);
 
-			this.videoCtx.drawImage(this.frameImage,0,0);
-
-			this.sideCtx.globalAlpha = 1.0 - this.currentBeatValue * 0.5;
+			this.sideCtx.globalAlpha = 1.0 - this.currentBeatValue * 0.1;
 
 			this.sideCtx.drawImage(this.frameImage,0,0);
 			this.sideCtx.globalAlpha = 1.0;
 
-			this.frontCtx.globalAlpha = 1.0 - this.currentBeatValue * 0.5;
+			this.frontCtx.globalAlpha = 1.0 - this.currentBeatValue * 0.1;
 			this.frontCtx.drawImage(this.frameImage,this.faces.side.width, 0, 36, 11,0,0, this.faces.front.width, this.faces.front.height);
 			this.frontCtx.globalAlpha = 1.0;
+		} else {
+
+			this.frontCtx.fillStyle = "white";
+			this.frontCtx.globalAlpha = 1.0 - this.currentBeatValue * 0.5;
+			this.frontCtx.fillRect(0,0,this.sides.front.width, this.sides.front.height);
+			this.frontCtx.globalAlpha = 1.0;
+
+			this.sideCtx.fillStyle = "white";
+			this.sideCtx.globalAlpha = 1.0 - this.currentBeatValue * 0.5;
+			this.sideCtx.fillRect(0,0,this.sides.side.width, this.sides.side.height);
+			this.sideCtx.globalAlpha = 1.0;
 		}
 		
 

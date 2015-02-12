@@ -1,27 +1,27 @@
 // Visualiser config
 
 var VisConfig = [
-	// { name : "conway01", path : "./visualisers/conway01/ConwayVisualiser01.js", 
+	{ name : "conway01", path : "./visualisers/conway01/ConwayVisualiser01.js", 
+		options : { 
+			enableBrightness : false,
+			brightnessAmount : 0.15, 
+			ghostEnabled : true,
+			ghostAmount : 0.2
+		}},
+	// { name : "conwayVideoMask", path : "./visualisers/conway01/ConwayVideoMask.js", 
 	// 	options : { 
-	// 		enableBrightness : true,
-	// 		brightnessAmount : 0.15, 
+	// 		enableBrightness : false,
+	// 		brightnessAmount : 0.0, 
 	// 		ghostEnabled : true,
 	// 		ghostAmount : 0.5
 	// 	}},
-	{ name : "conwayVideoMask", path : "./visualisers/conway01/ConwayVideoMask.js", 
-		options : { 
-			enableBrightness : false,
-			brightnessAmount : 0.0, 
-			ghostEnabled : true,
-			ghostAmount : 0.5
-		}},
 	{ name : "simpleBeatBar", path : "./visualisers/simpleBeatBar/SimpleBeatBar.js", 
 		options : { 
 			enableBrightness : false, 
 			ghostEnabled : true,
 			ghostAmount : 0.2
 		}},
-	// { name : "simpleBeatLines", path : "./visualisers/simpleBeatLines/SimpleBeatLinesVisualiser.js"},
+	{ name : "simpleBeatLines", path : "./visualisers/simpleBeatLines/SimpleBeatLinesVisualiser.js"},
 	// { name : "rainbow", path : "./visualisers/rainbowFFT/RainbowVisualiser.js"},
 	// { name : "rainbowShapes", path : "./visualisers/rainbowShapes/RainbowShapes.js"},
 	//{ name : "perlinShapes", path : "./visualisers/perlinShapes/PerlinShapes.js"},
@@ -33,7 +33,7 @@ var VisConfig = [
 	{ name : "christian_002", path : "./visualisers/christian/HarpaMSCP004.js", options : { 
 			enableBrightness : false, 
 			ghostEnabled : true,
-			ghostAmount : 0.8
+			ghostAmount : 0.6
 		}},
 	{ name : "crash_and_burn", path : "./visualisers/crashAndBurn/CrashAndBurn.js", options : { 
 			enableBrightness : true,
@@ -52,7 +52,7 @@ var VisConfig = [
 	// 	}},
 	// { name : "aurora", path : "./visualisers/aurora/AuroraVisualiser.js"},
 	{ name : "simpleVideo", path : "./visualisers/simpleVideoPlayer/SimpleVideoPlayer.js", options : { 
-			enableBrightness : true,
+			enableBrightness : false,
 			brightnessAmount : 0.08, 
 		}},
 
@@ -77,26 +77,26 @@ var VisConfig = [
 		} },
 	{ name : "jonasLissajious", path : "./visualisers/jonas/Lissajious.js" },
 	{ name : "jonasStars", path : "./visualisers/jonas/Stars.js" },
-	{ name : "jonasLinesVideoMask", path : "./visualisers/jonas/LinesVideoMask.js",
-		options : { 
-			enableBrightness : false,
-			brightnessAmount : 0.15, 
-			ghostEnabled : true,
-			ghostAmount : 0.5
-		}
-	 },
+	// { name : "jonasLinesVideoMask", path : "./visualisers/jonas/LinesVideoMask.js",
+	// 	options : { 
+	// 		enableBrightness : false,
+	// 		brightnessAmount : 0.15, 
+	// 		ghostEnabled : true,
+	// 		ghostAmount : 0.5
+	// 	}
+	//  },
 	// { name : "jonasLissajiousVideoMask", path : "./visualisers/jonas/LissajiousVideoMask.js", options : { 
 	// 		enableBrightness : true,
 	// 		brightnessAmount : 0.15, 
 	// 		ghostEnabled : true,
 	// 		ghostAmount : 0.5
 	// 	} },
-	{ name : "jonasStarsVideoMask", path : "./visualisers/jonas/StarsVideoMask.js", options : { 
-			enableBrightness : false,
-			brightnessAmount : 0.15, 
-			ghostEnabled : true,
-			ghostAmount : 0.5
-		} },
+	// { name : "jonasStarsVideoMask", path : "./visualisers/jonas/StarsVideoMask.js", options : { 
+	// 		enableBrightness : false,
+	// 		brightnessAmount : 0.15, 
+	// 		ghostEnabled : true,
+	// 		ghostAmount : 0.5
+	// 	} },
 	{ name : "simpleBeatLinesVideoMask", path : "./visualisers/simpleBeatLines/SimpleBeatVideoMask.js" }
 ];
 

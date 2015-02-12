@@ -45,22 +45,25 @@ var SimpleBeatBar = require("./SimpleBeatLinesVisualiser.js");
         this.videoPlayer.render();
         this.maskVisualiser.render();
 
-        this.frontCtx.fillStyle = "black";
-        this.frontCtx.fillRect(0,0,this.faces.front.width, this.faces.front.height);
+        
 
         this.frontCtx.globalCompositeOperation = "source-over";
         this.frontCtx.drawImage(this.videoPlayer.faces.front,0,0);
         this.frontCtx.globalCompositeOperation = "multiply";
         this.frontCtx.drawImage(this.maskVisualiser.faces.front,0,0);
 
-
-        this.sideCtx.fillStyle = "black";
-        this.sideCtx.fillRect(0,0,this.faces.side.width, this.faces.side.height);
+        this.frontCtx.globalCompositeOperation = "overlay";
+        this.frontCtx.fillStyle = "white";
+        this.frontCtx.fillRect(0,0,this.faces.front.width, this.faces.front.height);
 
         this.sideCtx.globalCompositeOperation = "source-over";
         this.sideCtx.drawImage(this.videoPlayer.faces.side,0,0);
         this.sideCtx.globalCompositeOperation = "multiply";
         this.sideCtx.drawImage(this.maskVisualiser.faces.side,0,0);
+
+        this.sideCtx.globalCompositeOperation = "overlay";
+        this.sideCtx.fillStyle = "white";
+        this.sideCtx.fillRect(0,0,this.faces.front.width, this.faces.front.height);
 
 
         // update beat value
