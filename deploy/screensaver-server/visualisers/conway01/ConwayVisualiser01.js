@@ -29,6 +29,9 @@ var ConwayVisualiser = function() {
 	this.tempImgData = null;
 	this.tempCanvas = null;
 
+	this.tempCanvasDouble = null;
+	this.tempCanvasDoubleCtx = null;
+
 	this.updateCounter = 0;
 
 	this.searchSpiral = [
@@ -58,29 +61,7 @@ var ConwayVisualiser = function() {
 		Color('rgb(150,150,150)')
 	];
 
-	setInterval(function() {
-
-		// get random colours periodically
-		COLOURlovers.get('/palettes/top', {
-				format:"json",	
-				showPaletteWidths:1,
-				numResults:1,
-				resultOffset:Math.floor(Math.random() * 50)
-			}, function(err, data){
-				// console.log(data);
-
-				if (data[0] && data[0].colors){
-					for (var i=1; i < 3; i++){
-						this.colours[i] = Color("#" + data[0].colors[i]);
-						//console.log(data[0].colors[i]);
-					}
-
-				}
-
-			}.bind(this));
-
-
-	}.bind(this), 20 * 1000);
+	
 	
 
 }
@@ -114,11 +95,42 @@ p.init = function(frontWidth, frontHeight, sideWidth, sideHeight) {
 	this.tempD = this.tempImgData.data;
 	this.tempCtx = this.tempCanvas.getContext("2d");
 
+	this.tempCanvasDouble = new Canvas();
+	this.tempCanvasDouble.width = this.tempCanvas.width * 2;
+	this.tempCanvasDouble.height = this.tempCanvas.height;
+	this.tempCanvasDoubleCtx = this.tempCanvasDouble.getContext("2d");
+
 	this.seed(this.defaultSeedAmount);
+
+	setInterval(this.randomiseColours.bind(this), 20 * 1000);
+	this.randomiseColours();
 
 	// this.update();
 
 }
+
+p.randomiseColours = function() {
+
+	// get random colours periodically
+	COLOURlovers.get('/palettes/top', {
+			format:"json",	
+			showPaletteWidths:1,
+			numResults:1,
+			resultOffset:Math.floor(Math.random() * 50)
+		}, function(err, data){
+			// console.log(data);
+
+			if (data[0] && data[0].colors){
+				for (var i=1; i < 3; i++){
+					this.colours[i] = Color("#" + data[0].colors[i]);
+					//console.log(data[0].colors[i]);
+				}
+
+			}
+
+		}.bind(this));
+
+};
 
 p.seed = function(aNumberSeeds) {
 
@@ -142,7 +154,7 @@ p.seed = function(aNumberSeeds) {
 p.render = function() {
 
 	this.updateCounter++;
-	if (this.updateCounter > 3){
+	if (this.updateCounter > 4){
 		this.update();
 		this.updateCounter = 0;
 	}
@@ -210,9 +222,9 @@ p.render = function() {
 	this.frontCtx.save();
 	// this.frontCtx.globalAlpha = 1 - (this.currentBeatValue * 4.0);
 	this.frontCtx.globalCompositeOperation = "multiply";
-	this.frontCtx.scale(1.5,1.0);
-	this.frontCtx.translate(this.gridSize/-1.5, this.gridSize/-1);
-	this.tileAcrossCanvas(this.tempCanvas, this.frontCtx);
+	// this.frontCtx.scale(2.0,1.0);
+	this.frontCtx.translate(0,0);
+	this.tileAcrossCanvas(this.doubleCanvasWidthNoAntiAlias(this.tempCanvas), this.frontCtx);
 
 
 	this.frontCtx.restore();
@@ -239,10 +251,10 @@ p.render = function() {
 	// this.sideCtx.fillStyle = "black";
 	// this.sideCtx.fillRect(0,0, this.tempCanvas.width, this.tempCanvas.height);
 
-	this.sideCtx.scale(1.5,1.0);
+	// this.sideCtx.scale(2.0,1.0);
 	
-	this.sideCtx.translate(this.gridSize, -this.gridSize/2);
-	this.tileAcrossCanvas(this.tempCanvas, this.sideCtx);
+	this.sideCtx.translate(this.gridSize, Math.floor(-this.gridSize/2));
+	this.tileAcrossCanvas(this.doubleCanvasWidthNoAntiAlias(this.tempCanvas), this.sideCtx);
 	this.sideCtx.restore();
 
 
@@ -268,8 +280,34 @@ p.render = function() {
 
 };
 
-p.tileAcrossCanvas = function(tileSource, destCanvasCtx) {
+p.doubleCanvasWidthNoAntiAlias = function(aCanvas) {
 
+	var newCanvas = new Canvas();
+	newCanvas.width = aCanvas.width * 2;
+	newCanvas.height = aCanvas.height;
+
+	this.tempImgData = aCanvas.getContext("2d").getImageData(0,0,aCanvas.width, aCanvas.height);
+	this.tempD = this.tempImgData.data;
+	var newImageData = newCanvas.getContext("2d").createImageData(aCanvas.width * 2, aCanvas.height);
+	var newImageDataIndex = 0;
+	for (var i=0; i < this.tempImgData.length; i += 4){
+		newImageData[newImageDataIndex] = this.tempD[i];
+		newImageData[newImageDataIndex+1] = this.tempD[i+1];
+		newImageData[newImageDataIndex+2] = this.tempD[i+2];
+		newImageData[newImageDataIndex+3] = this.tempD[i+3];
+		// double it
+		newImageData[newImageDataIndex+4] = this.tempD[i];
+		newImageData[newImageDataIndex+5] = this.tempD[i+1];
+		newImageData[newImageDataIndex+6] = this.tempD[i+2];
+		newImageData[newImageDataIndex+7] = this.tempD[i+3];
+
+		newImageDataIndex += 8;
+	}
+	newCanvas.getContext("2d").putImageData(this.tempImgData,0,0);
+	return newCanvas;
+};
+
+p.tileAcrossCanvas = function(tileSource, destCanvasCtx) {
 
 	// tile this as many times as neccesary
 	var tileX = Math.ceil(destCanvasCtx.canvas.width / this.gridSize) + 1;
@@ -397,7 +435,7 @@ p.signal = function(channel, value) {
 		this.currentBeatValue = value;
 
 		if (this.beatFlip)
-			this.seed(this.defaultSeedAmount * this.currentVolume * 5.0);
+			this.seed(this.defaultSeedAmount * (5 + this.currentVolume * 2.0));
 		this.beatFlip = !this.beatFlip;
 	}
 

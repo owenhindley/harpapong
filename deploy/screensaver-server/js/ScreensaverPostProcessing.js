@@ -110,8 +110,12 @@ p.processCanvases = function(aFrontCanvas, aSideCanvas) {
 	
 	this.exportCtx.putImageData(this.tempImageData,0,0);
 	
+	// add a bit of extra lightness, regardless
+	this.exportCtx.globalCompositeOperation = "overlay";
+	this.exportCtx.fillStyle = "white";
+	this.exportCtx.fillRect(0,0,this.exportCanvas.width, this.exportCanvas.height);
+	this.exportCtx.globalCompositeOperation = "source-over";
 
-	// TODO : ghosting
 	if (this.options.ghostEnabled){
 
 		this.exportCtx.globalAlpha = this.options.ghostAmount;

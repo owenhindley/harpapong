@@ -6,7 +6,7 @@ var VisConfig = [
 			enableBrightness : false,
 			brightnessAmount : 0.15, 
 			ghostEnabled : true,
-			ghostAmount : 0.5
+			ghostAmount : 0.2
 		}},
 	// { name : "conwayVideoMask", path : "./visualisers/conway01/ConwayVideoMask.js", 
 	// 	options : { 
@@ -21,7 +21,7 @@ var VisConfig = [
 			ghostEnabled : true,
 			ghostAmount : 0.2
 		}},
-	// { name : "simpleBeatLines", path : "./visualisers/simpleBeatLines/SimpleBeatLinesVisualiser.js"},
+	{ name : "simpleBeatLines", path : "./visualisers/simpleBeatLines/SimpleBeatLinesVisualiser.js"},
 	// { name : "rainbow", path : "./visualisers/rainbowFFT/RainbowVisualiser.js"},
 	// { name : "rainbowShapes", path : "./visualisers/rainbowShapes/RainbowShapes.js"},
 	//{ name : "perlinShapes", path : "./visualisers/perlinShapes/PerlinShapes.js"},
@@ -33,7 +33,7 @@ var VisConfig = [
 	{ name : "christian_002", path : "./visualisers/christian/HarpaMSCP004.js", options : { 
 			enableBrightness : false, 
 			ghostEnabled : true,
-			ghostAmount : 0.8
+			ghostAmount : 0.6
 		}},
 	{ name : "crash_and_burn", path : "./visualisers/crashAndBurn/CrashAndBurn.js", options : { 
 			enableBrightness : true,
@@ -52,7 +52,7 @@ var VisConfig = [
 	// 	}},
 	// { name : "aurora", path : "./visualisers/aurora/AuroraVisualiser.js"},
 	{ name : "simpleVideo", path : "./visualisers/simpleVideoPlayer/SimpleVideoPlayer.js", options : { 
-			enableBrightness : true,
+			enableBrightness : false,
 			brightnessAmount : 0.08, 
 		}},
 

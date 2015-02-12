@@ -30,7 +30,7 @@ p.init = function(frontWidth, frontHeight, sideWidth, sideHeight) {
 	this.tempSideCtx = this.tempSideCanvas.getContext("2d");
 
 	this.lineIndex = 0;
-	this.lineSpacing = 3;
+	this.lineSpacing = 4;
 
 }
 
@@ -60,7 +60,12 @@ p.render = function() {
 		this.frontCtx.globalAlpha = 0.2 * (numLines - i);
 		// this.frontCtx.fillRect(centerX + (i * this.lineSpacing) + this.lineIndex, 0, 1, this.faces.front.height);
 		// this.frontCtx.fillRect(centerX - (i * this.lineSpacing) - this.lineIndex, 0, 1, this.faces.front.height);
-		this.frontCtx.fillRect((i * this.lineSpacing) + this.lineIndex, 0, 1, this.faces.front.height);
+		if (Math.random() > 0.95){
+			this.frontCtx.fillStyle = "rgb(232, 21, 125)";
+		}else {
+			this.frontCtx.fillStyle = "white";
+		}
+		this.frontCtx.fillRect((i * this.lineSpacing) + this.lineIndex, 0, 3, this.faces.front.height);
 		// this.frontCtx.fillRect(centerX - (i * this.lineSpacing) - this.lineIndex, 0, 1, this.faces.front.height);
 	}
 	this.frontCtx.globalAlpha = 1.0;
@@ -71,7 +76,12 @@ p.render = function() {
 	for (var i = 0; i < numLines; i++){
 		// this.frontCtx.globalAlpha = (1.0 - (numLines / i));
 		this.sideCtx.globalAlpha = 0.2 * ((numLines - i));
-		this.sideCtx.fillRect(this.faces.side.width - (i * this.lineSpacing) - this.lineIndex, 0, 1, this.faces.front.height);
+		if (Math.random() > 0.94){
+			this.sideCtx.fillStyle = "rgb(232, 21, 125)";
+		}else {
+			this.sideCtx.fillStyle = "white";
+		}
+		this.sideCtx.fillRect(this.faces.side.width - (i * this.lineSpacing) - this.lineIndex, 0, 3, this.faces.side.height);
 		
 	}
 	this.sideCtx.globalAlpha = 1.0;
@@ -106,7 +116,7 @@ p.render = function() {
 	this.sideCtx.drawImage(this.tempSideCanvas,0,0);
 
 	// update beat value
-	this.currentBeatValue *= 0.8;
+	this.currentBeatValue *= 0.95;
 };
 
 p.signal = function(channel, value) {

@@ -46,6 +46,12 @@ p.init = function(frontWidth, frontHeight, sideWidth, sideHeight) {
 	this.frontCtx = frontCanvas.getContext("2d");
 	this.sideCtx = sideCanvas.getContext("2d");
 
+	this.frontCtx.antialias = "none";
+	this.sideCtx.antialias = "none";
+
+	this.frontCtx.patternQuality = "best";
+	this.sideCtx.patternQuality = "best";
+
 	// get references to front & side canvases
 	// for when we disconnect
 	this.baseFrontCanvas = this.frontCanvas;
