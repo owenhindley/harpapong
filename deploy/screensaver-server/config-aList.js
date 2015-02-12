@@ -1,20 +1,20 @@
 // Visualiser config
 
 var VisConfig = [
-	// { name : "conway01", path : "./visualisers/conway01/ConwayVisualiser01.js", 
-	// 	options : { 
-	// 		enableBrightness : true,
-	// 		brightnessAmount : 0.15, 
-	// 		ghostEnabled : true,
-	// 		ghostAmount : 0.5
-	// 	}},
-	{ name : "conwayVideoMask", path : "./visualisers/conway01/ConwayVideoMask.js", 
+	{ name : "conway01", path : "./visualisers/conway01/ConwayVisualiser01.js", 
 		options : { 
 			enableBrightness : false,
-			brightnessAmount : 0.0, 
+			brightnessAmount : 0.15, 
 			ghostEnabled : true,
 			ghostAmount : 0.5
 		}},
+	// { name : "conwayVideoMask", path : "./visualisers/conway01/ConwayVideoMask.js", 
+	// 	options : { 
+	// 		enableBrightness : false,
+	// 		brightnessAmount : 0.0, 
+	// 		ghostEnabled : true,
+	// 		ghostAmount : 0.5
+	// 	}},
 	{ name : "simpleBeatBar", path : "./visualisers/simpleBeatBar/SimpleBeatBar.js", 
 		options : { 
 			enableBrightness : false, 
@@ -77,26 +77,26 @@ var VisConfig = [
 		} },
 	{ name : "jonasLissajious", path : "./visualisers/jonas/Lissajious.js" },
 	{ name : "jonasStars", path : "./visualisers/jonas/Stars.js" },
-	{ name : "jonasLinesVideoMask", path : "./visualisers/jonas/LinesVideoMask.js",
-		options : { 
-			enableBrightness : false,
-			brightnessAmount : 0.15, 
-			ghostEnabled : true,
-			ghostAmount : 0.5
-		}
-	 },
+	// { name : "jonasLinesVideoMask", path : "./visualisers/jonas/LinesVideoMask.js",
+	// 	options : { 
+	// 		enableBrightness : false,
+	// 		brightnessAmount : 0.15, 
+	// 		ghostEnabled : true,
+	// 		ghostAmount : 0.5
+	// 	}
+	//  },
 	// { name : "jonasLissajiousVideoMask", path : "./visualisers/jonas/LissajiousVideoMask.js", options : { 
 	// 		enableBrightness : true,
 	// 		brightnessAmount : 0.15, 
 	// 		ghostEnabled : true,
 	// 		ghostAmount : 0.5
 	// 	} },
-	{ name : "jonasStarsVideoMask", path : "./visualisers/jonas/StarsVideoMask.js", options : { 
-			enableBrightness : false,
-			brightnessAmount : 0.15, 
-			ghostEnabled : true,
-			ghostAmount : 0.5
-		} },
+	// { name : "jonasStarsVideoMask", path : "./visualisers/jonas/StarsVideoMask.js", options : { 
+	// 		enableBrightness : false,
+	// 		brightnessAmount : 0.15, 
+	// 		ghostEnabled : true,
+	// 		ghostAmount : 0.5
+	// 	} },
 	{ name : "simpleBeatLinesVideoMask", path : "./visualisers/simpleBeatLines/SimpleBeatVideoMask.js" }
 ];
 
