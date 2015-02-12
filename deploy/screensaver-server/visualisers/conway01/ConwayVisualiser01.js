@@ -54,8 +54,8 @@ var ConwayVisualiser = function() {
 		Color('rgb(255,255,255)'),
 		// Color('rgb(0,128,255)'),
 		// Color('rgb(0,128,50)')
-		Color('rgb(0,0,0)'),
-		Color('rgb(0,0,0)')
+		Color('rgb(200,200,200)'),
+		Color('rgb(150,150,150)')
 	];
 
 	setInterval(function() {
