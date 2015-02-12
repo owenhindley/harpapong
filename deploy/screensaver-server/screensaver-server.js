@@ -57,12 +57,13 @@ function nextVisualiser() {
 	console.log(" ****** ******* ** **** ********** ****** ");
 
 	manager.selectVisualiser(currentVisualiserIndex);
-
+	clearTimeout(currentVisualiserIndex);
 	cycleVisualiserTimeout = setTimeout(nextVisualiser, 40 * 1000);
 	
-	currentVisualiserIndex = Math.floor(Math.random() * (vis.length + 1));
-	if (currentVisualiserIndex > vis.length) currentVisualiserIndex = vis.length-1;
-	// if (currentVisualiserIndex > vis.length) currentVisualiserIndex = 0;
+	// currentVisualiserIndex = Math.floor(Math.random() * (vis.length + 1));
+	// if (currentVisualiserIndex > vis.length) currentVisualiserIndex = vis.length-1;
+	currentVisualiserIndex++;
+	if (currentVisualiserIndex > vis.length) currentVisualiserIndex = 0;
 
 
 }
