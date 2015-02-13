@@ -106,9 +106,9 @@ function onGameUpdate(data){
 		waitTime++;
 
 		// // if we've been waiting for a long time, override the gameMode to show the screensaver
-		// if (waitTime > 1000){
-		// 	gameMode = "screensaver";
-		// }
+		if (waitTime > 1000){
+			gameMode = "screensaver";
+		}
 	} else {
 		screensaverMode = false;
 		waitTime = 0;
