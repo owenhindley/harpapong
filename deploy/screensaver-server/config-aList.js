@@ -8,6 +8,8 @@ var VisConfig = [
 			ghostEnabled : true,
 			ghostAmount : 0.2
 		}},
+	{ name : "harpStrings", path : "./visualisers/harpStrings/HarpStringsVisualiser.js"},
+	{ name : "harpStringsAlt", path : "./visualisers/harpStrings/HarpStringsVisualiser02.js"},
 	// { name : "conwayVideoMask", path : "./visualisers/conway01/ConwayVideoMask.js", 
 	// 	options : { 
 	// 		enableBrightness : false,

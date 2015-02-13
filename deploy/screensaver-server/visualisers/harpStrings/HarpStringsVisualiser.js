@@ -1,4 +1,7 @@
-(function(global){
+var HarpaVisualiserBase = require("../common/HarpaVisualiserBase.js");
+var Canvas = require("canvas");
+var Color = require("./libs/color.js");
+
 
 	/*
 
@@ -35,7 +38,7 @@
 		this.gradientStyle.addColorStop(1, this.colourEnd);
 
 		this.twangGradient = this.ctx.createLinearGradient(this.x1,this.ctx.canvas.height, this.x2, 0);
-		this.twangGradient.addColorStop(0, "#0023FF");
+		this.twangGradient.addColorStop(0, "#00FF23");
 		this.twangGradient.addColorStop(1, "#FFFFFF");
 	};
 
@@ -48,24 +51,24 @@
 
 		if (this.twangAmount == 0){
 
-			// ctx.strokeStyle = this.gradientStyle;
-			// ctx.beginPath();
-			// ctx.moveTo(this.x2,ctx.canvas.height);
-			// var x = this.x2;
-			// var y = ctx.canvas.height;
-			// for (var i=0; i< ctx.canvas.height; i++){
-			// 	x += (this.x1 - x) * (1.0/(ctx.canvas.height));
-			// 	// x += (Math.random() -0.5) * this.twangAmount * ctx.canvas.width * 0.1; 
-			// 	ctx.lineTo(x,--y);
-			// }
+			ctx.strokeStyle = this.gradientStyle;
+			ctx.beginPath();
+			ctx.moveTo(this.x2,ctx.canvas.height);
+			var x = this.x2;
+			var y = ctx.canvas.height;
+			for (var i=0; i< ctx.canvas.height; i++){
+				x += (this.x1 - x) * (1.0/(ctx.canvas.height));
+				// x += (Math.random() -0.5) * this.twangAmount * ctx.canvas.width * 0.1; 
+				ctx.lineTo(x,--y);
+			}
 
-			// // ctx.lineTo(this.x1,0);
-			// ctx.stroke();
-			// ctx.closePath();
+			// ctx.lineTo(this.x1,0);
+			ctx.stroke();
+			ctx.closePath();
 
 		} else {
 
-			ctx.strokeStyle = this.twangGradient;
+			
 			ctx.beginPath();
 			ctx.moveTo(this.x2,ctx.canvas.height);
 			var x = this.x2;
@@ -75,8 +78,19 @@
 				x += (Math.random() -0.5) * this.twangAmount * ctx.canvas.width * 0.1; 
 				ctx.lineTo(x,--y);
 			}
-			
+		
+
+			ctx.globalAlpha = 1.0 - this.twangAmount;
+			ctx.strokeStyle = this.gradientStyle;
 			ctx.stroke();
+
+
+			ctx.globalAlpha = this.twangAmount;
+			ctx.strokeStyle = this.twangGradient;
+			ctx.stroke();
+
+
+
 			ctx.closePath();
 				
 			if (this.twangAmount > 0.001)
@@ -132,7 +146,7 @@
 	 p.init = function(frontWidth, frontHeight, sideWidth, sideHeight) {
 		s.init.call(this, frontWidth, frontHeight, sideWidth, sideHeight);
 
-		this.stringCanvas = document.createElement("canvas");
+		this.stringCanvas = new Canvas();
 		this.stringCtx = this.stringCanvas.getContext("2d");
 		this.stringCanvas.width = frontWidth + sideWidth;
 		this.stringCanvas.height = Math.max(frontHeight, sideHeight);
@@ -194,7 +208,7 @@
 		var newX1 = Math.floor(Math.random() * this.stringCanvas.width);
 		var newX2 = newX1 + (Math.random() - 0.5) * this.stringCanvas.width * 0;
 		var newDistance = Math.random();
-		newString.init(newX1, newX2, newDistance, "#FFEE22", "#22EEFF", this.stringCtx);
+		newString.init(newX1, newX2, newDistance, "#2b2b2b", "#666666", this.stringCtx);
 
 		this.strings.push(newString);
 
@@ -204,7 +218,11 @@
 
 		if (this.strings.length){
 			var stringIndex = Math.floor(Math.random() * this.strings.length -1);
-			this.strings[stringIndex].twang();	
+
+			
+
+			if (this.strings[stringIndex])
+				this.strings[stringIndex].twang();
 		}
 		
 
@@ -212,17 +230,17 @@
 
 	p.signal = function(channel, value) {
 
-		// store volume values from channel 1
-		if (channel == 1){
+		// store volume values from channel 2
+		if (channel == 2){
 			this.currentVolume = value;
 		}
 
-		// store beat values from channel 2
-		if (channel == 2){
+		// store beat values from channel 1
+		if (channel == 1){
 			this.currentBeatValue = value;
 			this.beatFlip = !this.beatFlip;
 
-			if (value >= 0.9){
+			if (value == 1){
 
 				this.twangRandomString();
 
@@ -234,8 +252,4 @@
 	};
 
 
-
-
-	global.HarpStringsVisualiser = (global.module || {}).exports = HarpStringsVisualiser;
-
-})(this);
+module.exports = HarpStringsVisualiser;
