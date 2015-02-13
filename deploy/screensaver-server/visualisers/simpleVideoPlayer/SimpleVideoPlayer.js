@@ -18,7 +18,7 @@ var VIDEOS_AVAILABLE = [
 	"4",
 	"4738",
 	"4821",
-	
+	"Edu"
 ];
 
 var SimpleVideoPlayer = function() {
