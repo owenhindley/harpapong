@@ -57,6 +57,10 @@ var VisConfig = [
 			enableBrightness : false,
 			brightnessAmount : 0.08, 
 		}},
+	{ name : "PONGLogo", path : "./visualisers/simpleVideoPlayer/PONGLogo.js", options : { 
+			enableBrightness : false,
+			brightnessAmount : 0.08, 
+		}},
 
 	{ name : "liamBirds", path : "./visualisers/liamBirds/HarpaMeshColorVisualiser.js", options : { 
 			enableBrightness : true,
