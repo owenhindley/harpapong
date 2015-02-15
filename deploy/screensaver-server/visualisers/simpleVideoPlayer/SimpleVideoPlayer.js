@@ -10,15 +10,21 @@ var fs = require("fs");
 */
 
 var VIDEOS_AVAILABLE = [
-	"video-1",
-	"video-2",
-	"1",
-	"2",
-	"3",
-	"4",
-	"4738",
-	"4821",
-	"Edu"
+	// "video-1",
+	// "video-2",
+	// "1",
+	// "2",
+	// "3",
+	// "4",
+	// "Edu",
+	"new-1",
+	"new-2",
+	"new-3",
+	"new-4",
+	"new-5",
+	"new-6",
+	"new-7",
+	// "new-8"
 ];
 
 var SimpleVideoPlayer = function() {
@@ -94,15 +100,15 @@ p.render = function() {
 			this.frontCtx.globalAlpha = 1.0;
 		} else {
 
-			this.frontCtx.fillStyle = "white";
-			this.frontCtx.globalAlpha = 1.0 - this.currentBeatValue * 0.5;
-			this.frontCtx.fillRect(0,0,this.sides.front.width, this.sides.front.height);
-			this.frontCtx.globalAlpha = 1.0;
+			// this.frontCtx.fillStyle = "white";
+			// this.frontCtx.globalAlpha = 1.0 - this.currentBeatValue * 0.5;
+			// this.frontCtx.fillRect(0,0,this.sides.front.width, this.sides.front.height);
+			// this.frontCtx.globalAlpha = 1.0;
 
-			this.sideCtx.fillStyle = "white";
-			this.sideCtx.globalAlpha = 1.0 - this.currentBeatValue * 0.5;
-			this.sideCtx.fillRect(0,0,this.sides.side.width, this.sides.side.height);
-			this.sideCtx.globalAlpha = 1.0;
+			// this.sideCtx.fillStyle = "white";
+			// this.sideCtx.globalAlpha = 1.0 - this.currentBeatValue * 0.5;
+			// this.sideCtx.fillRect(0,0,this.sides.side.width, this.sides.side.height);
+			// this.sideCtx.globalAlpha = 1.0;
 		}
 		
 
