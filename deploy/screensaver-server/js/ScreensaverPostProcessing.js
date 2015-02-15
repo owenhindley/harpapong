@@ -113,8 +113,10 @@ p.processCanvases = function(aFrontCanvas, aSideCanvas) {
 	// add a bit of extra lightness, regardless
 	this.exportCtx.globalCompositeOperation = "overlay";
 	this.exportCtx.fillStyle = "white";
+	this.exportCtx.globalAlpha = 0.5;
 	this.exportCtx.fillRect(0,0,this.exportCanvas.width, this.exportCanvas.height);
 	this.exportCtx.globalCompositeOperation = "source-over";
+	this.exportCtx.globalAlpha = 1.0;
 
 	if (this.options.ghostEnabled){
 
